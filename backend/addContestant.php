@@ -2,7 +2,6 @@
 $name = $_POST['name'];
 $event_name = $_POST['event_name'];
 $file = $_FILES['file']['tmp_name'];
-//status tracks the succes of the process to work with the ajax
 $message = '';
 
 $file_name = $_FILES['file']['name'];
@@ -11,7 +10,7 @@ $file_name = $_FILES['file']['name'];
 
 $result = move_uploaded_file($file, "./Images/" . $file_name);
 if ($result == 1) {
-    //  $status += 1;
+   
     //  echo "Image upload successful" ;
     require 'connection.php';
 //Check if the contestant exists
