@@ -1,5 +1,9 @@
 <?php
 //error_reporting(0);
+header('Content-type: application/json');
+
+header('Access-Control-Allow-Origin: *');
+
 $event_name = $_POST['event_name'];
 $error_characters = [' ', '\n'];
 $character_replace = ['_', ' '];
@@ -10,7 +14,7 @@ require 'connection.php';
 
 $event_existence = checkExistence($table);
 //create a table for the new post
-if ($event_existence) {
+if ($event_existence == true) {
     $sql = "CREATE TABLE `$table` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
     `contestant_name` varchar(255) NOT NULL,

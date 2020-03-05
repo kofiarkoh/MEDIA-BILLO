@@ -1,6 +1,8 @@
 <?php
+header('Content-type: application/json');
+header('Access-Control-Allow-Origin: *');
 $name = $_POST['name'];
-$event_name = $_POST['event_name'];
+$event_name = str_replace(" ","_", $_POST['event_name']);
 $file = $_FILES['file']['tmp_name'];
 $message = '';
 
