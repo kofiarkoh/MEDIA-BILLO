@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Text, View,Image, StyleSheet} from 'react-native';
-import svgloader from '../Images/logo.png';
+import svgloader from '../Images/billo.png';
 import * as Animatable from 'react-native-animatable';
 class LoadingIcon extends Component {
   render() {

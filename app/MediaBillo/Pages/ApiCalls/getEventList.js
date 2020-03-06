@@ -1,7 +1,7 @@
 const getEventList =async () => {
   console.log('called event list');
   
-  var url1= 'http://8745e3c7.ngrok.io/getEventList.php'
+  var url1= 'http://192.168.8.101:3000/backend/getEventList.php'
 
   var url = 'https://www.startransittravels.org/MEDIA BILLO/backend/getEventList.php';
  

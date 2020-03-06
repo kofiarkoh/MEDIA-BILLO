@@ -94,7 +94,13 @@ async function fetchList() {
   
   var result = "";
   try {
-    var response = await axios.get("http://localhost:3000/getEventList.php");
+    var response = await axios.get("/backend/adminresources/getEventList.php",
+   { headers: {
+      //`"Content-Type": "application/json",
+      Authorization: "Bearer " + sessionStorage.getItem("token")
+    }
+  }
+    );
     result = response.data;
   } catch (error) {
    // alert(error);
@@ -130,8 +136,12 @@ async function deleteEvent() {
   try {
     var response = await axios({
       method: "post",
-      url: "http://localhost:3000/deleteEvent.php",
-      data: formdata
+      url: "/backend/adminresources/deleteEvent.php",
+      data: formdata,
+      headers: {
+        //`"Content-Type": "application/json",
+        Authorization: "Bearer " + sessionStorage.getItem("token")
+      }
      
     });
     //console.warn("response", response);
@@ -163,8 +173,12 @@ async function eventStatus(eventname, id, eventstatus) {
     
     var response = await axios({
       method: "post",
-      url: "http://localhost:3000/eventStatus.php",
-      data: formdata
+      url: "/backend/adminresources/eventStatus.php",
+      data: formdata,
+      headers: {
+        //`"Content-Type": "application/json",
+        Authorization: "Bearer " + sessionStorage.getItem("token")
+      }
       /* headers: {
           "Content-Type": "multipart/form-data",
         
@@ -208,10 +222,11 @@ async function eventStatus(eventname, id, eventstatus) {
     }
     //    eventStatus=='active'? $("#status"+id).html("Inactve") :$("#status"+id).html("Actve")
   } catch (error) {
+    //console.log(error.response)
    // alert("set event status" + error);
    swal({
     title: "Error!",
-    text: "A problem occured while Fetching data , please reload this page",
+    text: error.response.data.message,
     icon: "warning",
    
   });

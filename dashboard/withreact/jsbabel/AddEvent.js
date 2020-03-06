@@ -66,15 +66,19 @@ async function submitName(name){
     $("input").prop('disabled', true);
    $(".no-loading").show()
     try{
+      var token = await sessionStorage.getItem("token")
+      
         var res = await axios({
-            method:"post",
-            url:"https://a61c129f.ngrok.io/addEvent.php" ,//"http://localhost:3000/addEvent.php",
-            data:formdata,
-            header:{
-                "Content-Type": "multipart/form-data",
-            }
-
-        })
+          method: "post",
+          url: "/backend/adminresources/addEvent.php",
+          data: formdata,
+          headers: {
+            "Content-Type": "multipart/form-data",
+            'Authorization': "Bearer " + token
+          }
+        });
+        
+     
         swal({
         
           text: "Event add succesffully",
@@ -88,7 +92,7 @@ async function submitName(name){
     }
     catch(error){
        // alert("submit error",error)
-      // console.log(error.response.data.message)
+      console.log(error.response)
         swal({
         
           text: ""+error.response.data.message,

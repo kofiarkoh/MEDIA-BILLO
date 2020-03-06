@@ -9,7 +9,7 @@ class LeaderBoardIndex extends Component {
         initialRouteName="LeaderBoard"
         screenOptions={{
           headerStyle: {
-            backgroundColor: '#e48a32',
+            backgroundColor: '#D71182',
           },
           headerTintColor: '#fff',
           headerTitleStyle: {

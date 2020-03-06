@@ -16,7 +16,6 @@ class AddContestant extends React.Component {
   }
   async getEvents() {
     var response = await fetchList();
-    console.log("evnets are ", response);
     this.setState({
       eventList: response
     });
@@ -122,7 +121,7 @@ class AddContestant extends React.Component {
 
         <a
           className="btn btn-round btn-primary"
-          onClick={() => this.submitValues()}
+         
         >
           Submit
         </a>
@@ -134,18 +133,24 @@ async function fetchList() {
   var result = "";
   $("input").prop("disabled", true);
   $(".no-loading").show();
+  //console.log(sessionStorage.getItem('token'))
+  var url = "/backend/adminresources/getEventList.php";
   try {
-    var response = await axios.get(
-      "https://a61c129f.ngrok.io/getEventList.php"
-    );
+    var response = await axios.get(url, {
+       headers: {
+        //`"Content-Type": "application/json",
+        'Authorization': "Bearer " + sessionStorage.getItem("token")
+      }
+    });
     result = response.data;
+    //console.log(response)
     $(".no-loading").hide();
     $("input").prop("disabled", false);
     // alert("ready")
   } catch (error) {
-    //  alert(error)
+    
     await swal({
-      text: " " + error + "...Please reload this page",
+      text: " " + error.response.data.message, // + "...Please reload this page",
 
       icon: "warning",
       buttons: true,
@@ -158,6 +163,7 @@ async function fetchList() {
   return result;
 }
 async function sendContestantDetails(contestant) {
+  var token = sessionStorage.getItem("token");
   $(".no-loading").show();
   $("input").prop("disabled", true);
   var formdata = new FormData();
@@ -165,30 +171,25 @@ async function sendContestantDetails(contestant) {
   formdata.append("event_name", contestant.eventName);
   formdata.append("file", contestant.img);
   var response = "";
+  console.log("sednding with " + sessionStorage.getItem("token"));
   try {
     var res = await axios({
       method: "post",
+      url: "/backend/adminresources/addContestant.php",
       data: formdata,
-      url: "https://a61c129f.ngrok.io/addContestant.php",
-      header: {
-        "Content-Type": "multipart/form-data"
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: "bearer " + token
       }
     });
-    response = res.data;
-    await swal({
-      text: " " + response.message,
+    console.log(res.data);
 
-      icon: "success",
-      buttons: true,
-      dangerMode: true
-    });
     $(".no-loading").hide();
     $("input").prop("disabled", false);
-    //console.log(response);
   } catch (error) {
-    //  alert("add contestant error",error)
+    console.log(error.response.data.message);
     await swal({
-      text: " " + error,
+      text: " " + error.response.data.message,
 
       icon: "warning",
       buttons: true,

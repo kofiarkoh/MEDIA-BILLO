@@ -10,7 +10,7 @@ const Stack = createStackNavigator();
             <Stack.Navigator initialRouteName="Polls" 
             screenOptions={{
                 headerStyle: {
-                  backgroundColor: '#e48a32',
+                  backgroundColor: '#D71182',
                 },
                 headerTintColor: '#fff',
                 headerTitleStyle: {

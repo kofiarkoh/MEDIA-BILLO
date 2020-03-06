@@ -52,12 +52,16 @@ async function getEventStats() {
   try {
     var response = await axios({
       method: "get",
-      url: "http://localhost:3000/eventStats.php"
+      url: "/backend/adminresources/eventStats.php",
+      headers:{
+        "Authorization":"Bearer "+sessionStorage.getItem('token')
+      }
     });
     console.warn("response", response.data);
 
     //    eventStatus=='active'? $("#status"+id).html("Inactve") :$("#status"+id).html("Actve")
   } catch (error) {
+    console.log(error.response)
     swal({
         
       text: ""+ error,

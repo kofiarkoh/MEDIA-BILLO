@@ -31,13 +31,13 @@ export class BottomNav extends Component {
           },
         })}
         tabBarOptions={{
-          activeTintColor: 'orange',
+          activeTintColor: 'hotpink',
           inactiveTintColor: 'gray',
           backgroudColor:'red'
           
         }}>
         <Tab.Screen name="Home" component={VotePage}      />
-        <Tab.Screen name="LeaderBoard" component={LeaderBoardIndex} screenOptions={{ headerStyle: {
+        <Tab.Screen name="Statistics" component={LeaderBoardIndex} screenOptions={{ headerStyle: {
                   backgroundColor: 'red',
                 },}}/>
         <Tab.Screen name="About" component={AboutIndex} />

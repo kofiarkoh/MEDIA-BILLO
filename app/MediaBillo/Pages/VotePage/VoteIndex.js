@@ -74,7 +74,7 @@ class VoteIndex extends Component {
             style={styles.gridView}
             renderItem={({item, index}) => (
               <View
-                style={[styles.itemContainer, {backgroundColor: '#7a5835'}]}
+                style={[styles.itemContainer, {backgroundColor: '#D71182'}]}
                 onPress={() => this.handleOnPress(item.id)}>
                 <TouchableOpacity onPress={() => this.handleOnPress(item.id)}>
                   <Image

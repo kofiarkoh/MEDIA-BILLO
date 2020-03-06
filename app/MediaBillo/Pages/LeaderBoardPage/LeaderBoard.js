@@ -3,6 +3,11 @@ import {Form, Item} from 'native-base';
 import {RadioButton, Snackbar, } from 'react-native-paper';
 import { BarChart} from 'react-native-chart-kit';
 import {View, Text, Button,ScrollView,SafeAreaView} from 'react-native';
+import {
+  responsiveHeight,
+  responsiveWidth,
+  responsiveFontSize
+} from "react-native-responsive-dimensions";
 import getEventList from '../ApiCalls/getEventList';
 import getVoteValues from '../ApiCalls/getVoteValues';
 import LoadingIcon from '../Components/LoadingIcon';
@@ -76,7 +81,7 @@ class LeaderBoardIndex extends Component {
                 {this.state.eventName.map(item => {
                   return (
                     <Item style={[styles.listItem]} key={item.id} onPress={() => this.handleChange(item.event_name)}>
-                      <RadioButton color='#e48a32' value={item.event_name} />
+                      <RadioButton color='#D71182' value={item.event_name} />
                       <Text>{item.event_name}</Text>
                     </Item>
                   );
@@ -101,13 +106,14 @@ class LeaderBoardIndex extends Component {
                       margin: 10,
                     }}
                     data={this.state.voteData}
-                    width={350}
+                    width={responsiveWidth(100)}
                     height={320}
                     yAxisLabel=""
+                    fromZero={true}
                     chartConfig={{
-                      backgroundColor: "#e48a32",
-                      backgroundGradientFrom: "#e48a32",
-                      backgroundGradientTo: "#e48a32",
+                      backgroundColor: "#D71182",
+                      backgroundGradientFrom: "#D71182",
+                      backgroundGradientTo: "#D71182",
                       decimalPlaces: 2, // optional, defaults to 2dp
                       color: (opacity = 0.5) =>
                         `rgba(255, 255, 255, ${opacity})`,

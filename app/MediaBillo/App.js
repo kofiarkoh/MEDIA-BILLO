@@ -32,7 +32,7 @@ const App: () => React$Node = () => {
   return (
     <>
     <NavigationContainer>
-    <StatusBar backgroundColor="#e48a32" barStyle="light-content" />
+    <StatusBar backgroundColor="#D71182"  barStyle='default' />
       <PaperProvider>
         <StatusBar barStyle="dark-content" />
         

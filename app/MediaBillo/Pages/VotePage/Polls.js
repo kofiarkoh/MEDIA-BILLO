@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
   pollCard: {
-    //backgroundColor: '#e4f0ea',
+    backgroundColor: '#e4f0ea',
     // width: '100%',
     height: 170,
 
@@ -208,7 +208,7 @@ const styles = StyleSheet.create({
     height: '100%',
     width: '100%',
     textAlign: 'center',
-    backgroundColor: '#785199',
+    backgroundColor: '#D71182',
   },
 });
 export default Polls;
