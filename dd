@@ -1,0 +1,72 @@
+[33mcommit d68e22a99ddacc764c5690a0a18381f52391e9f9[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Merge: e92596b c1faf18
+Author: lawrence <larkoh@st.knust.edu.gh>
+Date:   Sat Mar 7 19:58:15 2020 -0500
+
+    Merge branch 'master' of https://github.com/lawrencearkkoh/MEDIA-BILLO
+
+[33mcommit e92596bc075380d86524fbb47f9af3a2afc8ddb5[m
+Author: lawrence <larkoh@st.knust.edu.gh>
+Date:   Sat Mar 7 19:56:47 2020 -0500
+
+    test
+
+[33mcommit c1faf18b3f6cab02579ca85b57958264df63d601[m[33m ([m[1;31morigin/lawrence[m[33m)[m
+Author: lawrence <larkoh@st.knust.edu.gh>
+Date:   Sat Mar 7 14:42:47 2020 -0500
+
+    added database file
+
+[33mcommit ed8f6e3e8db6e30d1d03b6d240994eefb964693d[m
+Author: lawrence <larkoh@st.knust.edu.gh>
+Date:   Sat Mar 7 04:19:45 2020 -0500
+
+    changed dashboard folder structure
+
+[33mcommit a84c185cb8f4ff09a19bb4319e2e29993eb2289c[m
+Author: lawrence <larkoh@st.knust.edu.gh>
+Date:   Sat Mar 7 03:55:08 2020 -0500
+
+    fixed image width
+
+[33mcommit 81c7525197b6ec8fcc8be3969c9066ced5f0af12[m
+Author: lawrence <larkoh@st.knust.edu.gh>
+Date:   Fri Mar 6 10:48:46 2020 -0500
+
+    worked on dashboard and fixed app issues
+
+[33mcommit dbf2fe126c59c2212cfdb2fa997c2c1cd187b82f[m
+Author: lawrence <larkoh@st.knust.edu.gh>
+Date:   Wed Mar 4 22:56:28 2020 -0500
+
+    added the dashboard
+
+[33mcommit b08fa0ccd745a4f8d171170a752ed94240016abd[m
+Author: lawrence <larkoh@st.knust.edu.gh>
+Date:   Wed Mar 4 22:53:55 2020 -0500
+
+    fixed submodule issues
+
+[33mcommit b448b73e0229f37d0442508988b50e7483dfe292[m
+Author: lawrence <larkoh@st.knust.edu.gh>
+Date:   Mon Mar 2 17:22:41 2020 -0500
+
+    phase 1
+
+[33mcommit ce75b68e4131a3887b946bc2ffea861faddaf647[m
+Author: lawrence <larkoh@st.knust.edu.gh>
+Date:   Thu Feb 27 17:05:34 2020 -0500
+
+    cleared some comments
+
+[33mcommit 48bb4c0efd6c6c7011b5acb63146aa3fff26b846[m
+Author: lawrence <larkoh@st.knust.edu.gh>
+Date:   Thu Feb 27 17:03:06 2020 -0500
+
+    removed unimportant file date.php
+
+[33mcommit 06a817e5916fa5fb9479db992b71d590cad90504[m
+Author: lawrence <larkoh@st.knust.edu.gh>
+Date:   Thu Feb 27 16:58:56 2020 -0500
+
+    initial push
