@@ -12,6 +12,11 @@ import Progress from 'react-native-progress';
 import img from '../Images/logo.png';
 import ProgressBar from 'react-native-progress/Bar';
 import LoadingIcon from '../Components/LoadingIcon';
+import {
+  responsiveHeight,
+  responsiveWidth,
+  responsiveFontSize
+} from "react-native-responsive-dimensions";
 
 class VoteIndex extends Component {
   constructor(props) {
@@ -69,17 +74,18 @@ class VoteIndex extends Component {
       return (
         <>
           <FlatGrid
-            itemDimension={150}
+            itemDimension={300}
             items={this.state.contestants}
             style={styles.gridView}
             renderItem={({item, index}) => (
+              <View style={[styles.OuterContainer]}>
               <View
                 style={[styles.itemContainer, {backgroundColor: '#D71182'}]}
                 onPress={() => this.handleOnPress(item.id)}>
                 <TouchableOpacity onPress={() => this.handleOnPress(item.id)}>
                   <Image
                     source={{
-                      uri: 'https://www.startransittravels.org/MEDIA BILLO/backend/' + item.image_path,
+                      uri: 'https://www.startransittravels.org/MEDIA BILLO/dashboard/adminresources' + item.image_path,
                     }}
                     indicator={ProgressBar}
                     indicatorProps={{
@@ -99,6 +105,7 @@ class VoteIndex extends Component {
                   onPress={() => this.handleOnPress(item.id)}>
                   <Text style={styles.itemName}>{item.contestant_name}</Text>
                 </RadioButton>
+              </View>
               </View>
             )}
           />
@@ -122,25 +129,31 @@ class VoteIndex extends Component {
   }
 }
 const styles = StyleSheet.create({
+ 
   gridView: {
     marginTop: 20,
     flex: 1,
+  },
+  OuterContainer:{
+
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    textAlign:'center'
   },
   itemContainer: {
     justifyContent: 'space-between',
     alignItems: 'center',
     borderRadius: 5,
-    padding: 15,
-    textAlign: 'center',
-    marginRight: 0,
-    height: 290,
-    //width:200
+    padding: 10,
+    height: 350,
+   // width:300
   },
   itemName: {
+    textAlign:'center',
     fontSize: 12,
     color: '#fff',
-    //  padding:3,
-    //fontWeight: '600',
+    
   },
   itemCode: {
     fontWeight: '600',
@@ -148,8 +161,8 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
   imgItem: {
-    width: 190,
-    height: 210,
+    width: 250,
+    height: 300,
   },
 });
 export default VoteIndex;

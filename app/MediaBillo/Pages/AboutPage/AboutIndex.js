@@ -29,7 +29,7 @@ class AboutIndex extends Component {
             <SocialIcon title="MediaBillo" button type="facebook" />
             <SocialIcon title="@MediaBillo" button type="twitter" />
             <SocialIcon title="@MediaBillo" button type="instagram" />
-            <SocialIcon title="Media Billow" button type="youtube" />
+            <SocialIcon title="Media Billo" button type="youtube" />
           </View>
           <View style={[styles.profilePic]}>
             <Text style={[styles.textStyle]}>{'\u00A9'} 2020</Text>

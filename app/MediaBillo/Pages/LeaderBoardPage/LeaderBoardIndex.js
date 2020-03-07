@@ -6,7 +6,7 @@ class LeaderBoardIndex extends Component {
   render() {
     return (
       <Stack.Navigator
-        initialRouteName="LeaderBoard"
+        initialRouteName="Statistics"
         screenOptions={{
           headerStyle: {
             backgroundColor: '#D71182',
@@ -16,7 +16,7 @@ class LeaderBoardIndex extends Component {
             fontWeight: 'bold',
           },
         }}>
-        <Stack.Screen name="LeaderBaord" component={LeaderBoard} />
+        <Stack.Screen name="Statistics" component={LeaderBoard} />
       </Stack.Navigator>
     );
   }
