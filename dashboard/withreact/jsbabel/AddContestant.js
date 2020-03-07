@@ -121,6 +121,7 @@ class AddContestant extends React.Component {
 
         <a
           className="btn btn-round btn-primary"
+          onClick={()=>this.submitValues()}
          
         >
           Submit

@@ -125,7 +125,8 @@ class AddContestant extends React.Component {
       type: "file",
       ref: this.fileInput
     }))))))), React.createElement("a", {
-      className: "btn btn-round btn-primary"
+      className: "btn btn-round btn-primary",
+      onClick: () => this.submitValues()
     }, "Submit"));
   }
 
@@ -151,7 +152,7 @@ function _fetchList() {
         }
       });
       result = response.data; //console.log(response)
-
+      
       $(".no-loading").hide();
       $("input").prop("disabled", false); // alert("ready")
     } catch (error) {

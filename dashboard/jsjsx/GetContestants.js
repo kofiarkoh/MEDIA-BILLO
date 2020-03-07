@@ -117,13 +117,36 @@ function _getContestants() {
   return _getContestants.apply(this, arguments);
 }
 
-function deleteContestant(_x, _x2) {
+function confirmDeleteion(_x, _x2) {
+  return _confirmDeleteion.apply(this, arguments);
+}
+
+function _confirmDeleteion() {
+  _confirmDeleteion = _asyncToGenerator(function* (id, eventname) {
+    sessionStorage.setItem("eventname", eventname);
+    sessionStorage.setItem("id", id);
+    yield swal({
+      text: "Proceed to delete  ?",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true
+    }).then(willDelete => {
+      if (willDelete) {
+        deleteContestant();
+      }
+    });
+  });
+  return _confirmDeleteion.apply(this, arguments);
+}
+
+function deleteContestant() {
   return _deleteContestant.apply(this, arguments);
 }
 
 function _deleteContestant() {
-  _deleteContestant = _asyncToGenerator(function* (id, eventname) {
-    console.log(eventname, id);
+  _deleteContestant = _asyncToGenerator(function* () {
+    var eventname = sessionStorage.getItem('eventname');
+    var id = sessionStorage.getItem('id');
     var formdata = new FormData();
     formdata.append("event_name", eventname);
     formdata.append("id", id);
@@ -131,20 +154,23 @@ function _deleteContestant() {
     try {
       var response = yield axios({
         method: "post",
-        url: "/backend/adminresources/deleteContestant.php",
+        url: "./adminresources/deleteContestant.php",
         data: formdata,
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token")
         }
       });
       yield swal({
-        text: " Deletion Succesful",
+        text: " Deletion Succesfuldsd",
         icon: "success"
-      }); // console.log("response", response);
+      });
+      $("#" + id).hide();
+      console.log("response", response);
     } catch (error) {
+      console.log(error.response);
       yield swal({
         text: " Deletion Unsuccesful",
-        icon: "success"
+        icon: "warning"
       }); // console.log("error", error.response);
     }
   });
@@ -155,10 +181,11 @@ class TableRows extends React.Component {
   render() {
     return this.props.items.map((item, index) => {
       return React.createElement("tr", {
-        key: item.id
+        key: item.id,
+        id: item.id
       }, React.createElement("td", null, index + 1), React.createElement("td", null, item.contestant_name), React.createElement("td", null, item.votes), React.createElement("td", {
         className: "text-primary",
-        onClick: () => deleteContestant(item.id, this.props.eventName)
+        onClick: () => confirmDeleteion(item.id, this.props.eventName)
       }, "Delete"));
     });
   }

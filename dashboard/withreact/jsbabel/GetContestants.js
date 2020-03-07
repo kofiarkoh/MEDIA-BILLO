@@ -106,31 +106,52 @@ async function getContestants() {
   }
   return result;
 }
-async function deleteContestant(id, eventname) {
-  console.log(eventname, id);
+async function confirmDeleteion(id,eventname) {
+  sessionStorage.setItem("eventname",eventname)
+  sessionStorage.setItem("id",id)
+
+ await swal({
+    text: "Proceed to delete  ?",
+    
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+  })
+  .then((willDelete) => {
+    if (willDelete) {
+     deleteContestant()
+    } 
+  });
+}
+async function deleteContestant() {
+var eventname = sessionStorage.getItem('eventname');
+var id = sessionStorage.getItem('id')
   var formdata = new FormData();
   formdata.append("event_name", eventname);
   formdata.append("id", id);
   try {
     var response = await axios({
       method: "post",
-      url: "/backend/adminresources/deleteContestant.php",
+      url: "./adminresources/deleteContestant.php",
       data: formdata,
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token")
       }
     });
     await swal({
-      text: " Deletion Succesful",
+      text: " Deletion Succesfuldsd",
 
       icon: "success"
     });
-    // console.log("response", response);
+
+    $("#"+id).hide()
+     console.log("response", response);
   } catch (error) {
+    console.log(error.response)
     await swal({
       text: " Deletion Unsuccesful",
 
-      icon: "success"
+      icon: "warning"
     });
     // console.log("error", error.response);
   }
@@ -140,13 +161,13 @@ class TableRows extends React.Component {
   render() {
     return this.props.items.map((item, index) => {
       return (
-        <tr key={item.id}>
+        <tr key={item.id} id={item.id}>
           <td>{index + 1}</td>
           <td>{item.contestant_name}</td>
           <td>{item.votes}</td>
           <td
             className="text-primary"
-            onClick={() => deleteContestant(item.id, this.props.eventName)}
+            onClick={() =>confirmDeleteion(item.id, this.props.eventName)}
           >
             Delete
           </td>

@@ -125,7 +125,8 @@ class AddContestant extends React.Component {
       type: "file",
       ref: this.fileInput
     }))))))), React.createElement("a", {
-      className: "btn btn-round btn-primary"
+      className: "btn btn-round btn-primary",
+      onClick: () => this.submitValues()
     }, "Submit"));
   }
 

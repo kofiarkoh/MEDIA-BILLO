@@ -2,7 +2,7 @@
 require('./verify_login.php');
 
 $id = $_POST['id'];
-$event_name = $_POST['event_name'];
+$event_name = str_replace(" ","_",$_POST['event_name']);
 $message = '';
 require('connection.php');
 $sql = "SELECT image_path FROM $event_name WHERE id= '$id'";
