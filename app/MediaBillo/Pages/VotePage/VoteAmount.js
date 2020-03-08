@@ -89,8 +89,8 @@ class VoteAmount extends Component {
             <Item style={[styles.inputField]}>
               <Input
                 placeholder="Enter Number of Votes to Cast"
-                keyboardType="numeric"
-                value={this.state.noOfVotes}
+                keyboardType="phone-pad"
+                value={`${this.state.noOfVotes}`}
                 onChangeText={text => this.setState({noOfVotes: Math.round(text)})}
               />
              
