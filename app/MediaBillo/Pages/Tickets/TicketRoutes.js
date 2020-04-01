@@ -2,8 +2,8 @@ import React from 'react';
 import {View, Text} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 import TicketsLanding from './TicketsLanding';
-import AnimatedList from './AnimatedList';
 import PaymentForm from './PaymentForm'
+import TicketEvents from './TicketEvents';
 const Stack = createStackNavigator();
 export default function TicketRoutes() {
   return (
@@ -31,7 +31,7 @@ export default function TicketRoutes() {
           headerShown: false,
         }}
         name="Tickets"
-        component={AnimatedList}
+        component={TicketEvents}
       />
        <Stack.Screen
         options={{

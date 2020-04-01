@@ -1,15 +1,16 @@
 import React from 'react';
 import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import {Form, Item} from 'native-base';
-import {RadioButton, Portal, Dialog, Button} from 'react-native-paper';
-
+import {RadioButton, Portal, Dialog, Button, IconButton} from 'react-native-paper';
+import Icon from 'react-native-vector-icons/FontAwesome'
 export default function PickTicketType(props) {
+ 
   return (
     <Portal>
-      <Dialog visible={props.visible} style={{backgroundColor: '#D71182'}}>
-        <Dialog.Title style={{color: 'white'}}>Ticket Class</Dialog.Title>
+      <Dialog visible={props.visible} style={{}}>
+        <Dialog.Title style={{color: 'white',backgroundColor:'rgba(113, 109, 116, 0.98)',marginTop:0,marginRight:0,marginLeft:0,padding:10,}}>Ticket Class</Dialog.Title>
         <Dialog.Content>
-          {/* <View style={[styles.mainView]}> */}
+        
 
           <Form>
             <ScrollView>
@@ -17,16 +18,17 @@ export default function PickTicketType(props) {
                 {
                   props.categories.length === 0 ? null :
                     props.categories.map((category)=>{
+                      if (category.is_sold_out === 'true') return
                       return <Item
                       key={category.category_id}
                       onPress={()=>{
                         props.setcategory(category.category_id)
                         props.setprice(category.price)
                       }}
-                      style={{borderColor: '#D71182', marginBottom: 20,marginLeft:0}}
+                      style={{borderColor: '#fff', marginBottom: 20,marginLeft:0}}
                       success={false}>
-                      <RadioButton color='whitesmoke'  value={category.category_id}/>
-                    <Text style={{color:'whitesmoke'}}>{category.category_name} @ GHC {category.price}</Text>
+                      <RadioButton color='#000'  value={category.category_id}/>
+                    <Text style={{color:'#000'}}>{category.category_name} @ GHC {category.price}</Text>
                     </Item>
                     })
                 }
@@ -35,53 +37,21 @@ export default function PickTicketType(props) {
               </RadioButton.Group>
             </ScrollView>
           </Form>
-          {/*   </View> */}
+        
         </Dialog.Content>
         <Dialog.Actions>
             <Button onPress={()=>props.close('cancel')}>
-                <Text  style={{color:'black'}}>  CANCEL</Text>
+                <Icon name='remove' color='rgba(113, 109, 116, 0.98)'  size={30}/>
+             
                </Button>
             <Button onPress={()=>props.saveselection()}>
-                <Text style={{color:'white'}}>PROCEED</Text>
+            <Icon name='check' color='green'  size={30}/>
+            
                  </Button>
         </Dialog.Actions>
       </Dialog>
     </Portal>
-    /*  <View style={[styles.mainView]}>
-      <Text style={[styles.heading]}>Select Class of ticket</Text>
-      <Form>
-<ScrollView>
-<RadioButton.Group>
-            <Item style={{borderColor:'#D71182',marginBottom:20}} underline={false}>
-              <RadioButton />
-              <Text style={{color:'whitesmoke'}}>Ticket Category 1 @ GHC49</Text>
-            </Item>
-            <Item style={{borderColor:'#D71182',marginBottom:20}} underline={false}>
-              <RadioButton />
-              <Text style={{color:'whitesmoke'}}>Ticket Category 1 @ GHC49</Text>
-            </Item>
-            <Item style={{borderColor:'#D71182',marginBottom:20}} underline={false}>
-              <RadioButton />
-              <Text style={{color:'whitesmoke'}}>Ticket Category 1 @ GHC49</Text>
-            </Item><Item style={{borderColor:'#D71182',marginBottom:20}} underline={false}>
-              <RadioButton />
-              <Text style={{color:'whitesmoke'}}>Ticket Category 1 @ GHC49</Text>
-            </Item><Item style={{borderColor:'#D71182',marginBottom:20}} underline={false}>
-              <RadioButton />
-              <Text style={{color:'whitesmoke'}}>Ticket Category 1 @ GHC49</Text>
-            </Item><Item style={{borderColor:'#D71182',marginBottom:20}} underline={false}>
-              <RadioButton />
-              <Text style={{color:'whitesmoke'}}>Ticket Category 1 @ GHC49</Text>
-            </Item><Item style={{borderColor:'#D71182',marginBottom:20}} underline={false}>
-              <RadioButton />
-              <Text style={{color:'whitesmoke'}}>Ticket Category 1 @ GHC49</Text>
-            </Item>
-          </RadioButton.Group>
-      
-</ScrollView>
-     
-      </Form>
-    </View> */
+ 
   );
 }
 

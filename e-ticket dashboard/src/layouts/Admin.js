@@ -34,7 +34,20 @@ class Admin extends React.Component {
   }
   getRoutes = routes => {
     return routes.map((prop, key) => {
-      if (prop.layout === "/admin") {
+      return prop.links.map((item,key)=>{
+        if (item.layout === "/admin") {
+          return (
+            <Route
+              path={item.layout + item.path}
+              component={item.component}
+              key={key}
+            />
+          );
+        } else {
+          return null;
+        }
+      })
+     /*  if (prop.layout === "/admin") {
         return (
           <Route
             path={prop.layout + prop.path}
@@ -44,7 +57,7 @@ class Admin extends React.Component {
         );
       } else {
         return null;
-      }
+      } */
     });
   };
   getBrandText = path => {

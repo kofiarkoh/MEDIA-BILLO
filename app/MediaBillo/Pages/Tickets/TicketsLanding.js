@@ -29,22 +29,17 @@ export default function TicketsLanding(props) {
     }
   };
   const goToTicketsPage = () => {
-    var ticket_ids = ['BILO450751T','BILO450751T','BILO450751T','BILO450751T','BILO450751T','BILO450751T','BILO450751T','BILO450751T','BILO450751T']
-    var m = "Your ticket(s) is/are "+ticket_ids+". Thanks for your patronage"
-   
-    props.navigation.navigate('Tickets');
+   props.navigation.navigate('Tickets');
   };
   useEffect(() => {
     applyAnim(), checkFocus();
   }, [isFocused]);
 
   {
-    /* <TicketEventList/> */
+   
   }
   return (
-    /*  <AnimatedList/>  */
-    /*  <PaymentForm/>
-<PickTicketType/> */
+   
 
     <View style={[ticketstyles.mainView]}>
       <View style={[ticketstyles.view1]}>
@@ -54,10 +49,7 @@ export default function TicketsLanding(props) {
             ticketstyles.h2,
             {
               opacity: slideUpAnim,
-              // height:'1%',
-              /*  translateY: slideUpAnim.interpolate({
-            inputRange:[0,1],outputRange:[30,0]
-          }) */
+              
             },
           ]}>
           <Animated.Text

@@ -49,14 +49,16 @@ import {
   Table,
   Container,
   Row,
-  Col
+  Col,
+  UncontrolledCollapse,
 } from "reactstrap";
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {faCoffee, faAngleDoubleRight} from  '@fortawesome/free-solid-svg-icons'
 var ps;
 
 class Sidebar extends React.Component {
   state = {
-    collapseOpen: false
+    collapseOpen: false,
   };
   constructor(props) {
     super(props);
@@ -69,20 +71,52 @@ class Sidebar extends React.Component {
   // toggles collapse between opened and closed (true/false)
   toggleCollapse = () => {
     this.setState({
-      collapseOpen: !this.state.collapseOpen
+      collapseOpen: !this.state.collapseOpen,
     });
   };
   // closes the collapse
   closeCollapse = () => {
     this.setState({
-      collapseOpen: false
+      collapseOpen: false,
     });
   };
   // creates the links that appear in the left menu / Sidebar
-  createLinks = routes => {
+  createLinks = (routes) => {
     return routes.map((prop, key) => {
       return (
         <NavItem key={key}>
+          <NavLink
+            to={"#"}
+            tag={NavLinkRRD}
+           /*  onClick={this.closeCollapse} */
+            id={prop.id}
+           
+          >
+            <i className={prop.icon} ></i>
+            {prop.groupname}
+          </NavLink>
+          <UncontrolledCollapse toggler={`#${prop.id}`}>
+          <div>{
+            prop.links.map((link)=>{
+              return <NavItem key={link.name}>
+              <NavLink
+                to={link.layout + link.path}
+                tag={NavLinkRRD}
+                onClick={this.closeCollapse}
+                activeClassName="active"
+              >
+               {/*  <i className={link.icon} /> */}
+                <FontAwesomeIcon style={{marginRight:'10px'}} color='red' icon={faAngleDoubleRight} />
+                {link.name}
+              </NavLink>
+            </NavItem>
+            })
+          
+    }</div>
+          </UncontrolledCollapse>
+        
+        </NavItem>
+        /*  <NavItem key={key}>
           <NavLink
             to={prop.layout + prop.path}
             tag={NavLinkRRD}
@@ -92,7 +126,7 @@ class Sidebar extends React.Component {
             <i className={prop.icon} />
             {prop.name}
           </NavLink>
-        </NavItem>
+        </NavItem> */
       );
     });
   };
@@ -102,12 +136,12 @@ class Sidebar extends React.Component {
     if (logo && logo.innerLink) {
       navbarBrandProps = {
         to: logo.innerLink,
-        tag: Link
+        tag: Link,
       };
     } else if (logo && logo.outterLink) {
       navbarBrandProps = {
         href: logo.outterLink,
-        target: "_blank"
+        target: "_blank",
       };
     }
     return (
@@ -137,7 +171,7 @@ class Sidebar extends React.Component {
           ) : null}
           {/* User */}
           <Nav className="align-items-center d-md-none">
-          {/*   <UncontrolledDropdown nav>
+            {/*   <UncontrolledDropdown nav>
               <DropdownToggle nav className="nav-link-icon">
                 <i className="ni ni-bell-55" />
               </DropdownToggle>
@@ -222,12 +256,11 @@ class Sidebar extends React.Component {
               </Row>
             </div>
             {/* Form */}
-         
+
             {/* Navigation */}
             <Nav navbar>{this.createLinks(routes)}</Nav>
             {/* Divider */}
             <hr className="my-3" />
-          
           </Collapse>
         </Container>
       </Navbar>
@@ -236,7 +269,7 @@ class Sidebar extends React.Component {
 }
 
 Sidebar.defaultProps = {
-  routes: [{}]
+  routes: [{}],
 };
 
 Sidebar.propTypes = {
@@ -252,8 +285,8 @@ Sidebar.propTypes = {
     // the image src of the logo
     imgSrc: PropTypes.string.isRequired,
     // the alt for the img
-    imgAlt: PropTypes.string.isRequired
-  })
+    imgAlt: PropTypes.string.isRequired,
+  }),
 };
 
 export default Sidebar;

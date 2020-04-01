@@ -1,20 +1,20 @@
 {
   "files": {
     "main.css": "/tdb/dash/static/css/main.e92d1fa4.chunk.css",
-    "main.js": "/tdb/dash/static/js/main.2f66476d.chunk.js",
-    "main.js.map": "/tdb/dash/static/js/main.2f66476d.chunk.js.map",
+    "main.js": "/tdb/dash/static/js/main.2a0050dd.chunk.js",
+    "main.js.map": "/tdb/dash/static/js/main.2a0050dd.chunk.js.map",
     "runtime-main.js": "/tdb/dash/static/js/runtime-main.fecdec9a.js",
     "runtime-main.js.map": "/tdb/dash/static/js/runtime-main.fecdec9a.js.map",
     "static/css/2.61320fc6.chunk.css": "/tdb/dash/static/css/2.61320fc6.chunk.css",
-    "static/js/2.53fa92fb.chunk.js": "/tdb/dash/static/js/2.53fa92fb.chunk.js",
-    "static/js/2.53fa92fb.chunk.js.map": "/tdb/dash/static/js/2.53fa92fb.chunk.js.map",
+    "static/js/2.dc5d9aec.chunk.js": "/tdb/dash/static/js/2.dc5d9aec.chunk.js",
+    "static/js/2.dc5d9aec.chunk.js.map": "/tdb/dash/static/js/2.dc5d9aec.chunk.js.map",
     "index.html": "/tdb/dash/index.html",
-    "precache-manifest.d4db1123d24baadcab91c889db6cc387.js": "/tdb/dash/precache-manifest.d4db1123d24baadcab91c889db6cc387.js",
+    "precache-manifest.8e2b6439b9243a1241f71d933a46bab2.js": "/tdb/dash/precache-manifest.8e2b6439b9243a1241f71d933a46bab2.js",
     "service-worker.js": "/tdb/dash/service-worker.js",
     "static/css/2.61320fc6.chunk.css.map": "/tdb/dash/static/css/2.61320fc6.chunk.css.map",
     "static/css/main.e92d1fa4.chunk.css.map": "/tdb/dash/static/css/main.e92d1fa4.chunk.css.map",
-    "static/js/2.53fa92fb.chunk.js.LICENSE.txt": "/tdb/dash/static/js/2.53fa92fb.chunk.js.LICENSE.txt",
-    "static/js/main.2f66476d.chunk.js.LICENSE.txt": "/tdb/dash/static/js/main.2f66476d.chunk.js.LICENSE.txt",
+    "static/js/2.dc5d9aec.chunk.js.LICENSE.txt": "/tdb/dash/static/js/2.dc5d9aec.chunk.js.LICENSE.txt",
+    "static/js/main.2a0050dd.chunk.js.LICENSE.txt": "/tdb/dash/static/js/main.2a0050dd.chunk.js.LICENSE.txt",
     "static/media/angular.jpg": "/tdb/dash/static/media/angular.368685db.jpg",
     "static/media/argon-react-white.png": "/tdb/dash/static/media/argon-react-white.275a2629.png",
     "static/media/argon-react.png": "/tdb/dash/static/media/argon-react.f38ddea9.png",
@@ -37,8 +37,8 @@
   "entrypoints": [
     "static/js/runtime-main.fecdec9a.js",
     "static/css/2.61320fc6.chunk.css",
-    "static/js/2.53fa92fb.chunk.js",
+    "static/js/2.dc5d9aec.chunk.js",
     "static/css/main.e92d1fa4.chunk.css",
-    "static/js/main.2f66476d.chunk.js"
+    "static/js/main.2a0050dd.chunk.js"
   ]
 }

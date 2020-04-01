@@ -1,6 +1,6 @@
 import { Container, Content, Form, Item, Text, View } from 'native-base';
 import React, { useEffect, useRef, useState } from 'react';
-import { Animated, Easing, StyleSheet } from 'react-native';
+import { Animated, Easing, StyleSheet, Alert } from 'react-native';
 import { Input } from 'react-native-elements';
 import { Button, RadioButton } from 'react-native-paper';
 import eventlistStyles from './eventliststyles';
@@ -10,15 +10,26 @@ import SuccessDialog from '../VotePage/SuccessDialog';
 
 export default function PaymentForm(props) {
   const fadeAnim = useRef(new Animated.Value(0)).current;
-  const [phone,setPhone] = useState('0241585537')
-  const [ntwk,setNtwk]  = useState('MTN')
-  const [numtickets,setTickets] = useState('9')
+  const [phone,setPhone] = useState('')
+  const [ntwk,setNtwk]  = useState('')
+  const [numtickets,setTickets] = useState('')
   const [isloading,setLoading] = useState(false)
   const dialogRef = useRef()
 
   const getData =async ()=>{
      //fetches the users selections from the route
-     console.clear()
+      if (phone.length !== 10) {
+       alert('10 digit phone number required')
+       return
+     } 
+     if (ntwk === '') {
+       alert('Please choose MOMO operator')
+       return
+     }
+     if (numtickets <0 || numtickets > 5) {
+       alert('Number of tickets must be 1-5')
+       return
+     } 
      const params = props.route.params
      let data = {
        phone:phone,eventid:params.eventid,
@@ -28,6 +39,7 @@ export default function PaymentForm(props) {
        price:params.price
      }
      setLoading(true)
+   
     var res = await sendTicketOtp(data)
 
      if(res.resp_code === 200) {
@@ -44,10 +56,22 @@ export default function PaymentForm(props) {
 
 
   const submitOtp = async (otp)=>{
+  
     setLoading(true)
     var res = await sendOtpConfirmation(otp)
      if(res.resp_code === 200) {
-     alert('Please wait for prompt to complete payment')
+    
+     Alert.alert('Alert','Please wait for prompt to complete payment',[
+      {
+        text:'Ok',
+        onPress : ()=>{
+          props.navigation.navigate('tickethome')
+        }
+      }
+    ],
+    {
+    
+    })
 
      }
      else{

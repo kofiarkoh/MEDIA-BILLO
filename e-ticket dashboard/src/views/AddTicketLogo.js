@@ -36,6 +36,7 @@ export default function AddTicketLogo() {
   }, []);
 
   const submitData = async ()=>{
+    setLoading(true)
       var res = await uploadPhoto(photo,selectedEvent)
       if(res.resp_code === 200){
         swal('success',res.message,'success')
@@ -43,6 +44,7 @@ export default function AddTicketLogo() {
     else{
         swal('error',res.message,'error')
     }
+    setLoading(false)
   }
   return (
     <>

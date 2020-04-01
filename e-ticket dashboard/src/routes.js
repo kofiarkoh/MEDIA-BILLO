@@ -28,9 +28,101 @@ import TicketSummary from "./views/TicketSummary";
 import VerifyTicket from "./views/VerifyTicket";
 import TicketTransactions from "./views/TicketTransactions";
 import AddTicketLogo from "./views/AddTicketLogo";
+import TransactionStatus from "./views/TransactionStatus";
+import { faExchangeAlt } from "@fortawesome/free-solid-svg-icons";
 
 var routes = [
   {
+    groupname: 'Tickets',
+    id:'menu1',
+    icon :'ni ni-badge text-primary',
+
+    links: [
+      {path: "/index",
+      name: "Dashboard",
+      icon: "ni ni-tv-2 text-primary",
+      component: Index,
+      layout: "/admin"
+    },
+    {
+      path: "/newticketevent",
+      name: "Add Ticket Event",
+      icon: "ni ni-tv-2 text-primary",
+      component: AddTicketEvent,
+      layout: "/admin"
+    },
+    {
+      path: "/addlogo",
+      name: "Add Ticket Logo",
+      icon: "ni ni-tv-2 text-primary",
+      component: AddTicketLogo,
+      layout: "/admin"
+    },
+  
+    {
+      path: "/newticketcategory",
+      name: "Add Ticket Category",
+      icon: "ni ni-tv-2 text-primary",
+      component: AddTicketCategory,
+      layout: "/admin"
+    },
+  
+    {
+      path: "/ticketsummary",
+      name: "Tickets Summary",
+      icon: "ni ni-tv-2 text-primary",
+      component:TicketSummary,
+      layout: "/admin"
+    },
+  
+    {
+      path: "/ticketverification",
+      name: "Verify Ticket",
+      icon: "ni ni-tv-2 text-primary",
+      component:VerifyTicket,
+      layout: "/admin"
+    },
+    ]
+  },
+  {
+    groupname : 'Voting',
+    id:'menu2',
+    icon :'ni ni-paper-diploma text-primary',
+
+    links: [
+      {
+        path: "#",
+        name: "Voting links here",
+        icon: "ni ni-tv-2 text-primary",
+        component:TicketTransactions,
+        layout: "/admin"
+      },
+    ]
+    
+  },
+  {
+    groupname:'Transactions',
+    id:'menu3',
+    icon :"ni ni-money-coins text-primary",
+    links: [
+      {
+        path: "/tickettransactions",
+        name: "Ticket Transactions",
+        icon: faExchangeAlt,
+        component:TicketTransactions,
+        layout: "/admin"
+      },
+      {
+        path: "/transstatus",
+        name: "Transaction Status",
+        icon: "ni ni-tv-2 text-primary",
+        component:TransactionStatus,
+        layout: "/admin"
+      }
+    ]
+  }
+
+  /* {
     path: "/index",
     name: "Dashboard",
     icon: "ni ni-tv-2 text-primary",
@@ -83,6 +175,13 @@ var routes = [
     component:TicketTransactions,
     layout: "/admin"
   },
+  {
+    path: "/transstatus",
+    name: "Transaction Status",
+    icon: "ni ni-tv-2 text-primary",
+    component:TransactionStatus,
+    layout: "/admin"
+  }, */
 
 
 
