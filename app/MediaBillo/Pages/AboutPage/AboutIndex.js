@@ -1,10 +1,14 @@
 import React, {Component} from 'react';
-import {Text, ScrollView, Image, View, StyleSheet} from 'react-native';
+import {Text, ScrollView, View, StyleSheet,Image} from 'react-native';
 import img from '../Images/bilo-logo.jpg';
 import {Avatar} from 'react-native-paper';
 import {SocialIcon} from 'react-native-elements';
 import * as Animatable from 'react-native-animatable';
-
+import {
+  responsiveHeight,
+  responsiveWidth,
+  responsiveFontSize,
+} from 'react-native-responsive-dimensions';
 class AboutIndex extends Component {
   componentDidMount() {
     console.log(this.props);
@@ -16,12 +20,15 @@ class AboutIndex extends Component {
         animation="fadeIn"
         iterationCount={1}
         direction="alternate">
-        <ScrollView>
+        <ScrollView >
           <View style={[styles.profilePic]}>
+           
             <Text style={[styles.textStyle]}> MEDIA BILLO </Text>
+
           </View>
           <View style={[styles.profilePic]}>
-            <Avatar.Image size={240} source={img} />
+            <Avatar.Image size={240} source={img
+            } />
 
             <Image />
           </View>
@@ -42,7 +49,9 @@ class AboutIndex extends Component {
 }
 const styles = StyleSheet.create({
   profilePic: {
+   
     margin: 20,
+    flex:1,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',

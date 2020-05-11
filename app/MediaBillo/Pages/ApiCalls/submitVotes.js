@@ -1,8 +1,8 @@
 
 const sumbitVotes = async data => {
-  var url1 = 'http://52e9b5bd.ngrok.io/VoteRecording/getVotes.php';
+  var url1 = 'http://192.168.8.100:5000/VoteRecording/getVotes.php';
 
-  var url = 'https://www.startransittravels.org/MEDIA BILLO/backend/VoteRecording/getVotes.php';
+  var url_main = 'https://www.admin.mediabillo.net/appbackend/VoteRecording/getVotes.php';
   var {
     phoneNumber,
     voucherCode,
@@ -23,7 +23,7 @@ const sumbitVotes = async data => {
   };
   var result = '';
   try {
-    var response = await fetch(url, {
+    var response = await fetch(url_main, {
       method: 'POST',
       body: JSON.stringify(voteData),
     });

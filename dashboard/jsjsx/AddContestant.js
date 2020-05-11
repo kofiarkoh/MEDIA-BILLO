@@ -126,6 +126,9 @@ class AddContestant extends React.Component {
       ref: this.fileInput
     }))))))), React.createElement("a", {
       className: "btn btn-round btn-primary",
+      style: {
+        color: 'white'
+      },
       onClick: () => this.submitValues()
     }, "Submit"));
   }
@@ -142,13 +145,14 @@ function _fetchList() {
     $("input").prop("disabled", true);
     $(".no-loading").show(); //console.log(sessionStorage.getItem('token'))
 
-    var url = "/backend/adminresources/getEventList.php";
+    var ur = "http://192.168.8.100:3000";
+    var url = ur + "/adminresources/getEventList.php";
 
     try {
       var response = yield axios.get(url, {
         headers: {
           //`"Content-Type": "application/json",
-          'Authorization': "Bearer " + sessionStorage.getItem("token")
+          Authorization: "Bearer " + sessionStorage.getItem("token")
         }
       });
       result = response.data; //console.log(response)
@@ -190,9 +194,10 @@ function _sendContestantDetails() {
     console.log("sednding with " + sessionStorage.getItem("token"));
 
     try {
+      var ur = "http://192.168.8.100:3000";
       var res = yield axios({
         method: "post",
-        url: "/backend/adminresources/addContestant.php",
+        url: ur + "/adminresources/addContestant.php",
         data: formdata,
         headers: {
           "Content-Type": "multipart/form-data",

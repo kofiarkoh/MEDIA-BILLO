@@ -73,7 +73,7 @@ class LeaderBoardIndex extends Component {
       <ScrollView style={styles.scrollView}>
           <View style={[styles.leaderBoardlist]}>
             <Form>
-              <Text style={[styles.heading]}>Select Event Name</Text>
+              <Text style={[styles.heading]}>Select Event</Text>
               <RadioButton.Group
 
                 onValueChange={value => this.handleChange(value)}
@@ -97,12 +97,14 @@ class LeaderBoardIndex extends Component {
                 style={{
                   display: 'flex',
                   justifyContent: 'center',
+                  borderRadius:30,
                   alignItems: 'center',
                 }}>
                 {this.state.voteData.labels.length != 0 ? (
                   <BarChart
                     style={{
                       // width:'100%',
+                      
                       margin: 10,
                     }}
                     data={this.state.voteData}
@@ -115,7 +117,7 @@ class LeaderBoardIndex extends Component {
                       backgroundGradientFrom: "#D71182",
                       backgroundGradientTo: "#D71182",
                       decimalPlaces: 2, // optional, defaults to 2dp
-                      color: (opacity = 0.5) =>
+                      color: (opacity = 0.9) =>
                         `rgba(255, 255, 255, ${opacity})`,
                       labelColor: (opacity = 1) =>
                         `rgba(255, 255, 255, ${opacity})`,

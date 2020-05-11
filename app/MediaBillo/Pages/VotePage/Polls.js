@@ -2,26 +2,32 @@ import React, {Component} from 'react';
 import {
   Text,
   View,
-  Button,
   StyleSheet,
   ImageBackground,
   ScrollView,
 } from 'react-native';
+import {
+  responsiveHeight,
+  responsiveWidth,
+  responsiveFontSize,
+} from 'react-native-responsive-dimensions';
+import {Content, Container, Card, CardItem, Button} from 'native-base';
 import getEventList from '../ApiCalls/getEventList';
 import img from '../Images/bilo-logo.jpg';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import LoadingIcon from '../Components/LoadingIcon';
-import {Snackbar} from 'react-native-paper'
+import {Snackbar} from 'react-native-paper';
+import noEventimg from '../Images/nodata.png'
 const eev = [3, 5, 54, 6, 6, 7, 7, 6, 3, 34];
 class Polls extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      visible:false,
-      msg:'',
+      visible: false,
+      msg: '',
       launched: false,
-      polls:[],
+      polls: [],
       // noEvent:
       loading: false,
     };
@@ -32,32 +38,28 @@ class Polls extends Component {
   };
   refresList = async () => {
     this.setState({loading: true});
-    var data = await getEventList()
+    var data = await getEventList();
     var response = data;
-    console.log('datais ',data)
-   // alert(response)
-    if (response == null){
+    console.log('datais ', data);
+    // alert(response)
+    if (response == null) {
       this.setState({
-        msg:'Error Fetching Events Datads',
-        visible:true,
-        polls:null,
-        loading:false
-
-      })
-     return 
-    } else{
+        msg: 'Error Fetching Events Datads',
+        visible: true,
+        polls: null,
+        loading: false,
+      });
+      return;
+    } else {
       this.setState({
         polls: response,
         loading: false,
-        
       });
     }
-
-   
   };
   componentDidMount = async () => {
     console.log('lauched is ', this.state.launched);
-   /*  if (this.state.launched == false) {
+    /*  if (this.state.launched == false) {
       this.setState({loading: true});
       var data = await getEventList();
       var response = data;
@@ -68,95 +70,99 @@ class Polls extends Component {
         launched: true,
       });
     } */
-    this.refresList()
+    this.refresList();
   };
   render() {
-  console.log('poll lengthis ',this.state.polls);
+    console.log('poll lengthis ', this.state.polls);
     if (this.state.polls != null) {
-    if (this.state.polls.length == 0) {
+      if (this.state.polls.length == 0) {
+        return (
+          <>
+            <View style={[styles.centerContent]}>
+              {this.state.loading ? <LoadingIcon /> :
+           <TouchableOpacity>
+            <ImageBackground style={[styles.bgImg]} source={noEventimg}>
+           
+            </ImageBackground>
+          </TouchableOpacity>
+      }
+            </View>
+          </>
+        );
+      }
       return (
         <>
-        <View style={[styles.centerContent]}>
-          {this.state.loading ? <LoadingIcon /> : null}
-          {/* <TouchableOpacity>
-            <ImageBackground style={[styles.pollCard]} source={img}>
-              <Text style={[styles.cardText]}>No Polls Has Not Been Created</Text>
-            </ImageBackground>
-          </TouchableOpacity> */}
+          <Container>
+            <Content>
+              {this.state.loading ? <LoadingIcon /> : null}
+              {/*  <ScrollView style={{height: '100%'}}> */}
+              {this.state.polls.map(item => {
+                return (
+                  <TouchableOpacity
+                    key={item.id}
+                    onPress={() => this.handleNavigation(item.event_name)}>
+                    <Card style={[styles.card]}>
+                      <CardItem cardBody={false} style={[styles.carditem]}>
+                        {/*  <Body> */}
 
-        
-          </View>
+                        <Text style={[styles.cardText]}>{item.event_name}</Text>
+
+                        {/*  </Body> */}
+                      </CardItem>
+                    </Card>
+                  </TouchableOpacity>
+                );
+              })}
+              {/*  </ScrollView> */}
+            </Content>
+          </Container>
+          <Button
+            light
+            style={[styles.btn]}
+            onPress={() => {
+              this.refresList();
+            }}>
+            <Text style={{color: 'white'}}> Refresh</Text>
+          </Button>
         </>
       );
-    }
-    return (
-      <>
-        {this.state.loading ? <LoadingIcon /> : null}
-        <ScrollView style={{height: '100%'}}>
-          
-          {this.state.polls.map(item => {
-            return (
-              <TouchableOpacity
-              key={item.id}
-                onPress={() => this.handleNavigation(item.event_name)}>
-                <ImageBackground style={[styles.pollCard]} source={img}>
-                  <Text style={[styles.cardText]}>{item.event_name}</Text>
-                </ImageBackground>
-              </TouchableOpacity>
-            );
-          })}
-        </ScrollView>
-        <Button
-          title="Refresh"
-          color='#c79665'
-          onPress={() => {
-            this.refresList();
-          }}
-        />
-        
-      </>
-    );
-
-  }
-    else if(this.state.polls == null) {
-      console.log('show display snackbar')
+    } else if (this.state.polls == null) {
+      console.log('show display snackbar');
       return (
         <>
-        {this.state.loading ? <LoadingIcon /> : null}
-        <TouchableOpacity>
-          <ImageBackground style={[styles.pollCard]} source={img}>
-            <Text style={[styles.cardText]}>Error get Polls</Text>
-          </ImageBackground>
-        </TouchableOpacity>
-        <Button
-          title="Refresh"
-          style={[styles.btn]}
-          onPress={() => {
-            this.refresList();
-          }}
-        />
-         <Snackbar 
-          visible={this.state.visible}
-          onDismiss={() => this.setState({ visible: false })}
-          action={{
-            label: 'Ok',
-            onPress: () => {
-              // Do something
-            },
-          }}>
-        {this.state.msg}
-            </Snackbar>
-      </>
-      )
-    }
-    
-   
+          {this.state.loading ? <LoadingIcon /> : null}
+          <TouchableOpacity>
+            <ImageBackground style={[styles.pollCard]} source={img}>
+              <Text style={[styles.cardText]}>Error get Polls</Text>
+            </ImageBackground>
+          </TouchableOpacity>
+          <Button
+            title="Refresh"
+            style={[styles.btn]}
+            onPress={() => {
+              this.refresList();
+            }}
+          />
+          <Snackbar
+            visible={this.state.visible}
+            onDismiss={() => this.setState({visible: false})}
+            action={{
+              label: 'Ok',
+              onPress: () => {
+                // Do something
+              },
+            }}>
+            {this.state.msg}
+          </Snackbar>
+        </>
+      );
+    } 
   }
 }
 
 const styles = StyleSheet.create({
-  btn:{
-  color:'#e48a32'
+  btn: {
+    color: '#e48a32',
   },
   centerContent: {
     flex: 1,
@@ -170,45 +176,58 @@ const styles = StyleSheet.create({
     backgroundColor: 'orange',
     position: 'absolute',
   },
+  card: {
+    marginLeft: 20,
+    marginRight: 20,
+    marginTop: 10,
+    marginBottom: 30,
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+  },
+  carditem: {
+    backgroundColor: '#eae6ed',
+  },
   pollCard: {
-    backgroundColor: '#e4f0ea',
-    // width: '100%',
     height: 170,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
 
+    color: 'white',
+    width: responsiveWidth(100),
+  },
+  bgImg:{
+    height: 350,
+    backgroundColor:'transparent',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     color: 'white',
-    margin: 30,
-    borderTopLeftRadius: 20,
-    borderBottomRightRadius: 20,
-    borderColor: '#1d2620',
-    borderWidth: 2,
-
-    //  borderRadius: 20,
-    opacity: 0.7,
-    overflow: 'hidden',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 11,
-    },
-    shadowOpacity: 0.97,
-    shadowRadius: 15.19,
-
-    elevation: 23,
-   
+    width: responsiveWidth(60),
   },
   cardText: {
-    display: 'flex',
+    // display: 'flex',
 
     fontSize: 25,
-   
-    color: 'white',
+
+    color: '#7a6464',
     height: '100%',
     width: '100%',
     textAlign: 'center',
-    backgroundColor: '#D71182',
+    //backgroundColor: '#D71182',
+  },
+  btn: {
+    alignSelf: 'flex-start',
+    backgroundColor: '#c969a8',
+
+    width: 70,
+    margin: 10,
+    height: 40,
+
+    textAlign: 'center',
   },
 });
 export default Polls;

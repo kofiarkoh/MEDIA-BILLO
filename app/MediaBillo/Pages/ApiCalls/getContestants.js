@@ -1,16 +1,16 @@
 const axios = require('react-native-axios')
 const getContestants =async( eventName) => {
   console.log('called event list');
-  var url1 = 'https://www.startransittravels.org/MEDIA BILLO/backend/getEventContestants.php';
+  var url_main = 'https://www.admin.mediabillo.net/appbackend/getEventContestants.php';
 
-  var url = 'http://192.168.43.165:3000/getEventContestants.php';
+  var url = 'http://192.168.8.100:5000/getEventContestants.php';
   var formdata = new FormData();
   formdata.append('event_name', eventName );
   var result = '';
   try {
     var response =await axios({
       method: 'POST',
-      url:url1,
+      url:url_main,
       data: formdata,
       headers: {'Content-Type': 'multipart/form-data' }
       })
@@ -23,6 +23,7 @@ const getContestants =async( eventName) => {
   } catch (error) {
     alert("error"+error);
     //alert("ds"+error)
+    console.log(error)
   }
   return result;
  

@@ -1,14 +1,14 @@
 const getEventList =async () => {
   console.log('called event list');
   
-  var url1= 'http://192.168.8.101:3000/backend/getEventList.php'
+  var url1= 'http://192.168.8.100:5000/getEventList.php'
 
-  var url = 'https://www.startransittravels.org/MEDIA BILLO/backend/getEventList.php';
+  var url_main = 'https://www.admin.mediabillo.net/appbackend/getEventList.php';
  
   var res = null
   
   try {
-    var response = await fetch(url  )
+    var response = await fetch(url_main  )
    
     res = response.json()
     //alert(res)

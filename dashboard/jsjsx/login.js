@@ -12,10 +12,10 @@ $("#submit-btn").click( /*#__PURE__*/_asyncToGenerator(function* () {
   formdata.append('password', password);
 
   try {
-    var ur = "https://3689457c.ngrok.io";
+    var ur = "http://192.168.8.100:3000";
     var response = yield axios({
       method: "post",
-      url: "/backend/adminresources/auth/login.php",
+      url: ur + "/adminresources/auth/login.php",
       //"/addEvent.php",
       data: formdata,
       header: {
@@ -27,7 +27,7 @@ $("#submit-btn").click( /*#__PURE__*/_asyncToGenerator(function* () {
     sessionStorage.setItem('token', response.data.token);
     document.cookie = response.data.token;
     swal({
-      text: "Event add succesffully",
+      text: "Login Successful",
       icon: "success"
     });
     $(".loading").hide();

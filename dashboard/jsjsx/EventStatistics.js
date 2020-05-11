@@ -16,7 +16,7 @@ class EventStatistics extends React.Component {
 
     return _asyncToGenerator(function* () {
       var response = yield getEventStats();
-      console.log('the response is ', response);
+      console.log("the response is ", response);
 
       _this.setState({
         eventstats: response
@@ -44,7 +44,7 @@ class EventStatistics extends React.Component {
 
 class RowBuilder extends React.Component {
   render() {
-    console.log('the prop is ', this.props);
+    console.log("the prop is ", this.props);
     return this.props.data.map((item, index) => {
       return React.createElement("tr", null, React.createElement("th", {
         scope: "row"
@@ -63,18 +63,20 @@ function getEventStats() {
 function _getEventStats() {
   _getEventStats = _asyncToGenerator(function* () {
     try {
+      var ur = "http://192.168.8.100:3000"; // console.log(sessionStorage.getItem('token'))
+
       var response = yield axios({
         method: "get",
-        url: "/backend/adminresources/eventStats.php",
+        url: ur + "/adminresources/eventStats.php",
         headers: {
-          "Authorization": "Bearer " + sessionStorage.getItem('token')
+          Authorization: "Bearer " + sessionStorage.getItem("token")
         }
       });
       console.warn("response", response.data); //    eventStatus=='active'? $("#status"+id).html("Inactve") :$("#status"+id).html("Actve")
     } catch (error) {
-      console.log(error.response);
+      //console.log(error.status)
       swal({
-        text: "" + error,
+        text: "df" + error,
         icon: "warning"
       });
     }

@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {View} from 'native-base';
 import {TextInput, StyleSheet} from 'react-native';
-import {Container, Header, Content, Form, Item, Input} from 'native-base';
+import {Container, Header, Content, Form, Item} from 'native-base';
+import {Input} from 'react-native-elements';
 import {Button, RadioButton, Text, Snackbar} from 'react-native-paper';
 import sumbitVotes from '../ApiCalls/submitVotes';
 import userAssistance from './userAssistance';
@@ -13,10 +14,11 @@ class VoteAmount extends Component {
     visible: false,
     phoneNumber: '',
     voucherCode: '',
-    noOfVotes: 0,
+    noOfVotes: '',
     ntwkType: 'MTN',
     contestantId: '',
     msg: '',
+    disableInput: false,
   };
   submitData = async () => {
     console.log('called' + this.state.phoneNumber.length);
@@ -54,6 +56,7 @@ class VoteAmount extends Component {
     this.setState({
       buttonText: '',
       loading: true,
+      disableInput: true,
     });
     var response = await sumbitVotes(this.state);
     if (response === 'ok') {
@@ -61,6 +64,7 @@ class VoteAmount extends Component {
       this.setState({
         loading: false,
         buttonText: 'Submit',
+        disableInput: false,
       });
       userAssistance();
     } else {
@@ -68,6 +72,7 @@ class VoteAmount extends Component {
       this.setState({
         loading: false,
         buttonText: 'Submit',
+        disableInput: false,
       });
     }
     // alert('continuing')
@@ -86,57 +91,93 @@ class VoteAmount extends Component {
       <>
         <Content>
           <Form>
-            <Item style={[styles.inputField]}>
-              <Input
+         <Item style={[styles.inputField]}> 
+            <Input
+              
+              label="Enter Number of Votes to Cast"
+              keyboardType="phone-pad"
+              value={`${this.state.noOfVotes}`}
+              disabled={this.state.disableInput}
+              onChangeText={text =>
+                this.setState({noOfVotes: Math.round(text)})
+              }
+              />
+              {/*   <Input
                 placeholder="Enter Number of Votes to Cast"
                 keyboardType="phone-pad"
                 value={`${this.state.noOfVotes}`}
-                onChangeText={text => this.setState({noOfVotes: Math.round(text)})}
-              />
-             
+                disabled={this.state.disableInput}
+                onChangeText={text =>
+                  this.setState({noOfVotes: Math.round(text)})
+                }
+              /> */}
             </Item>
-            <Text style={{textAlign:'center'}}>
-               
-                Votes  {this.state.noOfVotes} : GHS {this.state.noOfVotes*0.6}
-              </Text>
-            <Text style={[styles.heading]}>Select Network to Pay With</Text>
+            <Text style={{textAlign: 'center'}}>
+              Votes {this.state.noOfVotes} : GHS {this.state.noOfVotes * 0.6}
+            </Text>
+            <Text style={[styles.heading]}>Select Service Provider</Text>
             <RadioButton.Group
               color="red"
               onValueChange={value => this.setState({ntwkType: value})}
               value={this.state.ntwkType}>
               <Item onPress={() => this.setState({ntwkType: 'MTN'})}>
-                <RadioButton color="#D71182" value="MTN" />
+                <RadioButton
+                  disabled={this.state.disableInput}
+                  color="#D71182"
+                  value="MTN"
+                />
                 <Text>MTN</Text>
               </Item>
               <Item onPress={() => this.setState({ntwkType: 'VOD'})}>
-                <RadioButton color="#D71182" value="VOD" />
+                <RadioButton
+                  disabled={this.state.disableInput}
+                  color="#D71182"
+                  value="VOD"
+                />
                 <Text>VODAFONE</Text>
               </Item>
               <Item onPress={() => this.setState({ntwkType: 'AIR'})}>
-                <RadioButton color="#D71182" value="AIR" />
+                <RadioButton
+                  disabled={this.state.disableInput}
+                  color="#D71182"
+                  value="AIR"
+                />
                 <Text>AIRTEL</Text>
               </Item>
               <Item onPress={() => this.setState({ntwkType: 'TIG'})}>
-                <RadioButton color="#D71182" value="TIG" />
+                <RadioButton
+                  disabled={this.state.disableInput}
+                  color="#D71182"
+                  value="TIG"
+                />
                 <Text>TIGO</Text>
               </Item>
             </RadioButton.Group>
             <Item style={[styles.inputField]}>
               <Input
-                placeholder="Enter Mobile Money Number"
+                label="Enter Mobile Money Number"
                 keyboardType="numeric"
                 value={this.state.phoneNumber}
+                disabled={this.state.disableInput}
                 onChangeText={text => this.setState({phoneNumber: text})}
               />
             </Item>
             <Item style={[styles.inputField]}>
-              <Input
+         <Input
+              
+              disabled={this.state.ntwkType == 'VOD' ? false : true}
+                label="Voucher Code (Vodafone Users Only)"
+                keyboardType="numeric"
+                value={this.state.voucherCode}
+                onChangeText={text => this.setState({voucherCode: text})}
+            /> 
+              {/* <Input
                 disabled={this.state.ntwkType == 'VOD' ? false : true}
                 placeholder="Voucher Code (Vodafone Users Only)"
                 keyboardType="numeric"
                 value={this.state.voucherCode}
                 onChangeText={text => this.setState({voucherCode: text})}
-              />
+              />  */}
             </Item>
             <Item style={[styles.listItem]}>
               <View style={[styles.submitBtn]}>
@@ -144,7 +185,7 @@ class VoteAmount extends Component {
                   mode="contained"
                   mode="contained"
                   color="#D71182"
-                  disabled={false}
+                  disabled={this.state.disableInput}
                   loading={this.state.loading}
                   onPress={this.submitData}>
                   {this.state.buttonText}

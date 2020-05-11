@@ -1,11 +1,11 @@
 const getVoteValues = async eventName => {
-  var url1 = 'http://52e9b5bd.ngrok.io/getVotes/fetchVotes.php';
-  var url = 'https://www.startransittravels.org/MEDIA BILLO/backend/getVotes/fetchVotes.php';
+  var url1 = 'http://192.168.8.100:5000/getVotes/fetchVotes.php';
+  var url_main = 'https://www.admin.mediabillo.net/appbackend/getVotes/fetchVotes.php';
   var formdata = new FormData();
   formdata.append('event_name', eventName);
   var result = '';
   try {
-    var response = await fetch(url, {
+    var response = await fetch(url_main, {
       method: 'POST',
       headers: {
         'Content-Type': 'multipart/form-data',

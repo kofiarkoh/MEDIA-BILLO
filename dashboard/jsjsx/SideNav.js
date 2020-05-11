@@ -8,7 +8,9 @@ class SideNav extends React.Component {
       className: "navbar-brand",
       href: "javascript:void(0)"
     }, React.createElement("img", {
-      src: "../assets/img/brand/bidllo.png",
+      src: "../assets/img/billologo.png",
+      width: "500px",
+      height: "500px",
       className: "navbar-brand-img",
       alt: "logo here"
     }))), React.createElement("div", {
@@ -30,46 +32,46 @@ class SideNav extends React.Component {
     }, "Dashboard"))), React.createElement("li", {
       className: "nav-item"
     }, React.createElement("a", {
-      className: "nav-link",
+      className: "nav-link active",
       href: "addevent.html"
     }, React.createElement("i", {
-      className: "ni ni-planet text-orange"
+      className: "ni ni-planet text-blue"
     }), React.createElement("span", {
       className: "nav-link-text"
     }, "Add Event"))), React.createElement("li", {
       className: "nav-item"
     }, React.createElement("a", {
-      className: "nav-link",
+      className: "nav-link active",
       href: "addcontestant.html"
     }, React.createElement("i", {
-      className: "ni ni-planet text-orange"
+      className: "ni ni-planet text-blue"
     }), React.createElement("span", {
       className: "nav-link-text"
     }, "Add Contestant"))), React.createElement("li", {
       className: "nav-item"
     }, React.createElement("a", {
-      className: "nav-link",
+      className: "nav-link active",
       href: "eventlist.html"
     }, React.createElement("i", {
-      className: "ni  ni-bullet-list-67 text-orange"
+      className: "ni  ni-bullet-list-67 text-blue"
     }), React.createElement("span", {
       className: "nav-link-text"
     }, "Events"))), React.createElement("li", {
       className: "nav-item"
     }, React.createElement("a", {
-      className: "nav-link",
+      className: "nav-link active",
       href: "contestants.html"
     }, React.createElement("i", {
-      className: "ni ni-single-02 text-orange"
+      className: "ni ni-single-02 text-blue"
     }), React.createElement("span", {
       className: "nav-link-text"
     }, "Contestants"))), React.createElement("li", {
       className: "nav-item"
     }, React.createElement("a", {
-      className: "nav-link",
+      className: "nav-link active",
       href: "adduser.html"
     }, React.createElement("i", {
-      className: "ni ni-single-02 text-orange"
+      className: "ni ni-single-02 text-blue"
     }), React.createElement("span", {
       className: "nav-link-text"
     }, "Add Another User")))), React.createElement("hr", {

@@ -11,8 +11,25 @@ $message = '';
 $file_name = $_FILES['file']['name'];
 
 //MOVE THE IMAGE TO DESIRED FOLDER
+/* try{
+    http_response_code(500);
+    move_uploaded_file($file, "./Images/" . $file_name);
+    $message ="completed";
+    $response = array(
+        'message' => $message,
+    );
+    echo json_encode($response);
+}
+catch(Excepion $e){
+    http_response_code(500);
+    $message ="Image Upload Unsuceesfull, please try again..".$e;
+    $response = array(
+        'message' => $message,
+    );
+    echo json_encode($response);
 
-$result = move_uploaded_file($file, "./Images/" . $file_name);
+} */
+ $result = move_uploaded_file($file, "./Images/" . $file_name);
 if ($result == 1) {
    
     //  echo "Image upload successful" ;
@@ -46,6 +63,7 @@ if ($result == 1) {
     http_response_code(500);
    $message ="Image Upload Unsuceesfull, please try again..";
 }
+
 
 $response = array(
     'message' => $message,

@@ -1,20 +1,14 @@
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-$("#submit-btn").click( /*#__PURE__*/_asyncToGenerator(function* () {
+$("#submit-btn").click(async function () {
   var username = $("#username").val();
   var password = $("#password").val();
   var name = $("#name").val();
-
   if (username == "" || password == "" || name == "") {
     swal({
       text: "All fields are required",
-      icon: "warning"
+      icon: "warning",
     });
     return;
   }
-
   $(".loading").show();
   $("input").prop("disabled", true);
   var formdata = new FormData();
@@ -24,14 +18,14 @@ $("#submit-btn").click( /*#__PURE__*/_asyncToGenerator(function* () {
 
   try {
     var ur = "http://192.168.8.100:3000";
-    var response = yield axios({
+    var response = await axios({
       method: "post",
       url: ur + "adminresources/auth/signup.php",
       data: formdata,
       header: {
         "Content-Type": "multipart/form-data",
-        Authorization: "Bearer " + sessionStorage.getItem("token")
-      }
+        Authorization: "Bearer " + sessionStorage.getItem("token"),
+      },
     });
     console.log(response.data.token);
     console.log(response);
@@ -39,8 +33,9 @@ $("#submit-btn").click( /*#__PURE__*/_asyncToGenerator(function* () {
     document.cookie = response.data.token;
     swal({
       text: "Event add succesffully",
-      icon: "success"
+      icon: "success",
     });
+
     $(".loading").hide();
     $("input").prop("disabled", false);
   } catch (error) {
@@ -48,9 +43,10 @@ $("#submit-btn").click( /*#__PURE__*/_asyncToGenerator(function* () {
     console.log(error.response);
     swal({
       text: "" + error.response.data.message,
-      icon: "warning"
+      icon: "warning",
     });
     $(".loading").hide();
+
     $("input").prop("disabled", false);
   }
-}));
+});

@@ -1,23 +1,17 @@
 import React, {Component} from 'react';
-//import {Image} from 'react-native';
 import {Text} from 'native-base';
-import {StyleSheet, View, TouchableOpacity, Button} from 'react-native';
+import {StyleSheet, View, TouchableHighlight} from 'react-native';
+import {Button} from 'native-base';
+import * as Animatable from 'react-native-animatable';
+
 import {FlatGrid} from 'react-native-super-grid';
 import RadioButton from 'radio-button-react-native';
-import VoteAmount from './VoteAmount';
 import getContestants from '../ApiCalls/getContestants';
 import {Snackbar} from 'react-native-paper';
 import Image from 'react-native-image-progress';
-import Progress from 'react-native-progress';
-import img from '../Images/logo.png';
 import ProgressBar from 'react-native-progress/Bar';
 import LoadingIcon from '../Components/LoadingIcon';
-import {
-  responsiveHeight,
-  responsiveWidth,
-  responsiveFontSize
-} from "react-native-responsive-dimensions";
-
+import checkedIcon from '../Images/checkedicon.png';
 class VoteIndex extends Component {
   constructor(props) {
     super(props);
@@ -31,8 +25,14 @@ class VoteIndex extends Component {
       contestants: [],
     };
   }
+clearSelection = ()=>[
+  this.setState({
+    checked: false,
+    seletectedContestant: null,
 
-  handleNav = ({navigation}) => {
+  })
+]
+  handleNav = () => {
     if (this.state.seletectedContestant == null) {
       this.setState({
         msg: 'Choose a contestant to vote for',
@@ -50,6 +50,9 @@ class VoteIndex extends Component {
   handleOnPress = value => {
     console.log('called' + value);
     this.setState({seletectedContestant: value});
+  };
+  _renderCheckedIcon = () => {
+    // if ()
   };
   componentDidMount = async () => {
     const eventName = this.props.route.params.eventName;
@@ -74,50 +77,86 @@ class VoteIndex extends Component {
       return (
         <>
           <FlatGrid
-            itemDimension={300}
+            itemDimension={150} //300
             items={this.state.contestants}
             style={styles.gridView}
             renderItem={({item, index}) => (
               <View style={[styles.OuterContainer]}>
-              <View
-                style={[styles.itemContainer, {backgroundColor: '#D71182'}]}
-                onPress={() => this.handleOnPress(item.id)}>
-                <TouchableOpacity onPress={() => this.handleOnPress(item.id)}>
-                  <Image
-                    source={{
-                      uri: 'https://www.startransittravels.org/MEDIA BILLO/dashboard/adminresources' + item.image_path,
-                    }}
-                    indicator={ProgressBar}
-                    indicatorProps={{
-                      size: 80,
-                      borderWidth: 0,
-                      color: 'rgba(150, 150, 150, 1)',
-                      unfilledColor: 'rgba(200, 200, 200, 0.2)',
-                    }}
-                    style={[styles.imgItem]}
-                  />
-                </TouchableOpacity>
-
-                <RadioButton
-                  currentValue={this.state.seletectedContestant}
-                  value={item.id}
-                  outerCircleSize={20}
+                <View
+                  style={[
+                    styles.itemContainer,
+                    {
+                      backgroundColor:
+                        this.state.seletectedContestant === item.id
+                          ? '#4f2e2b'
+                          : '#D71182',
+                    },
+                  ]}
                   onPress={() => this.handleOnPress(item.id)}>
-                  <Text style={styles.itemName}>{item.contestant_name}</Text>
-                </RadioButton>
-              </View>
+                  <TouchableHighlight
+                    onPress={() => this.handleOnPress(item.id)}>
+                    <View style={{position: 'relative'}}>
+                      <Image
+                        source={{
+                          uri: item.image_path
+                        }}
+                        indicator={ProgressBar}
+                        indicatorProps={{
+                          size: 80,
+                          borderWidth: 0,
+                          color: 'rgba(150, 150, 150, 1)',
+                          unfilledColor: 'rgba(200, 200, 200, 0.2)',
+                        }}
+                        style={[
+                          styles.imgItem,
+                          {
+                            opacity:
+                              this.state.seletectedContestant === item.id
+                                ? 0.4
+                                : 1,
+                          },
+                        ]}
+                      />
+                      {this.state.seletectedContestant === item.id ? 
+                        <Animatable.View
+                        style={{position: 'absolute', top: 0, right: 40}}
+                          animation="fadeIn"
+                          iterationCount={1}
+                          direction="alternate">
+                          <Image
+                           
+                            source={checkedIcon}
+                          />
+                        </Animatable.View>
+                       : null}
+                    </View>
+                  </TouchableHighlight>
+
+                  <RadioButton
+                    currentValue={this.state.seletectedContestant}
+                    value={item.id}
+                    outerCircleSize={20}
+                    onPress={() => this.handleOnPress(item.id)}>
+                    <Text style={styles.itemName}>{item.contestant_name}</Text>
+                  </RadioButton>
+                </View>
               </View>
             )}
           />
+          <Button primary style={[styles.clrBtn]} onPress={this.clearSelection}>
+            <Text style={{color:'red'}}>Clear Selection</Text>
+          </Button>
 
-          <Button title="Proceed" onPress={this.handleNav} />
+          <Button primary style={[styles.btn]} onPress={this.handleNav}>
+            <Text>Proceed</Text>
+          </Button>
           <Snackbar
             visible={this.state.visible}
             onDismiss={() => this.setState({visible: false})}
             action={{
               label: 'Ok',
               onPress: () => {
-                // Do something
+                // nothing here
               },
             }}>
             {this.state.msg}
@@ -129,31 +168,28 @@ class VoteIndex extends Component {
   }
 }
 const styles = StyleSheet.create({
- 
   gridView: {
     marginTop: 20,
     flex: 1,
   },
-  OuterContainer:{
-
+  OuterContainer: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    textAlign:'center'
+    textAlign: 'center',
   },
   itemContainer: {
     justifyContent: 'space-between',
     alignItems: 'center',
     borderRadius: 5,
-    padding: 10,
-    height: 350,
-   // width:300
+    padding: 2,
+    //height: 350,
+    // width:300
   },
   itemName: {
-    textAlign:'center',
-    fontSize: 12,
+    textAlign: 'center',
+    fontSize: 15,
     color: '#fff',
-    
   },
   itemCode: {
     fontWeight: '600',
@@ -161,8 +197,29 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
   imgItem: {
-    width: 250,
-    height: 300,
+    width: 160, //250,
+    height: 200, //300,
+  },
+  btn: {
+    alignSelf: 'flex-end',
+    backgroundColor: '#ff00a6',
+
+    width: 105,
+    margin: 10,
+    height: 40,
+
+    textAlign: 'center',
+  },
+  clrBtn: {
+    alignSelf: 'flex-start',
+    backgroundColor: '#ffc2e4',
+    position:'absolute',
+    bottom:0,
+    width: 120,
+    margin: 10,
+    height: 40,
+
+    textAlign: 'center',
   },
 });
 export default VoteIndex;

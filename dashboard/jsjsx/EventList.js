@@ -75,6 +75,8 @@ class EventList extends React.Component {
 
 }
 
+var ur = "http://192.168.8.100:3000";
+
 function fetchList() {
   return _fetchList.apply(this, arguments);
 }
@@ -84,7 +86,7 @@ function _fetchList() {
     var result = "";
 
     try {
-      var response = yield axios.get("/backend/adminresources/getEventList.php", {
+      var response = yield axios.get(ur + "/adminresources/getEventList.php", {
         headers: {
           //`"Content-Type": "application/json",
           Authorization: "Bearer " + sessionStorage.getItem("token")
@@ -137,7 +139,7 @@ function _deleteEvent() {
     try {
       var response = yield axios({
         method: "post",
-        url: "/backend/adminresources/deleteEvent.php",
+        url: ur + "/adminresources/deleteEvent.php",
         data: formdata,
         headers: {
           //`"Content-Type": "application/json",
@@ -175,7 +177,7 @@ function _eventStatus() {
     try {
       var response = yield axios({
         method: "post",
-        url: "/backend/adminresources/eventStatus.php",
+        url: ur + "/adminresources/eventStatus.php",
         data: formdata,
         headers: {
           //`"Content-Type": "application/json",
@@ -187,7 +189,7 @@ function _eventStatus() {
           } */
 
       });
-      console.warn("response", response);
+      console.log("response", response);
 
       if (eventstatus === "active") {
         yield $("#inactive" + id).html('<button type="button" class="btn btn-warning" id=\'inactive' + id + "' onclick='eventStatus(" + '"' + eventname + '",' + id + ',"inactive"' + ")'>Deactivate</button>");
@@ -202,8 +204,8 @@ function _eventStatus() {
       } //    eventStatus=='active'? $("#status"+id).html("Inactve") :$("#status"+id).html("Actve")
 
     } catch (error) {
-      //console.log(error.response)
-      // alert("set event status" + error);
+      console.log(error.response); // alert("set event status" + error);
+
       swal({
         title: "Error!",
         text: error.response.data.message,

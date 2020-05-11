@@ -87,9 +87,10 @@ function _getContestants() {
     var result = "";
 
     try {
+      var ur = "http://192.168.8.100:3000";
       var response = yield axios({
         method: "get",
-        url: "/backend/adminresources/fetchAllContestants.php",
+        url: ur + "/adminresources/fetchAllContestants.php",
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token")
         }
@@ -145,16 +146,17 @@ function deleteContestant() {
 
 function _deleteContestant() {
   _deleteContestant = _asyncToGenerator(function* () {
-    var eventname = sessionStorage.getItem('eventname');
-    var id = sessionStorage.getItem('id');
+    var eventname = sessionStorage.getItem("eventname");
+    var id = sessionStorage.getItem("id");
     var formdata = new FormData();
     formdata.append("event_name", eventname);
     formdata.append("id", id);
 
     try {
+      var ur = "http://192.168.8.100:3000";
       var response = yield axios({
         method: "post",
-        url: "./adminresources/deleteContestant.php",
+        url: ur + "/adminresources/deleteContestant.php",
         data: formdata,
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token")

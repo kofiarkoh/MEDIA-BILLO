@@ -6,7 +6,7 @@ class AddEvent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      eventName: ''
+      eventName: ""
     };
   }
 
@@ -71,19 +71,20 @@ function _submitName() {
     // alert("name is "+name)
     var formdata = new FormData();
     formdata.append("event_name", name);
-    var response = '';
-    $("input").prop('disabled', true);
+    var response = "";
+    $("input").prop("disabled", true);
     $(".no-loading").show();
 
     try {
+      var ur = "http://192.168.8.100:3000";
       var token = yield sessionStorage.getItem("token");
       var res = yield axios({
         method: "post",
-        url: "/backend/adminresources/addEvent.php",
+        url: ur + "/adminresources/addEvent.php",
         data: formdata,
         headers: {
           "Content-Type": "multipart/form-data",
-          'Authorization': "Bearer " + token
+          Authorization: "Bearer " + token
         }
       });
       swal({
@@ -91,7 +92,7 @@ function _submitName() {
         icon: "success"
       });
       $(".no-loading").hide();
-      $("input").prop('disabled', false);
+      $("input").prop("disabled", false);
     } catch (error) {
       // alert("submit error",error)
       console.log(error.response);
@@ -100,7 +101,7 @@ function _submitName() {
         icon: "warning"
       });
       $(".no-loading").hide();
-      $("input").prop('disabled', false);
+      $("input").prop("disabled", false);
     }
 
     return response;
