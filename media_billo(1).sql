@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 07, 2020 at 08:41 PM
+-- Generation Time: May 14, 2020 at 01:56 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.2
 
@@ -31,6 +31,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `billo_event` (
   `id` int(20) NOT NULL,
   `event_name` varchar(255) NOT NULL,
+  `image_url` varchar(255) NOT NULL,
   `status` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -38,8 +39,30 @@ CREATE TABLE `billo_event` (
 -- Dumping data for table `billo_event`
 --
 
-INSERT INTO `billo_event` (`id`, `event_name`, `status`) VALUES
-(34, 'MISS_AGRIC_GHANA', 'inactive');
+INSERT INTO `billo_event` (`id`, `event_name`, `image_url`, `status`) VALUES
+(44, 'SDFS', '/Images/EventImages/GBWA-20180317184017.jpg', 'inactive'),
+(45, 'EWFW', '/Images/EventImages/enoch.jpg', 'inactive');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `EWFW`
+--
+
+CREATE TABLE `EWFW` (
+  `id` int(11) NOT NULL,
+  `contestant_name` varchar(255) NOT NULL,
+  `image_path` varchar(255) NOT NULL,
+  `votes` int(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `EWFW`
+--
+
+INSERT INTO `EWFW` (`id`, `contestant_name`, `image_path`, `votes`) VALUES
+(1, 'ewwe', '/Images/GBWA-20180704204008.jpg', 3452),
+(2, 'ewweewer ewef', '/Images/enoch.jpg', 123);
 
 -- --------------------------------------------------------
 
@@ -63,20 +86,53 @@ INSERT INTO `login_logs` (`id`, `name`, `login_time`) VALUES
 (3, 'lawrence', '2020-03-06 15:05:28'),
 (4, 'law', '2020-03-06 15:27:50'),
 (5, 'law', '2020-03-06 16:33:38'),
-(6, 'lawrence', '2020-03-06 22:10:20');
+(6, 'lawrence', '2020-03-06 22:10:20'),
+(7, 'law', '2020-03-17 02:47:37'),
+(8, 'law', '2020-03-17 02:52:22'),
+(9, 'law', '2020-03-17 02:54:09'),
+(10, 'lawrence', '2020-03-17 03:07:24'),
+(11, 'lawrence', '2020-03-17 04:26:30'),
+(12, 'lawrence', '2020-04-28 19:19:29'),
+(13, 'lawrence', '2020-04-28 19:38:33'),
+(14, 'lawrence', '2020-04-28 19:39:40'),
+(15, 'lawrence', '2020-04-28 19:44:36'),
+(16, 'lawrence', '2020-04-28 19:46:37'),
+(17, 'lawrence', '2020-04-28 19:54:07'),
+(18, 'lawrence', '2020-04-28 20:05:22'),
+(19, 'law', '2020-05-07 16:42:02'),
+(20, 'law', '2020-05-07 16:43:16'),
+(21, 'law', '2020-05-07 16:45:32'),
+(22, 'law', '2020-05-07 16:48:59'),
+(23, 'law', '2020-05-07 16:49:16'),
+(24, 'law', '2020-05-07 17:30:52'),
+(25, 'law', '2020-05-07 17:31:26'),
+(26, 'law', '2020-05-08 05:16:40'),
+(27, 'law', '2020-05-08 06:01:33'),
+(28, 'law', '2020-05-08 06:13:53'),
+(29, 'law', '2020-05-12 17:44:21'),
+(30, 'law', '2020-05-13 00:40:40'),
+(31, 'law', '2020-05-13 01:45:57');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `MISS_AGRIC_GHANA`
+-- Table structure for table `SDFS`
 --
 
-CREATE TABLE `MISS_AGRIC_GHANA` (
+CREATE TABLE `SDFS` (
   `id` int(11) NOT NULL,
   `contestant_name` varchar(255) NOT NULL,
   `image_path` varchar(255) NOT NULL,
   `votes` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `SDFS`
+--
+
+INSERT INTO `SDFS` (`id`, `contestant_name`, `image_path`, `votes`) VALUES
+(1, 'dsddsd', '/Images/GBWA-20180221185035.jpg', 323),
+(2, 'dsddsddsdfs', '/Images/GBWA-20181215075141.jpg', 433);
 
 -- --------------------------------------------------------
 
@@ -103,62 +159,7 @@ CREATE TABLE `transaction_logs` (
 --
 
 INSERT INTO `transaction_logs` (`id`, `trans_id`, `trans_ref`, `phone_number`, `networkType`, `voucher_code`, `status`, `event_name`, `selected_contestant`, `votes`, `trans_date`) VALUES
-(1, 'MBILO-1582841919', 'MEDIA BILLO VOTING', '0', '', '2434433', 'pending', 'MOST_BEAUTIFUL', '5', 50, '2020-02-27 21:54:59'),
-(2, 'MBILO-1582843233', 'MEDIA BILLO VOTING', '0', '', '2434433', 'pending', 'MOST_BEAUTIFUL', '6', 129, '2020-02-27 22:16:53'),
-(3, 'MBILO-1582843341', 'MEDIA BILLO VOTING', '0', '', '2434433', 'pending', 'MISS_AGRIC_GHANA', '3', 429, '2020-02-27 22:18:41'),
-(4, 'MBILO-1582938719', 'MEDIA BILLO VOTING', '234567895', '', '2434433', 'pending', 'MISS_AGRIC_GHANA', '3', 429, '2020-02-29 00:48:19'),
-(5, 'MBILO-1582940014', 'MEDIA BILLO VOTING', '542882913', '', '', 'pending', 'MISS AGRIC GHANA', '3', 21, '2020-02-29 01:09:54'),
-(6, 'MBILO-1582940087', 'MEDIA BILLO VOTING', '542882913', '', '', 'pending', 'MISS AGRIC GHANA', '3', 21, '2020-02-29 01:11:07'),
-(7, 'MBILO-1582940151', 'MEDIA BILLO VOTING', '542882913', '', '', 'pending', 'MISS AGRIC GHANA', '3', 21, '2020-02-29 01:12:11'),
-(8, 'MBILO-1582940230', 'MEDIA BILLO VOTING', '542882913', '', '', 'pending', 'MISS AGRIC GHANA', '3', 21, '2020-02-29 01:13:30'),
-(9, 'MBILO-1582940254', 'MEDIA BILLO VOTING', '542882913', '', '', 'pending', 'MISS AGRIC GHANA', '3', 21, '2020-02-29 01:13:54'),
-(10, 'MBILO-1582940439', 'MEDIA BILLO VOTING', '542882913', '', '', 'pending', 'MISS AGRIC GHANA', '3', 21, '2020-02-29 01:16:59'),
-(11, 'MBILO-1582940530', 'MEDIA BILLO VOTING', '542882913', '', '', 'pending', 'MISS AGRIC GHANA', '3', 21, '2020-02-29 01:18:30'),
-(12, 'MBILO-1582940978', 'MEDIA BILLO VOTING', '054432882913', 'MTN', '', 'pending', 'MISS AGRIC GHANA', '3', 21, '2020-02-29 01:25:58'),
-(13, 'MBILO-1582941007', 'MEDIA BILLO VOTING', '0542882913', 'AIR', '', 'pending', 'MOST BEAUTIFUL', '5', 21, '2020-02-29 01:26:27'),
-(14, 'MBILO-1583011637', 'MEDIA BILLO VOTING', '0542882913', 'AIR', '', 'pending', 'MISS AGRIC GHANA', '3', 21, '2020-02-29 21:03:37'),
-(15, 'MBILO-1583012912', 'MEDIA BILLO VOTING', '0542882913', 'MTN', '', 'pending', 'MISS AGRIC GHANA', '3', 21, '2020-02-29 21:24:52'),
-(16, 'MBILO-1583027183', 'MEDIA BILLO VOTING', '0542882913', 'MTN', '', 'pending', 'MOST BEAUTIFUL', '6', 21, '2020-03-01 01:22:43'),
-(17, 'MBILO-1583027376', 'MEDIA BILLO VOTING', '0542882913', 'MTN', '', 'pending', 'MOST BEAUTIFUL', '6', 21, '2020-03-01 01:25:56'),
-(18, 'MBILO-1583027762', 'MEDIA BILLO VOTING', '0542882913', 'MTN', '', 'pending', 'MISS AGRIC GHANA', '3', 21, '2020-03-01 01:32:22'),
-(19, 'MBILO-1583027796', 'MEDIA BILLO VOTING', '0542882913', 'MTN', '', 'pending', 'MISS AGRIC GHANA', '3', 21, '2020-03-01 01:32:56'),
-(20, 'MBILO-1583028133', 'MEDIA BILLO VOTING', '0542882913', 'MTN', '', 'pending', 'MISS AGRIC GHANA', '3', 21, '2020-03-01 01:38:33'),
-(21, 'MBILO-1583028165', 'MEDIA BILLO VOTING', '0542882913', 'MTN', '', 'pending', 'MISS AGRIC GHANA', '3', 21, '2020-03-01 01:39:05'),
-(22, 'MBILO-1583028192', 'MEDIA BILLO VOTING', '0542882913', 'MTN', '', 'pending', 'MISS AGRIC GHANA', '3', 21, '2020-03-01 01:39:32'),
-(23, 'MBILO-1583028217', 'MEDIA BILLO VOTING', '0542882913', 'MTN', '', 'pending', 'MISS AGRIC GHANA', '3', 21, '2020-03-01 01:39:57'),
-(24, 'MBILO-1583028372', 'MEDIA BILLO VOTING', '0542882913', 'MTN', '', 'pending', 'MISS AGRIC GHANA', '3', 21, '2020-03-01 01:42:32'),
-(25, 'MBILO-1583028401', 'MEDIA BILLO VOTING', '0542882913', 'MTN', '', 'pending', 'MISS AGRIC GHANA', '3', 21, '2020-03-01 01:43:01'),
-(26, 'MBILO-1583028450', 'MEDIA BILLO VOTING', '0542882913', 'MTN', '', 'pending', 'MISS AGRIC GHANA', '3', 21, '2020-03-01 01:43:50'),
-(27, 'MBILO-1583028479', 'MEDIA BILLO VOTING', '0542882913', 'MTN', '', 'pending', 'MISS AGRIC GHANA', '3', 21, '2020-03-01 01:44:19'),
-(28, 'MBILO-1583097440', 'MEDIA BILLO VOTING', '0542882913', 'TIG', '', 'pending', 'MISS AGRIC GHANA', '3', 21, '2020-03-01 20:53:40'),
-(29, 'MBILO-1583097502', 'MEDIA BILLO VOTING', '0542882913', 'TIG', '', 'pending', 'MISS AGRIC GHANA', '3', 2158, '2020-03-01 20:54:42'),
-(30, 'MBILO-1583097565', 'MEDIA BILLO VOTING', '0542882913', 'TIG', '', 'pending', 'MISS AGRIC GHANA', '3', 2158, '2020-03-01 20:55:45'),
-(31, 'MBILO-1583097621', 'MEDIA BILLO VOTING', '0542882913', 'MTN', '', 'pending', 'MISS AGRIC GHANA', '3', 21, '2020-03-01 20:56:41'),
-(32, 'MBILO-1583097705', 'MEDIA BILLO VOTING', '0542882913', 'MTN', '', 'pending', 'MISS AGRIC GHANA', '3', 21, '2020-03-01 20:58:05'),
-(33, 'MBILO-1583098197', 'MEDIA BILLO VOTING', '0542882913', 'MTN', '', 'pending', 'MISS AGRIC GHANA', '3', 21, '2020-03-01 21:06:17'),
-(34, 'MBILO-1583098217', 'MEDIA BILLO VOTING', '0542882913', 'MTN', '', 'pending', 'MISS AGRIC GHANA', '3', 21, '2020-03-01 21:06:37'),
-(35, 'MBILO-1583098253', 'MEDIA BILLO VOTING', '0542882913', 'MTN', '', 'pending', 'MISS AGRIC GHANA', '3', 21, '2020-03-01 21:07:13'),
-(36, 'MBILO-1583098277', 'MEDIA BILLO VOTING', '0542882913', 'MTN', '', 'pending', 'MISS AGRIC GHANA', '3', 21, '2020-03-01 21:07:37'),
-(37, 'MBILO-1583098321', 'MEDIA BILLO VOTING', '0542882913', 'MTN', '', 'pending', 'MISS AGRIC GHANA', '3', 21, '2020-03-01 21:08:21'),
-(38, 'MBILO-1583098375', 'MEDIA BILLO VOTING', '0542882913', 'TIG', '', 'pending', 'MISS AGRIC GHANA', '3', 21, '2020-03-01 21:09:15'),
-(39, 'MBILO-1583098421', 'MEDIA BILLO VOTING', '0542882913', 'VOD', '5555555', 'pending', 'MISS AGRIC GHANA', '3', 21, '2020-03-01 21:10:01'),
-(40, 'MBILO-1583098521', 'MEDIA BILLO VOTING', '0542882913', 'VOD', '123456', 'pending', 'MISS AGRIC GHANA', '3', 21, '2020-03-01 21:11:41'),
-(41, 'MBILO-1583105485', 'MEDIA BILLO VOTING', '0542882913', 'AIR', '', 'pending', 'MISS AGRIC GHANA', '3', 21, '2020-03-01 23:07:45'),
-(42, 'MBILO-1583107463', 'MEDIA BILLO VOTING', '0542882913', 'MTN', '', 'pending', 'MISS AGRIC GHANA', '3', 21, '2020-03-01 23:40:43'),
-(43, 'MBILO-1583107659', 'MEDIA BILLO VOTING', '0542882913', 'MTN', '', 'pending', 'MISS AGRIC GHANA', '3', 21, '2020-03-01 23:43:59'),
-(44, 'MBILO-1583107671', 'MEDIA BILLO VOTING', '0542882913', 'MTN', '', 'pending', 'MISS AGRIC GHANA', '3', 21, '2020-03-01 23:44:11'),
-(45, 'MBILO-1583107675', 'MEDIA BILLO VOTING', '0542882913', 'MTN', '', 'pending', 'MISS AGRIC GHANA', '3', 21, '2020-03-01 23:44:15'),
-(46, 'MBILO-1583107690', 'MEDIA BILLO VOTING', '0542882913', 'MTN', '', 'pending', 'MISS AGRIC GHANA', '3', 21, '2020-03-01 23:44:30'),
-(47, 'MBILO-1583107700', 'MEDIA BILLO VOTING', '0542882913', 'MTN', '', 'pending', 'MISS AGRIC GHANA', '3', 21, '2020-03-01 23:44:40'),
-(48, 'MBILO-1583107714', 'MEDIA BILLO VOTING', '0542882913', 'MTN', '', 'pending', 'MISS AGRIC GHANA', '3', 21, '2020-03-01 23:44:54'),
-(49, 'MBILO-1583107736', 'MEDIA BILLO VOTING', '0542882913', 'MTN', '', 'pending', 'MISS AGRIC GHANA', '3', 21, '2020-03-01 23:45:16'),
-(50, 'MBILO-1583107739', 'MEDIA BILLO VOTING', '0542882913', 'MTN', '', 'pending', 'MISS AGRIC GHANA', '3', 21, '2020-03-01 23:45:19'),
-(51, 'MBILO-1583107753', 'MEDIA BILLO VOTING', '0542882913', 'MTN', '', 'pending', 'MISS AGRIC GHANA', '3', 21, '2020-03-01 23:45:33'),
-(52, 'MBILO-1583107761', 'MEDIA BILLO VOTING', '0542882913', 'MTN', '', 'pending', 'MISS AGRIC GHANA', '3', 21, '2020-03-01 23:45:41'),
-(53, 'MBILO-1583107788', 'MEDIA BILLO VOTING', '0542882913', 'MTN', '', 'pending', 'MISS AGRIC GHANA', '3', 21, '2020-03-01 23:46:08'),
-(54, 'MBILO-1583107807', 'MEDIA BILLO VOTING', '0542882913', 'MTN', '', 'pending', 'MISS AGRIC GHANA', '3', 21, '2020-03-01 23:46:27'),
-(55, 'MBILO-1583107854', 'MEDIA BILLO VOTING', '0542882913', 'MTN', '', 'pending', 'MISS AGRIC GHANA', '3', 21, '2020-03-01 23:47:14'),
-(56, 'MBILO-1583107856', 'MEDIA BILLO VOTING', '0542882913', 'MTN', '', 'pending', 'MISS AGRIC GHANA', '3', 21, '2020-03-01 23:47:16');
+(1, 'MBILO-1588902633', 'MEDIA BILLO VOTING', '0241585537', 'VOD', '887852', 'pending', 'GHANA MOST BEAUTIFUL EVENT NAME IN SOME EVENT', '2', 55, '2020-05-08 02:26:53');
 
 -- --------------------------------------------------------
 
@@ -196,15 +197,21 @@ ALTER TABLE `billo_event`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `EWFW`
+--
+ALTER TABLE `EWFW`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `login_logs`
 --
 ALTER TABLE `login_logs`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `MISS_AGRIC_GHANA`
+-- Indexes for table `SDFS`
 --
-ALTER TABLE `MISS_AGRIC_GHANA`
+ALTER TABLE `SDFS`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -227,25 +234,31 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `billo_event`
 --
 ALTER TABLE `billo_event`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+
+--
+-- AUTO_INCREMENT for table `EWFW`
+--
+ALTER TABLE `EWFW`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `login_logs`
 --
 ALTER TABLE `login_logs`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
--- AUTO_INCREMENT for table `MISS_AGRIC_GHANA`
+-- AUTO_INCREMENT for table `SDFS`
 --
-ALTER TABLE `MISS_AGRIC_GHANA`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+ALTER TABLE `SDFS`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `transaction_logs`
 --
 ALTER TABLE `transaction_logs`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `users`
