@@ -146,10 +146,8 @@ async function fetchList() {
       },
     });
     result = response.data;
-    //console.log(response)
     $(".no-loading").hide();
     $("input").prop("disabled", false);
-    // alert("ready")
   } catch (error) {
     await swal({
       text: " " + error.response.data.message, // + "...Please reload this page",

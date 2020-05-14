@@ -5,13 +5,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 class AddEvent extends React.Component {
   constructor(props) {
     super(props);
+    this.fileInput = React.createRef();
     this.state = {
-      eventName: ""
+      eventName: "",
+      img: ''
     };
   }
 
   setValues(event) {
-    //console.log(event.target.value)
     this.setState({
       eventName: event.target.value
     });
@@ -21,6 +22,10 @@ class AddEvent extends React.Component {
     var _this = this;
 
     return _asyncToGenerator(function* () {
+      yield _this.setState({
+        img: _this.fileInput.current.files[0]
+      });
+
       if (_this.state.eventName == "" || _this.state.eventName === 0) {
         swal({
           text: "Event Name Required...",
@@ -29,7 +34,16 @@ class AddEvent extends React.Component {
         return;
       }
 
-      var response = yield submitName(_this.state.eventName);
+      if (_this.state.img === undefined) {
+        swal({
+          text: "Photo Of Contestant required...",
+          icon: "warning"
+        });
+        a;
+        return;
+      }
+
+      var response = yield submitName(_this.state);
       console.warn("the response is ", response);
     })();
   }
@@ -52,7 +66,22 @@ class AddEvent extends React.Component {
       placeholder: "enter event name here",
       onChange: event => this.setValues(event),
       type: "text"
-    })))), React.createElement("input", {
+    })))), React.createElement("div", {
+      className: "row"
+    }, React.createElement("div", {
+      className: "col-md-12"
+    }, React.createElement("div", {
+      className: "form-group"
+    }, React.createElement("label", {
+      htmlFor: "file"
+    }, "Select Image"), React.createElement("div", {
+      className: "col-sm-offset-2 col-sm-10"
+    }, React.createElement("label", {
+      className: "file-upload btn btn-secondary"
+    }, React.createElement("input", {
+      type: "file",
+      ref: this.fileInput
+    })))))), React.createElement("input", {
       type: "button",
       value: "Submit",
       class: "btn btn-round btn-primary",
@@ -67,10 +96,11 @@ function submitName(_x) {
 }
 
 function _submitName() {
-  _submitName = _asyncToGenerator(function* (name) {
+  _submitName = _asyncToGenerator(function* (data) {
     // alert("name is "+name)
     var formdata = new FormData();
-    formdata.append("event_name", name);
+    formdata.append("event_name", data.eventName);
+    formdata.append("file", data.img);
     var response = "";
     $("input").prop("disabled", true);
     $(".no-loading").show();
@@ -87,6 +117,7 @@ function _submitName() {
           Authorization: "Bearer " + token
         }
       });
+      console.log('the', res);
       swal({
         text: "Event add succesffully",
         icon: "success"

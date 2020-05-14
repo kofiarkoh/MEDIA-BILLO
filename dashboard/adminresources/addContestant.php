@@ -1,37 +1,17 @@
 <?php
 /* header('Content-type: application/json');
 header('Access-Control-Allow-Origin: *'); */
-require('./verify_login.php');
+require './verify_login.php';
 
 $name = $_POST['name'];
-$event_name = str_replace(" ","_", $_POST['event_name']);
+$event_name = str_replace(" ", "_", $_POST['event_name']);
 $file = $_FILES['file']['tmp_name'];
 $message = '';
 
 $file_name = $_FILES['file']['name'];
-
-//MOVE THE IMAGE TO DESIRED FOLDER
-/* try{
-    http_response_code(500);
-    move_uploaded_file($file, "./Images/" . $file_name);
-    $message ="completed";
-    $response = array(
-        'message' => $message,
-    );
-    echo json_encode($response);
-}
-catch(Excepion $e){
-    http_response_code(500);
-    $message ="Image Upload Unsuceesfull, please try again..".$e;
-    $response = array(
-        'message' => $message,
-    );
-    echo json_encode($response);
-
-} */
- $result = move_uploaded_file($file, "./Images/" . $file_name);
+$result = move_uploaded_file($file, "./Images/" . $file_name);
 if ($result == 1) {
-   
+
     //  echo "Image upload successful" ;
     require 'connection.php';
 //Check if the contestant exists
@@ -44,7 +24,7 @@ if ($result == 1) {
     } else {
         //if contestant does not exist!
         //insert the name into database
-        $image_path = '/Images/'.$file_name;
+        $image_path = '/Images/' . $file_name;
         $qry = "INSERT INTO $event_name (contestant_name,votes,image_path) VALUES ('$name',0,'$image_path')";
         $result = $connection->exec($qry);
         if ($result !== false) {
@@ -61,9 +41,8 @@ if ($result == 1) {
     }
 } else {
     http_response_code(500);
-   $message ="Image Upload Unsuceesfull, please try again..";
+    $message = "Image Upload Unsuceesfull, please try again..";
 }
-
 
 $response = array(
     'message' => $message,

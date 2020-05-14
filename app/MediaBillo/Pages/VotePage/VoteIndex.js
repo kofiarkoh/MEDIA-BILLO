@@ -13,6 +13,7 @@ import ProgressBar from 'react-native-progress/Bar';
 import LoadingIcon from '../Components/LoadingIcon';
 import checkedIcon from '../Images/checkedicon.png';
 class VoteIndex extends Component {
+  
   constructor(props) {
     super(props);
     this.state = {
@@ -135,7 +136,10 @@ clearSelection = ()=>[
                   <RadioButton
                     currentValue={this.state.seletectedContestant}
                     value={item.id}
-                    outerCircleSize={20}
+                   /*  outerCircleSize={20}
+                    innerCircleColor='red'
+                    innerCircleSize={15} */
+                    
                     onPress={() => this.handleOnPress(item.id)}>
                     <Text style={styles.itemName}>{item.contestant_name}</Text>
                   </RadioButton>

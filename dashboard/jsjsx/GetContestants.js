@@ -17,6 +17,7 @@ class ContestantList extends React.Component {
 
     return _asyncToGenerator(function* () {
       var data = yield getContestants();
+      console.log('the', data);
 
       _this.setState({
         list: data

@@ -155,10 +155,9 @@ function _fetchList() {
           Authorization: "Bearer " + sessionStorage.getItem("token")
         }
       });
-      result = response.data; //console.log(response)
-
+      result = response.data;
       $(".no-loading").hide();
-      $("input").prop("disabled", false); // alert("ready")
+      $("input").prop("disabled", false);
     } catch (error) {
       yield swal({
         text: " " + error.response.data.message,

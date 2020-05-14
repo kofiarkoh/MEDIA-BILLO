@@ -1,18 +1,22 @@
 class AddEvent extends React.Component {
   constructor(props) {
     super(props);
-
+    this.fileInput = React.createRef();
     this.state = {
       eventName: "",
+      img:''
     };
   }
   setValues(event) {
-    //console.log(event.target.value)
+  
     this.setState({
       eventName: event.target.value,
     });
   }
   async submitData() {
+    await this.setState({
+      img: this.fileInput.current.files[0],
+    });
     if (this.state.eventName == "" || this.state.eventName === 0) {
       swal({
         text: "Event Name Required...",
@@ -20,7 +24,16 @@ class AddEvent extends React.Component {
       });
       return;
     }
-    var response = await submitName(this.state.eventName);
+    if (this.state.img === undefined) {
+      swal({
+        text: "Photo Of Contestant required...",
+        icon: "warning",
+      });
+      a;
+      return;
+    }
+   
+    var response = await submitName(this.state);
     console.warn("the response is ", response);
   }
 
@@ -45,7 +58,18 @@ class AddEvent extends React.Component {
             </div>
           </div>
         </div>
-
+        <div className="row">
+            <div className="col-md-12">
+              <div className="form-group">
+                <label htmlFor="file">Select Image</label>
+                <div className="col-sm-offset-2 col-sm-10">
+                  <label className="file-upload btn btn-secondary">
+                    <input type="file" ref={this.fileInput} />
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
         <input
           type="button"
           value="Submit"
@@ -57,10 +81,11 @@ class AddEvent extends React.Component {
   }
 }
 
-async function submitName(name) {
+async function submitName(data) {
   // alert("name is "+name)
   var formdata = new FormData();
-  formdata.append("event_name", name);
+  formdata.append("event_name", data.eventName);
+  formdata.append("file",data.img)
   var response = "";
   $("input").prop("disabled", true);
   $(".no-loading").show();
@@ -77,7 +102,7 @@ async function submitName(name) {
         Authorization: "Bearer " + token,
       },
     });
-
+      console.log('the',res)
     swal({
       text: "Event add succesffully",
       icon: "success",

@@ -11,14 +11,23 @@ import {
   responsiveWidth,
   responsiveFontSize,
 } from 'react-native-responsive-dimensions';
-import {Content, Container, Card, CardItem, Button} from 'native-base';
+import {
+  Content,
+  Container,
+  Card,
+  CardItem,
+  Button,
+  Icon,
+  Fab,
+} from 'native-base';
 import getEventList from '../ApiCalls/getEventList';
 import img from '../Images/bilo-logo.jpg';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import LoadingIcon from '../Components/LoadingIcon';
 import {Snackbar} from 'react-native-paper';
-import noEventimg from '../Images/nodata.png'
-const eev = [3, 5, 54, 6, 6, 7, 7, 6, 3, 34];
+import noEventimg from '../Images/nodata.png';
+import errorImage from '../Images/billoerror.png';
+import PollCardItem from './PollCardItem';
 class Polls extends Component {
   constructor(props) {
     super(props);
@@ -58,18 +67,6 @@ class Polls extends Component {
     }
   };
   componentDidMount = async () => {
-    console.log('lauched is ', this.state.launched);
-    /*  if (this.state.launched == false) {
-      this.setState({loading: true});
-      var data = await getEventList();
-      var response = data;
-
-      this.setState({
-        polls: response,
-        loading: false,
-        launched: true,
-      });
-    } */
     this.refresList();
   };
   render() {
@@ -79,13 +76,13 @@ class Polls extends Component {
         return (
           <>
             <View style={[styles.centerContent]}>
-              {this.state.loading ? <LoadingIcon /> :
-           <TouchableOpacity>
-            <ImageBackground style={[styles.bgImg]} source={noEventimg}>
-           
-            </ImageBackground>
-          </TouchableOpacity>
-      }
+              {this.state.loading ? (
+                <LoadingIcon />
+              ) : (
+                <TouchableOpacity>
+                  <ImageBackground style={[styles.bgImg]} source={noEventimg} />
+                </TouchableOpacity>
+              )}
             </View>
           </>
         );
@@ -98,65 +95,63 @@ class Polls extends Component {
               {/*  <ScrollView style={{height: '100%'}}> */}
               {this.state.polls.map(item => {
                 return (
-                  <TouchableOpacity
-                    key={item.id}
-                    onPress={() => this.handleNavigation(item.event_name)}>
-                    <Card style={[styles.card]}>
-                      <CardItem cardBody={false} style={[styles.carditem]}>
-                        {/*  <Body> */}
-
-                        <Text style={[styles.cardText]}>{item.event_name}</Text>
-
-                        {/*  </Body> */}
-                      </CardItem>
-                    </Card>
-                  </TouchableOpacity>
+                  <PollCardItem key={item.id} eventname={item.event_name} imgpath={item.image_url} navigate={this.handleNavigation}/>
+                
                 );
               })}
               {/*  </ScrollView> */}
             </Content>
           </Container>
-          <Button
-            light
-            style={[styles.btn]}
+          <Fab
+            active={this.state.active}
+            direction="up"
+            containerStyle={{}}
+            style={{backgroundColor: '#00adf1'}}
+            position="bottomRight"
+            dis
             onPress={() => {
               this.refresList();
             }}>
-            <Text style={{color: 'white'}}> Refresh</Text>
-          </Button>
+            <Icon name="refresh" />
+          </Fab>
         </>
       );
     } else if (this.state.polls == null) {
       console.log('show display snackbar');
       return (
         <>
-          {this.state.loading ? <LoadingIcon /> : null}
-          <TouchableOpacity>
-            <ImageBackground style={[styles.pollCard]} source={img}>
-              <Text style={[styles.cardText]}>Error get Polls</Text>
-            </ImageBackground>
-          </TouchableOpacity>
-          <Button
-            title="Refresh"
-            style={[styles.btn]}
-            onPress={() => {
-              this.refresList();
-            }}
-          />
-          <Snackbar
-            visible={this.state.visible}
-            onDismiss={() => this.setState({visible: false})}
-            action={{
-              label: 'Ok',
-              onPress: () => {
-                // Do something
-              },
-            }}>
-            {this.state.msg}
-          </Snackbar>
+          <View style={[styles.centerContent]}>
+            {this.state.loading ? <LoadingIcon /> : null}
+            <TouchableOpacity>
+              <ImageBackground style={[styles.errorImg]} source={errorImage} />
+            </TouchableOpacity>
+            <Fab
+              active={this.state.active}
+              direction="up"
+              containerStyle={{}}
+              style={{backgroundColor: '#00adf1'}}
+              position="bottomRight"
+              dis
+              onPress={() => {
+                this.refresList();
+              }}>
+              <Icon name="refresh" />
+            </Fab>
+            <Snackbar
+              visible={this.state.visible}
+              onDismiss={() => this.setState({visible: false})}
+              action={{
+                label: 'Ok',
+                onPress: () => {
+                  // Do something
+                },
+              }}>
+              {this.state.msg}
+            </Snackbar>
+          </View>
         </>
       );
-    } 
+    }
   }
 }
 
@@ -199,34 +194,48 @@ const styles = StyleSheet.create({
     color: 'white',
     width: responsiveWidth(100),
   },
-  bgImg:{
+  bgImg: {
     height: 350,
-    backgroundColor:'transparent',
+    backgroundColor: 'transparent',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     color: 'white',
     width: responsiveWidth(60),
   },
+  errorImg: {
+    height: 210,
+    backgroundColor: 'transparent',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    color: 'white',
+    width: responsiveWidth(50),
+  },
+
   cardText: {
-    // display: 'flex',
-
     fontSize: 25,
-
     color: '#7a6464',
     height: '100%',
     width: '100%',
     textAlign: 'center',
-    //backgroundColor: '#D71182',
   },
   btn: {
     alignSelf: 'flex-start',
     backgroundColor: '#c969a8',
-
     width: 70,
     margin: 10,
     height: 40,
-
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  refreshBtn: {
+    alignSelf: 'center',
+    backgroundColor: '#c969a8',
+    width: 70,
+    margin: 10,
+    height: 40,
     textAlign: 'center',
   },
 });

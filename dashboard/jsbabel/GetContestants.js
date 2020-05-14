@@ -10,7 +10,7 @@ class ContestantList extends React.Component {
   }
   async fetchData() {
     var data = await getContestants();
-
+    console.log('the',data)
     this.setState({
       list: data,
     });

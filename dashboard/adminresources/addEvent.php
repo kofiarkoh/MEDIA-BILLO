@@ -9,6 +9,8 @@ require('./verify_login.php');
 $event_name = $_POST['event_name'];
 $error_characters = [' ', '\n'];
 $character_replace = ['_', ' '];
+$file = $_FILES['file']['tmp_name'];
+$file_name = $_FILES['file']['name'];
 $table = trim(strtoupper(str_replace($error_characters, $character_replace, $event_name)));
 $status = 0;
 $message = '';
@@ -27,11 +29,14 @@ if ($event_existence == true) {
    ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8  ";
     $res = $connection->exec($sql);
     if ($res !== false) {
+        $img_path = "./Images/EventImages/" . $file_name;
+        $path_db = "/Images/EventImages/" . $file_name; 
+       move_uploaded_file($file, $img_path);
 
         $event_staus = 'inactive';
-        $qry = "INSERT INTO billo_event (event_name,status) VALUES (?,?)";
+        $qry = "INSERT INTO billo_event (event_name,image_url,status) VALUES (?,?,?)";
         $stmt = $connection->prepare($qry);
-        $res = $stmt->execute([$table, $event_staus]);
+        $res = $stmt->execute([$table, $path_db,$event_staus]);
         if ($res !== false) {
             $message = "Event Has Been Added";
         } else {
@@ -63,3 +68,5 @@ function checkExistence($table_name)
         return false;
     }
 }
+
+

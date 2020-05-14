@@ -3,6 +3,7 @@ import {View} from 'native-base';
 import {TextInput, StyleSheet} from 'react-native';
 import {Container, Header, Content, Form, Item} from 'native-base';
 import {Input} from 'react-native-elements';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import {Button, RadioButton, Text, Snackbar} from 'react-native-paper';
 import sumbitVotes from '../ApiCalls/submitVotes';
 import userAssistance from './userAssistance';
@@ -94,26 +95,19 @@ class VoteAmount extends Component {
          <Item style={[styles.inputField]}> 
             <Input
               
-              label="Enter Number of Votes to Cast"
+              label="Enter Number of Votes {GHS 0.6 per vote}"
               keyboardType="phone-pad"
+              leftIcon={{ type: 'font-awesome', name: 'money' }}
               value={`${this.state.noOfVotes}`}
               disabled={this.state.disableInput}
               onChangeText={text =>
                 this.setState({noOfVotes: Math.round(text)})
               }
               />
-              {/*   <Input
-                placeholder="Enter Number of Votes to Cast"
-                keyboardType="phone-pad"
-                value={`${this.state.noOfVotes}`}
-                disabled={this.state.disableInput}
-                onChangeText={text =>
-                  this.setState({noOfVotes: Math.round(text)})
-                }
-              /> */}
+           
             </Item>
             <Text style={{textAlign: 'center'}}>
-              Votes {this.state.noOfVotes} : GHS {this.state.noOfVotes * 0.6}
+              Votes {this.state.noOfVotes} : GHS { (this.state.noOfVotes*0.6).toFixed(2)}
             </Text>
             <Text style={[styles.heading]}>Select Service Provider</Text>
             <RadioButton.Group
@@ -157,6 +151,7 @@ class VoteAmount extends Component {
               <Input
                 label="Enter Mobile Money Number"
                 keyboardType="numeric"
+                leftIcon={{ type: 'font-awesome', name: 'mobile' }}
                 value={this.state.phoneNumber}
                 disabled={this.state.disableInput}
                 onChangeText={text => this.setState({phoneNumber: text})}
@@ -167,17 +162,12 @@ class VoteAmount extends Component {
               
               disabled={this.state.ntwkType == 'VOD' ? false : true}
                 label="Voucher Code (Vodafone Users Only)"
+                leftIcon={{ type: 'font-awesome', name: 'lock' }}
                 keyboardType="numeric"
                 value={this.state.voucherCode}
                 onChangeText={text => this.setState({voucherCode: text})}
             /> 
-              {/* <Input
-                disabled={this.state.ntwkType == 'VOD' ? false : true}
-                placeholder="Voucher Code (Vodafone Users Only)"
-                keyboardType="numeric"
-                value={this.state.voucherCode}
-                onChangeText={text => this.setState({voucherCode: text})}
-              />  */}
+             
             </Item>
             <Item style={[styles.listItem]}>
               <View style={[styles.submitBtn]}>
