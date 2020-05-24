@@ -12,6 +12,7 @@ import getEventList from '../ApiCalls/getEventList';
 import getVoteValues from '../ApiCalls/getVoteValues';
 import LoadingIcon from '../Components/LoadingIcon';
 import styleSheet from './leaderBoardstyles';
+import RefreshFab from './RefreshFab';
 
 class LeaderBoardIndex extends Component {
   state = {
@@ -29,6 +30,7 @@ class LeaderBoardIndex extends Component {
   };
   handleChange = async value => {
     this.setState({selectedEvent: value, loading: true}, async () => {
+     // alert('hi')
       var response = await getVoteValues(this.state.selectedEvent);
       // console.log("the data is ",response.labels)
       this.setState(
@@ -46,7 +48,7 @@ class LeaderBoardIndex extends Component {
     });
   };
   fetchVotes = async () => {
-    this.setState({loading: true});
+    this.setState({loading: true,selectedEvent:null});
     var data = await getEventList();
     var response = data;
     if (data == null) {
@@ -54,6 +56,7 @@ class LeaderBoardIndex extends Component {
         msg: 'Error Fetching Data,please try again',
         visible: true,
         eventName: null,
+        loading:false
       });
     } else {
       this.setState({
@@ -88,7 +91,7 @@ class LeaderBoardIndex extends Component {
                 })}
               </RadioButton.Group>
             </Form>
-
+               
             {this.state.voteData.labels ==
             null ? null /* (
               <Text style={[styles.heading]}>Select An Event to view a graph</Text>
@@ -101,14 +104,15 @@ class LeaderBoardIndex extends Component {
                   alignItems: 'center',
                 }}>
                 {this.state.voteData.labels.length != 0 ? (
+
                   <BarChart
                     style={{
                       // width:'100%',
                       
-                      margin: 10,
+                      margin: 1,
                     }}
                     data={this.state.voteData}
-                    width={responsiveWidth(100)}
+                    width={responsiveWidth(90)}
                     height={320}
                     yAxisLabel=""
                     fromZero={true}
@@ -142,6 +146,7 @@ class LeaderBoardIndex extends Component {
                     Selected Event Has no data to display
                   </Text>
                 )}
+                <Button title="Reload Graph" onPress={()=>this.handleChange(this.state.selectedEvent)} />
               </View>
             )}
             {this.state.loading ? <LoadingIcon /> : null}
@@ -160,6 +165,7 @@ class LeaderBoardIndex extends Component {
           </Snackbar>
          
           </ScrollView>
+          <RefreshFab refresh={this.fetchVotes}/>
           </SafeAreaView>
         </>
         
@@ -173,7 +179,6 @@ class LeaderBoardIndex extends Component {
             {this.state.loading ? <LoadingIcon /> : null}
             {/*    <Text>No Events Found</Text> */}
           </View>
-          <Button title="Reload" onPress={this.fetchVotes} />
         </>
       );
     }
@@ -181,6 +186,7 @@ class LeaderBoardIndex extends Component {
       return (
         <>
           <View style={[styles.screenCenter]}>
+          {this.state.loading ? <LoadingIcon /> : null}
             <View>
               <Text>Error Fetching Data</Text>
             </View>
@@ -212,6 +218,13 @@ class LeaderBoardIndex extends Component {
           <Button title="Reload" onPress={this.fetchVotes} />
         </>
       );
+    }
+    else{
+      <>
+      <View>
+        <Text>Unknown Error</Text>
+      </View>
+      </>
     }
   }
 }

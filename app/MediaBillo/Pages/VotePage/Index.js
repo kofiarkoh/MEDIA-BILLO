@@ -21,6 +21,7 @@ const Stack = createStackNavigator();
         <Stack.Screen name="CastVote" component={VoteIndex} />
         <Stack.Screen name="Payment" component={VoteAmount} />
         <Stack.Screen name='Polls' component={Polls}/>
+        
       </Stack.Navigator>
         )
     }

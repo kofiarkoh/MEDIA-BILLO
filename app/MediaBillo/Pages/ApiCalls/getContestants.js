@@ -8,7 +8,19 @@ const getContestants = async eventName => {
  
 
   console.log('fetching them');
-  try {
+await  timeout(15000, fetch(url_main, {
+    method: 'POST',
+    headers: {'Content-Type': 'multipart/form-data'},
+    body: formdata,
+  })).then(function(response) {
+    // process response
+   
+    result = response.json()
+  }).catch(function(error) {
+    // might be a timeout error
+    alert(error)
+  })
+ /*  try {
     var response = await fetch(url_main, {
       method: 'POST',
       headers: {'Content-Type': 'multipart/form-data'},
@@ -19,9 +31,18 @@ const getContestants = async eventName => {
   } catch (error) {
     alert(error);
   }
-  
+   */
  
   return result;//
 };
-
+function timeout(ms, promise) {
+ 
+ 
+  return new Promise(function(resolve, reject) {
+    setTimeout(function() {
+      reject(new Error("timeout"))
+    }, ms)
+    promise.then(resolve, reject)
+  })
+}
 export default getContestants;

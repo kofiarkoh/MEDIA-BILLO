@@ -6,21 +6,28 @@ import {Input} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {Button, RadioButton, Text, Snackbar} from 'react-native-paper';
 import sumbitVotes from '../ApiCalls/submitVotes';
-import userAssistance from './userAssistance';
+import SuccessDialog from './SuccessDialog';
 class VoteAmount extends Component {
-  state = {
-    event_name: '',
-    buttonText: 'Submit',
-    loading: false,
-    visible: false,
-    phoneNumber: '',
-    voucherCode: '',
-    noOfVotes: '',
-    ntwkType: 'MTN',
-    contestantId: '',
-    msg: '',
-    disableInput: false,
-  };
+  constructor(props) {
+    super(props)
+    this.alertRef = React.createRef()
+    this. state = {
+      event_name: '',
+      buttonText: 'Submit',
+      loading: false,
+      visible: false,
+      phoneNumber: '',
+      voucherCode: '',
+      noOfVotes: '',
+      ntwkType: 'MTN',
+      contestantId: '',
+      msg: '',
+      disableInput: false,
+      showDialog:false
+    };
+  }
+  
+ 
   submitData = async () => {
     console.log('called' + this.state.phoneNumber.length);
     if (
@@ -66,8 +73,10 @@ class VoteAmount extends Component {
         loading: false,
         buttonText: 'Submit',
         disableInput: false,
+    //    showDialog:true
       });
-      userAssistance();
+      
+      this.alertRef.current._showDialog()
     } else {
       alert('An Error has occured, please try again');
       this.setState({
@@ -195,6 +204,7 @@ class VoteAmount extends Component {
           }}>
           {this.state.msg}
         </Snackbar>
+        <SuccessDialog ref={this.alertRef} navigator={this.props.navigation}/>
       </>
     );
   }
