@@ -7,13 +7,10 @@ import { makeStyles } from "@material-ui/core/styles"
 import AppBar from "@material-ui/core/AppBar"
 import Toolbar from "@material-ui/core/Toolbar"
 import Typography from "@material-ui/core/Typography"
-import Button from "@material-ui/core/Button"
-import IconButton from "@material-ui/core/IconButton"
-import MenuIcon from "@material-ui/icons/Menu"
+
 import { StylesProvider } from "@material-ui/core/styles"
 import Contestant from "../components/Contestant"
 import Grid from "@material-ui/core/Grid"
-import getEventList from "../ApiCalls/getEventList"
 import Fab from "@material-ui/core/Fab"
 import RefreshIcon from "@material-ui/icons/Refresh"
 import ArrorForward from "@material-ui/icons/ArrowForward"
@@ -21,33 +18,35 @@ import NetworkError from "../components/NetworkError"
 import Container from "@material-ui/core/Container"
 import getContestants from "../ApiCalls/getContestants"
 import { navigate } from "gatsby"
-
+import Footer from '../components/Footer'
+import Loading from "../components/Loading"
+import LinearProgress from '@material-ui/core/LinearProgress';
+import swal from 'sweetalert'
 import "./index.css"
 class pickcontestant extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      contestants: [
-        { name: "law", id: 4 },
-        { name: "yaw", id: 42 },
-        { name: "kofi", id: 43 },
-      ],
-      loading:false,
+      contestants: [],
+      loading: false,
       contestantId: null,
-      eventname:sessionStorage.getItem('eventname')
+      isRouting:false,
+      eventname:null // sessionStorage.getItem("eventname"),
     }
   }
   fetchContestants = async eventName => {
-      this.setState({
-          loading:true
-      })
-    var data = await getContestants(eventName)
-    console.log("ds", data)
+  await  this.setState({
+      loading: true,
+      eventname: sessionStorage.getItem("eventname"),
+    })
+    var data = await getContestants(sessionStorage.getItem("eventname"))
+    
     this.setState({
       contestants: data,
       event_name: eventName,
       loading: false,
+      openDialog: false,
     })
   }
   setContestant = id => {
@@ -55,38 +54,59 @@ class pickcontestant extends Component {
       contestantId: id,
     })
   }
-  goToPayment= ()=>{
-    if(this.state.contestantId === null) {
-      alert("you mus ")
+  goToPayment = () => {
+    if (this.state.contestantId === null) {
+     
+      swal({
+       // title: "Selec",
+        text: "Please choose a contestant to vote for",
+        icon: "warning",
+      });
       return
     }
-      navigate("/payment")
+    this.setState({
+      isRouting:true,
+      //openDialog: true,
+    })
+    sessionStorage.setItem("contestant", this.state.contestantId)
+    navigate("/payment")
   }
   componentDidMount() {
-    this.fetchContestants(this.state.eventname)
+    this.fetchContestants()
+  }
+  showProgressbar = ()=>{
+    this.setState({isRouting:true})
   }
 
   render() {
-    console.log(this.props.location.state)
+    if (this.state.loading === true) {
+      return <Loading title="Contestants" />
+    }
     return (
       <StylesProvider injectFirst>
         <AppBar position="fixed" className="appbar">
           <Toolbar>
-            <Typography variant="h6">Polls</Typography>
+            <Typography variant="h6">Contestants</Typography>
           </Toolbar>
         </AppBar>
         <Toolbar />
-        <Container>
-            {this.state.loading === true ? <h1>loading</h1> : null}
+        {this.state.isRouting===true ?   <LinearProgress color="secondary" /> :null }
+
+        <Container className='container'>
+         {/*  {this.state.loading === true ? <h1>loading</h1> : null} */}
+          
           <Grid container spacing={1} className="pollGridf">
             {this.state.contestants.length > 0 ? (
               this.state.contestants.map(item => {
+                console.log(item.image_path)
                 return (
                   <Contestant
                     key={item.id}
                     name={item.contestant_name}
                     id={item.id}
+                    imgurl={`${item.image_path}`}
                     click={this.setContestant}
+                    showloading={this.showProgressbar}
                     selected={
                       this.state.contestantId === item.id ? true : false
                     }
@@ -102,22 +122,22 @@ class pickcontestant extends Component {
           <Fab
             aria-label="like"
             className="vote-fab"
-            onClick={() =>
-              this.fetchContestants(this.state.eventname)
-            }
+            onClick={() => this.fetchContestants(this.state.eventname)}
           >
             <RefreshIcon />
           </Fab>
           <Fab
             aria-label="like"
             className="fab"
-            onClick={() =>
-              this.goToPayment()
-            }
+            onClick={() => this.goToPayment()}
           >
             <ArrorForward />
-          </Fab>
+          </Fab> 
+
         </Container>
+      
+        <Footer/>
+      
       </StylesProvider>
     )
   }

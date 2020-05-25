@@ -1,19 +1,55 @@
+.main{
+  height: 100%;
+}
 .appbar {
-  background-color: rgb(175, 10, 161);
+  background: linear-gradient(293deg, #00adf1 90%, #025170 66%);
   color: wheat;
 }
-
+.badge{
+  color: rebeccapurple;
+  background-color: rgb(3, 0, 0);
+}
+.loading-content{
+  height: 100vh;
+  position: fixed;
+  width: 100%;
+}
 .pollCard {
   margin: 10px;
+  
+}
+.grid-item{
+  align-self: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;  
+}
+.cardimg{
+  height: 200px;
+}
+@media (max-width:600px){
+ /*  .cardimg{
+    min-height: 30px;
+    max-width: 120px;
+  } */
+}
+.card-content{
+  background: rgb(95,0,128);
+  margin-top: -34px;
+  background: linear-gradient(293deg, #00adf1 90%, #025170 66%);
+  background-repeat: repeat; 
+  color: whitesmoke;
 }
 .fab {
   position: fixed;
-  bottom: 40px;
+  bottom: 90px;
   right: 40px;
+  background: linear-gradient(293deg, #00adf1 90%, #025170 66%);
+  color: white;
 }
 .vote-fab{
   position: fixed;
-  bottom: 40px;
+  bottom: 90px;
   left: 30px;
 }
 .networkError {
@@ -37,5 +73,24 @@
   text-align: center;
 }
 .submitbtn{
+  margin-top: 30px;
   width: 160px;
+  height: 50px;
+  font-size: 20px;
+  background: rgb(95,0,128);
+  background: linear-gradient(293deg, rgba(95,0,128,1) 90%, rgba(55,0,79,0.5452380781414128) 66%);
+  
+}
+.snackbar{
+  margin-right: 5%;
+}
+.radioHeading{
+  font-weight: bold;
+  text-align: center;
+  font-size: 30px;
+  color: linear-gradient(293deg, rgba(95,0,128,1) 90%, rgba(55,0,79,0.5452380781414128) 66%);
+  
+}
+.container{
+  margin-bottom: 70px;
 }

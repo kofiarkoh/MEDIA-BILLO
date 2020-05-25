@@ -1,0 +1,54 @@
+.footer {
+   
+  
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+ 
+  background-color: thistle;
+}
+.footer-icons{
+  
+    width: 100%;
+    background-color: whitesmoke;
+    display: flex;
+    justify-content: space-around;
+}
+.fb {
+  color: #3b5998;
+  font-size: 30px;
+}
+.instagram {
+  color: #d6249f;
+  color: radial-gradient(
+    circle at 30% 107%,
+    #fdf497 0%,
+    #fdf497 5%,
+    #fd5949 45%,
+    #d6249f 60%,
+    #285aeb 90%
+  );
+  font-size: 30px;
+}
+.twitter {
+  color: #00acee;
+  font-size: 30px;
+}
+.youtube {
+  color: #c4302b;
+  font-size: 30px;
+}
+.footer-note{
+   
+    width: 100%;
+  text-align: center;
+  z-index: 3333;
+  background: linear-gradient(-293deg, #00adf1 90%, #025170 66%);
+}
+.micky-brand{
+    color: rgb(255, 255, 255);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-style: italic;
+    font-weight: bold;
+    background: linear-gradient(293deg, #00adf1 90%, #025170 66%);
+}

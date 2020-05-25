@@ -3,7 +3,6 @@ import AppBar from "@material-ui/core/AppBar"
 import Toolbar from "@material-ui/core/Toolbar"
 import Typography from "@material-ui/core/Typography"
 import Button from "@material-ui/core/Button"
-import Icon from "@material-ui/core/Icon"
 import { StylesProvider } from "@material-ui/core/styles"
 import Grid from "@material-ui/core/Grid"
 import TextField from "@material-ui/core/TextField"
@@ -13,20 +12,34 @@ import RadioGroup from "@material-ui/core/RadioGroup"
 import FormControlLabel from "@material-ui/core/FormControlLabel"
 import FormControl from "@material-ui/core/FormControl"
 import FormLabel from "@material-ui/core/FormLabel"
-import { navigate } from "gatsby"
+import submitVotes from "../ApiCalls/submitVotes"
+
+import Backdrop from '@material-ui/core/Backdrop';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Footer from '../components/Footer'
+import swal from "sweetalert"
 import "./index.css"
 class payment extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
-        event_name: sessionStorage.getItem('eventname'),
-        phoneNumber: '',
-        voucherCode: '',
-        noOfVotes: 0,
-        ntwkType: 'MTN',
-        contestantId: '',
+      event_name: null, // sessionStorage.getItem('eventname'),
+      phoneNumber: "",
+      voucherCode: "",
+      noOfVotes: 0,
+      ntwkType: null,
+      contestantId: null, //sessionStorage.getItem('contestant'),
+      openSnackbar: false,
+      message: "",
+      openbackdrop:false
     }
+  }
+  componentDidMount() {
+    this.setState({
+      event_name: sessionStorage.getItem("eventname"),
+      contestantId: sessionStorage.getItem("contestant"),
+    })
   }
   setValues = (field, event) => {
     //console.log(value)
@@ -34,30 +47,78 @@ class payment extends Component {
       [field]: event.target.value,
     })
   }
-  submitData = () =>{
-     var {noOfVotes,phoneNumber,voucherCode,ntwkType} = this.state
-      if (noOfVotes === 0 || noOfVotes=== '' || noOfVotes===null) {
-          alert('votes req')
-          return
+  submitData = async () => {
+    var {
+      noOfVotes,
+      phoneNumber,
+      voucherCode,
+      ntwkType,
+      contestantId,
+      event_name,
+    } = this.state
+    if (noOfVotes === 0 || noOfVotes === "" || noOfVotes === null) {
+      swal({
+        icon: "warning",
+        text: "Provide number of votes to cast",
+      })
+      return
+    }
+    if (ntwkType === null) {
+      swal({
+        icon: "warning",
+        text: "Please select your service provider",
+      })
+      return
+    }
+    if (phoneNumber.length !== 10) {
+      swal({
+        icon: "warning",
+        text: "10 digit phone number required",
+      })
+      return
+    }
 
-      }
-      if (phoneNumber.length !== 10) {
-          alert('10 digit phone number ')
-          return
-      }
-      if ( ntwkType==="VOD" && voucherCode.length !== 6) {
-          alert('6 digi')
-          return
-      }
-      
-      console.log(this.state)
+    if (ntwkType === "VOD" && voucherCode.length !== 6) {
+      swal({
+        icon: "warning",
+        text: "6 digit voucher pin required",
+      })
+      return
+    }
+    if (contestantId === null || event_name === null) {
+      swal({
+        icon: "warning",
+        text: "Event Name and Contest missing, please start over",
+      })
+      return
+    }
+    this.setState({
+      openbackdrop:true
+    })
+
+    var response = await submitVotes(this.state)
+    if (response === "ok") {
+      swal({
+        icon: "warning",
+        text:
+          "Thanks for voting, please wait for prompt on your phone to complete payment",
+      })
+    } else {
+      swal({
+        icon: "error",
+        text: "An error occured, Please try again",
+      })
+    }
+    this.setState({
+      openbackdrop:false
+    })
   }
   render() {
     return (
       <StylesProvider injectFirst>
         <AppBar position="fixed" className="appbar">
           <Toolbar>
-            <Typography variant="h6">Polls</Typography>
+            <Typography variant="h6">Payment</Typography>
           </Toolbar>
         </AppBar>
         <Toolbar />
@@ -71,12 +132,14 @@ class payment extends Component {
                 type="number"
                 variant="outlined"
                 onChange={event => this.setValues("noOfVotes", event)}
-                helperText={`GHS ${ (this.state.noOfVotes*0.6).toFixed(2)} (GHS 0.6 per vote)`}
+                helperText={`GHS ${(this.state.noOfVotes * 0.6).toFixed(
+                  2
+                )} (GHS 0.6 per vote)`}
               />
             </Grid>
             <Grid item xs={12} sm={4} className="form">
               <FormControl component="fieldset">
-                <FormLabel component="legend">
+                <FormLabel component="legend" className="radioHeading">
                   Select Service Provider
                 </FormLabel>
                 <RadioGroup
@@ -125,21 +188,33 @@ class payment extends Component {
                 label="Voucher Code"
                 type="number"
                 variant="outlined"
-               
+                style={{
+                  display: this.state.ntwkType === "VOD" ? "inline" : "none",
+                }}
                 onChange={event => this.setValues("voucherCode", event)}
                 helperText="Vodafone users only"
               />
             </Grid>
           </Grid>
-          <div className='submit'>
-            <Button variant="contained" 
-            onClick={()=>this.submitData()}
-           
-            className='submitbtn' color="primary">
+          <div className="submit">
+            <Button
+              variant="contained"
+              onClick={() => this.submitData()}
+              className="submitbtn"
+              color="primary"
+            >
               Send
             </Button>
           </div>
+          <Backdrop
+           
+            open={this.state.openbackdrop}
+            
+          >
+            <CircularProgress color="inherit" />
+          </Backdrop>
         </Container>
+        <Footer/>
       </StylesProvider>
     )
   }

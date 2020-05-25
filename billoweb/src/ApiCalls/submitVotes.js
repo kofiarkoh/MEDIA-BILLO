@@ -31,18 +31,10 @@ const sumbitVotes = async data => {
     result ='ok'// response.json()
   }).catch(function(error) {
     // might be a timeout error
-    alert("An error has occured")
+    result = null
+   console.log('err',error)
   })
-  /* try {
-    var response = await fetch(url_main, {
-      method: 'POST',
-      body: JSON.stringify(voteData),
-    });
-   // console.log(response.text());
-    result = 'ok'; //response.json()
-  } catch (error) {
-    alert("error"+error)
-  } */
+  
   return result;
 };
 function timeout(ms, promise) {

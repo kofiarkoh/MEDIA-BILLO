@@ -27,7 +27,7 @@ const getContestants = async eventName => {
     result = text
     })
     .catch(function (error) {
-      // might be a timeout error
+     
       console.log(error.body)
     })
    
