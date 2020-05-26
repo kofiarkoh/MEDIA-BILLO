@@ -1,13 +1,10 @@
 
 const sumbitVotes = async data => {
-  var url1 = 'http://192.168.8.100:5000/VoteRecording/getVotes.php';
-
   var url_main = 'https://www.admin.mediabillo.net/appbackend/VoteRecording/logVotesData.php';
   var {
     phoneNumber,
     voucherCode,
     noOfVotes,
-    ntwkType,
     event_name,
     contestantId,
     ntwkType,

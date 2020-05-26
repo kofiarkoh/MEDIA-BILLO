@@ -1,5 +1,4 @@
 const getEventList = async () => {
-  var url_main1 = 'http://localhost:3000/getEventList.php';
   var url_main = 'https://www.admin.mediabillo.net/appbackend/getEventList.php';
 
    var res = null;

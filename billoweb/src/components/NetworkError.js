@@ -5,7 +5,7 @@ class NetworkError extends Component {
         return (
             <div className='networkError'>
                 <div>
-                <img src={errorImg}/>
+                <img src={errorImg} alt='Error'/>
 
                 </div>
                    

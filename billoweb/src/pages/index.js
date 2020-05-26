@@ -103,7 +103,7 @@ class IndexPage extends React.Component {
             <RefreshIcon />
           </Fab>
         </Container>
-        <div className='space'>dddd</div>
+        <div className='space'></div>
         <Footer/>
       </StylesProvider>
     /*  

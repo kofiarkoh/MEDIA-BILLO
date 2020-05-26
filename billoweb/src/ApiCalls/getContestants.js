@@ -5,7 +5,6 @@ const getContestants = async eventName => {
   formdata.append("event_name", eventName)
   var url_main =
     "https://www.admin.mediabillo.net/appbackend/getEventContestants.php"
-  var url_main2 = "http://localhost:3000/getEventContestants.php"
 
   console.log("fetching them "+eventName)
   await timeout(

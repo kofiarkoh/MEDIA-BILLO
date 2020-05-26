@@ -7,10 +7,8 @@ import img from "../images/micky.jpg"
 import Grid from "@material-ui/core/Grid"
 import Badge from "@material-ui/core/Badge"
 import Skeleton from '@material-ui/lab/Skeleton';
-import Lazyload from "react-lazyload"
 import "./animations.css"
 import { LazyLoadImage } from "react-lazy-load-image-component"
-import red from '@material-ui/core/colors/red';
 import "../pages/index.css"
 class Contestant extends Component {
   constructor(props) {
@@ -31,13 +29,13 @@ class Contestant extends Component {
           badgeContent=""
           
           color='secondary'
-          invisible={this.props.selected == true ? false : true}
+          invisible={this.props.selected === true ? false : true}
         >
           <Card
             className="pollCard"
             onClick={() => this.props.click(this.props.id)}
             elevation={20}
-            style={{ opacity: this.props.selected == true ? 0.4 : 1 }}
+            style={{ opacity: this.props.selected === true ? 0.4 : 1 }}
           >
             <CardActionArea >
               <LazyLoadImage
