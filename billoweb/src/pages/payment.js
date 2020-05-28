@@ -13,12 +13,14 @@ import FormControlLabel from "@material-ui/core/FormControlLabel"
 import FormControl from "@material-ui/core/FormControl"
 import FormLabel from "@material-ui/core/FormLabel"
 import submitVotes from "../ApiCalls/submitVotes"
+import { navigate } from "gatsby"
 
-import Backdrop from '@material-ui/core/Backdrop';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import Footer from '../components/Footer'
+import Backdrop from "@material-ui/core/Backdrop"
+import CircularProgress from "@material-ui/core/CircularProgress"
+import Footer from "../components/Footer"
 import swal from "sweetalert"
 import "./index.css"
+import "../components/animations.css"
 class payment extends Component {
   constructor(props) {
     super(props)
@@ -32,7 +34,7 @@ class payment extends Component {
       contestantId: null, //sessionStorage.getItem('contestant'),
       openSnackbar: false,
       message: "",
-      openbackdrop:false
+      openbackdrop: false,
     }
   }
   componentDidMount() {
@@ -93,16 +95,29 @@ class payment extends Component {
       return
     }
     this.setState({
-      openbackdrop:true
+      openbackdrop: true,
     })
 
     var response = await submitVotes(this.state)
     if (response === "ok") {
-      swal({
-        icon: "warning",
-        text:
-          "Thanks for voting, please wait for prompt on your phone to complete payment",
-      })
+      if (ntwkType === "MTN") {
+        swal({
+          icon: "warning",
+          text:
+            "Thanks for voting, please wait for prompt on your phone to complete payment, if promp deleys,Dial *170#, My Account -> My Approvals ",
+        }).then(()=>{
+          this.goToHome()
+        })
+       
+      } else {
+        swal({
+          icon: "warning",
+          text:
+            "Thanks for voting, please wait for prompt on your phone to complete payment",
+        }).then(()=>{
+          this.goToHome()
+        })
+      }
     } else {
       swal({
         icon: "error",
@@ -110,8 +125,12 @@ class payment extends Component {
       })
     }
     this.setState({
-      openbackdrop:false
+      openbackdrop: false,
     })
+  }
+
+  goToHome =()=>{
+      navigate('/')
   }
   render() {
     return (
@@ -181,9 +200,9 @@ class payment extends Component {
                 onChange={event => this.setValues("phoneNumber", event)}
               />
             </Grid>
-            <Grid item xs={12} sm={4} className="form">
+            <Grid item xs={12} sm={4} className="form fade-in">
               <TextField
-                className="inputField"
+                className="inputField puff-in-center"
                 id="outlined-multiline-static"
                 label="Voucher Code"
                 type="number"
@@ -206,15 +225,11 @@ class payment extends Component {
               Send
             </Button>
           </div>
-          <Backdrop
-           
-            open={this.state.openbackdrop}
-            
-          >
+          <Backdrop open={this.state.openbackdrop}>
             <CircularProgress color="inherit" />
           </Backdrop>
         </Container>
-        <Footer/>
+        <Footer />
       </StylesProvider>
     )
   }

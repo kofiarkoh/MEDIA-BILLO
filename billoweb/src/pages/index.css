@@ -95,3 +95,12 @@
 .container{
   margin-bottom: 70px;
 }
+.linear-progress{
+  position: fixed;
+ 
+  width: 100%;
+  left: 0;
+  top: 40;
+  z-index: 9994;
+  
+}

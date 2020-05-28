@@ -68,14 +68,16 @@ class IndexPage extends React.Component {
       <div className='main'> */
       <StylesProvider injectFirst>
        
-        <AppBar position="fixed" className="appbar">
+      <AppBar position="fixed" className="appbar">
           <Toolbar>
             <Typography variant="h6">Polls</Typography>
           </Toolbar>
         </AppBar>
-        <Toolbar />
+        <Toolbar /> 
+    
+
         <Container className='container'>
-        {this.state.isRouting===true ?   <LinearProgress color="secondary" /> :null }
+        {this.state.isRouting===true ?   <LinearProgress color="secondary" className='linear-progress'/> :null }
        
           <Grid container spacing={1} className='grid-item'>
             {this.state.polls.length > 0 ? (

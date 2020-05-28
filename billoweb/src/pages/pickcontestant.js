@@ -85,7 +85,7 @@ class pickcontestant extends Component {
           </Toolbar>
         </AppBar>
         <Toolbar />
-        {this.state.isRouting===true ?   <LinearProgress color="secondary" /> :null }
+        {this.state.isRouting===true ?   <LinearProgress color="secondary" className='linear-progress' /> :null }
 
         <Container className='container'>
          {/*  {this.state.loading === true ? <h1>loading</h1> : null} */}
@@ -93,7 +93,7 @@ class pickcontestant extends Component {
           <Grid container spacing={1} className="pollGridf">
             {this.state.contestants.length > 0 ? (
               this.state.contestants.map(item => {
-                console.log(item.image_path)
+               
                 return (
                   <Contestant
                     key={item.id}
