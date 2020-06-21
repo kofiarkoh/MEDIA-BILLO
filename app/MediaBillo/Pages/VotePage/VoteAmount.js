@@ -7,6 +7,8 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {Button, RadioButton, Text, Snackbar} from 'react-native-paper';
 import sumbitVotes from '../ApiCalls/submitVotes';
 import SuccessDialog from './SuccessDialog';
+import otpVerification from '../ApiCalls/otpVerification'
+
 class VoteAmount extends Component {
   constructor(props) {
     super(props)
@@ -87,6 +89,45 @@ class VoteAmount extends Component {
     }
     // alert('continuing')
   };
+
+  submitOtp =async (otp) =>{
+    this.setState({
+      buttonText: '',
+      loading: true,
+    
+    });
+    var response = await otpVerification(otp)
+    this.setState({
+      loading: false,
+      buttonText: 'Submit',
+     
+    });
+    if (response.resp_code === 200) {
+      //otp success
+     // this.handleClose()
+      /* swal({
+         text: response.message,
+         icon: "success",
+       });
+       setTimeout(() => {
+        navigate('/')
+       }, 3000); */
+       alert(response.message)
+       setTimeout(() => {
+        this.props.navigation.navigate('Polls')
+       }, 3000);
+    
+    }
+    else{
+      //otp error
+      alert(response.message)
+     /*  swal({
+         text: response.message,
+         icon: "error",
+       }); */
+       //this.handleClose()
+    }
+  }
   componentDidMount = () => {
     //  console.log('data is ',this.props.route.params.eventName)
     const eventName = this.props.route.params.eventName;
@@ -104,7 +145,7 @@ class VoteAmount extends Component {
          <Item style={[styles.inputField]}> 
             <Input
               
-              label="Enter Number of Votes {GHS 0.6 per vote}"
+              label="Enter Number of Votes {GHS 0.4 per vote}"
               keyboardType="phone-pad"
               leftIcon={{ type: 'font-awesome', name: 'money' }}
               value={`${this.state.noOfVotes}`}
@@ -116,7 +157,7 @@ class VoteAmount extends Component {
            
             </Item>
             <Text style={{textAlign: 'center'}}>
-              Votes {this.state.noOfVotes} : GHS { (this.state.noOfVotes*0.6).toFixed(2)}
+              Votes {this.state.noOfVotes} : GHS { (this.state.noOfVotes*0.4).toFixed(2)}
             </Text>
             <Text style={[styles.heading]}>Select Service Provider</Text>
             <RadioButton.Group
@@ -204,7 +245,7 @@ class VoteAmount extends Component {
           }}>
           {this.state.msg}
         </Snackbar>
-        <SuccessDialog ref={this.alertRef} navigator={this.props.navigation}/>
+        <SuccessDialog ref={this.alertRef} otpcall={this.submitOtp} navigator={this.props.navigation}/>
       </>
     );
   }

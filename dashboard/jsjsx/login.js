@@ -15,7 +15,7 @@ $("#submit-btn").click( /*#__PURE__*/_asyncToGenerator(function* () {
     var ur = "http://192.168.8.100:3000";
     var response = yield axios({
       method: "post",
-      url: ur + "/adminresources/auth/login.php",
+      url: "adminresources/auth/login.php",
       //"/addEvent.php",
       data: formdata,
       header: {

@@ -10,7 +10,7 @@ class ContestantList extends React.Component {
   }
   async fetchData() {
     var data = await getContestants();
-    console.log('the',data)
+    console.log("the", data);
     this.setState({
       list: data,
     });
@@ -31,7 +31,7 @@ class ContestantList extends React.Component {
               <h3 class="mb-0">{item.eventname}</h3>
             </div>
             {/* <!-- Light table --> */}
-            <div class="table-responsive"></div>
+            <div class="table-responsive">
 
             <table class="table align-items-center table-flush">
               <thead class="thead-light">
@@ -46,7 +46,7 @@ class ContestantList extends React.Component {
                     Accumulated Votes
                   </th>
                   <th scope="col">Action</th>
-                  <th scope="col"></th>
+                  {/* <th scope="col"></th> */}
                 </tr>
               </thead>
               <tbody class="list">
@@ -60,6 +60,7 @@ class ContestantList extends React.Component {
                 )}
               </tbody>
             </table>
+            </div>
           </div>
         );
       });
@@ -77,7 +78,7 @@ async function getContestants() {
 
     var response = await axios({
       method: "get",
-      url: ur + "/adminresources/fetchAllContestants.php",
+      url: "/adminresources/fetchAllContestants.php",
 
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token"),
@@ -131,7 +132,7 @@ async function deleteContestant() {
 
     var response = await axios({
       method: "post",
-      url: ur + "/adminresources/deleteContestant.php",
+      url: "/adminresources/deleteContestant.php",
       data: formdata,
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token"),
@@ -164,16 +165,121 @@ class TableRows extends React.Component {
           <td>{index + 1}</td>
           <td>{item.contestant_name}</td>
           <td>{item.votes}</td>
-          <td
-            className="text-primary"
-            onClick={() => confirmDeleteion(item.id, this.props.eventName)}
-          >
-            Delete
+          <td className="text-primary">
+            <span>
+              <button
+                type="button"
+                className="btn btn-danger mr-2"
+                onClick={() => confirmDeleteion(item.id, this.props.eventName)}
+              >
+                <i class="fas fa-user-times"></i>
+              </button>
+            </span>
+
+            <span>
+              <button
+                type="button"
+                className="btn btn-info "
+                onClick={() =>
+                  showModal(item.contestant_name, this.props.eventName, item.id)
+                }
+              >
+               <i class="fas fa-user-edit"></i>
+              </button>
+            </span>
           </td>
         </tr>
       );
     });
   }
+}
+//export default Btn
+function showModal(name, eventname, id) {
+  sessionStorage.setItem("eventname", eventname);
+  sessionStorage.setItem("id", id);
+  $("#titleName").text(name);
+
+  $("#editModal").modal({
+    keyboard: true,
+    backdrop: "static",
+    show: true,
+  });
+}
+async function submitNewData() {
+  var eventname = sessionStorage.getItem("eventname");
+  var id = sessionStorage.getItem("id");
+  var new_name = $("#newName").val();
+  var photo = $("#newPhoto")[0].files[0];
+  var prev_name = $("#titleName").text();
+  var reg = /\s\s+/g;
+  var res = reg.test(new_name);
+  console.log(photo);
+  if (res) {
+    swal({
+      title: "Warning!",
+      text: "Name field cannot be white spaces only",
+      icon: "warning",
+    });
+    return;
+  }
+  if ((new_name == "" || new_name == null) && photo == undefined) {
+    swal({
+      title: "Warning!",
+      text: "You have not made any changes",
+      icon: "warning",
+    });
+    return;
+  }
+  $("#spinner").fadeIn();
+  $("#submitBtn").prop("disabled", true);
+  var data = new FormData();
+  data.append("event_name", eventname);
+  data.append("file", photo);
+  data.append("id", id);
+  data.append("new_name", new_name);
+  var requestOptions = {
+    method: "POST",
+    body: data,
+    redirect: "follow",
+    headers: {
+      //`"Content-Type": "application/json",
+      Authorization: "Bearer " + sessionStorage.getItem("token"),
+    },
+  };
+  var responseCode = 0;
+  fetch("/adminresources/editContestant.php", requestOptions)
+    .then((response) => {
+      responseCode = response.status;
+
+      return response.text();
+    })
+    .then((result) => {
+      //console.log(result)
+      if (responseCode == 200) {
+        swal({
+          title: "Success",
+          text: "Changes recorded successfully",
+          icon: "success",
+        });
+        location.reload();
+      } else {
+        swal({
+          title: "Error!",
+          text: "An error has occured, please try again",
+          icon: "warning",
+        });
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      swal({
+        title: "Error!",
+        text: "An unknown error has occured, please try again",
+        icon: "warning",
+      });
+    });
+  $("#spinner").fadeOut();
+  $("#submitBtn").prop("disabled", false);
 }
 
 //export default Btn

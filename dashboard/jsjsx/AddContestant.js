@@ -146,7 +146,7 @@ function _fetchList() {
     $(".no-loading").show(); //console.log(sessionStorage.getItem('token'))
 
     var ur = "http://192.168.8.100:3000";
-    var url = ur + "/adminresources/getEventList.php";
+    var url = "/adminresources/getEventList.php";
 
     try {
       var response = yield axios.get(url, {
@@ -196,7 +196,7 @@ function _sendContestantDetails() {
       var ur = "http://192.168.8.100:3000";
       var res = yield axios({
         method: "post",
-        url: ur + "/adminresources/addContestant.php",
+        url: "/adminresources/addContestant.php",
         data: formdata,
         headers: {
           "Content-Type": "multipart/form-data",

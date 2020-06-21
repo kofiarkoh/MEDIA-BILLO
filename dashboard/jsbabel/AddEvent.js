@@ -95,7 +95,7 @@ async function submitName(data) {
 
     var res = await axios({
       method: "post",
-      url: ur + "/adminresources/addEvent.php",
+      url: "/adminresources/addEvent.php",
       data: formdata,
       headers: {
         "Content-Type": "multipart/form-data",

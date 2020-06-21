@@ -21,10 +21,11 @@ import Footer from "../components/Footer"
 import swal from "sweetalert"
 import "./index.css"
 import "../components/animations.css"
+import OtpConfirmDialog from "../components/OtpConfirmDialog"
 class payment extends Component {
   constructor(props) {
     super(props)
-
+    this.otpRef = React.createRef()
     this.state = {
       event_name: null, // sessionStorage.getItem('eventname'),
       phoneNumber: "",
@@ -49,6 +50,7 @@ class payment extends Component {
       [field]: event.target.value,
     })
   }
+  
   submitData = async () => {
     var {
       noOfVotes,
@@ -75,7 +77,7 @@ class payment extends Component {
     if (phoneNumber.length !== 10) {
       swal({
         icon: "warning",
-        text: "10 digit phone number required",
+        text: "10 digit phone number required "+phoneNumber.length,
       })
       return
     }
@@ -97,16 +99,47 @@ class payment extends Component {
     this.setState({
       openbackdrop: true,
     })
+    //verify otp
+  //  var otpStatus = await this.otpRef.current.showDialog()
+   
+   /*  if (otpStatus === 'invalid') {
+      this.setState({
+        openbackdrop :false
+      })
+      return
+    }
+    else{ */
+ 
+  //}
+  this.sendVoteData()
+   
+  }
 
+  confirmOtp = async()=>{
+    //verify otp
+   var otpStatus = await this.otpRef.current.showDialog()
+  
+
+  }
+
+  backdropHandler = (option)=> {
+    this.setState({
+      openbackdrop:option
+    })
+  }
+  sendVoteData = async ()=> {
+    
+    
     var response = await submitVotes(this.state)
     if (response === "ok") {
-      if (ntwkType === "MTN") {
+      this.confirmOtp()
+      /* if (ntwkType === "MTN") {
         swal({
           icon: "warning",
           text:
             "Thanks for voting, please wait for prompt on your phone to complete payment, if promp deleys,Dial *170#, My Account -> My Approvals ",
         }).then(()=>{
-          this.goToHome()
+        //  this.goToHome()
         })
        
       } else {
@@ -115,9 +148,9 @@ class payment extends Component {
           text:
             "Thanks for voting, please wait for prompt on your phone to complete payment",
         }).then(()=>{
-          this.goToHome()
+          //this.goToHome()
         })
-      }
+      } */
     } else {
       swal({
         icon: "error",
@@ -151,9 +184,9 @@ class payment extends Component {
                 type="number"
                 variant="outlined"
                 onChange={event => this.setValues("noOfVotes", event)}
-                helperText={`GHS ${(this.state.noOfVotes * 0.6).toFixed(
+                helperText={`GHS ${(this.state.noOfVotes * 0.4).toFixed(
                   2
-                )} (GHS 0.6 per vote)`}
+                )} (GHS 0.4 per vote)`}
               />
             </Grid>
             <Grid item xs={12} sm={4} className="form">
@@ -214,8 +247,12 @@ class payment extends Component {
                 helperText="Vodafone users only"
               />
             </Grid>
+
           </Grid>
+          
           <div className="submit">
+          <OtpConfirmDialog ref={this.otpRef} backdrop={this.backdropHandler} submitdata={this.sendVoteData}/>
+
             <Button
               variant="contained"
               onClick={() => this.submitData()}

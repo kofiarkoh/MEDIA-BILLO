@@ -110,7 +110,7 @@ function _submitName() {
       var token = yield sessionStorage.getItem("token");
       var res = yield axios({
         method: "post",
-        url: ur + "/adminresources/addEvent.php",
+        url: "/adminresources/addEvent.php",
         data: formdata,
         headers: {
           "Content-Type": "multipart/form-data",

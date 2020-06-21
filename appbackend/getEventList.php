@@ -4,7 +4,7 @@ header('Access-Control-Allow-Origin: *');
 //header('Access-Control-Allow-Headers: X-Requested-With');
 
 require('./connection.php');
-$sql = "SELECT * FROM billo_event";
+$sql = "SELECT * FROM billo_event WHERE status='active'";
 $stmt = $connection->prepare($sql);
 $stmt->execute();
 $res = $stmt->fetchAll(PDO::FETCH_ASSOC);

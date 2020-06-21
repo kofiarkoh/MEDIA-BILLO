@@ -77,6 +77,63 @@
       </footer>
     </div>
   </div>
+   <!----EDIT CONTESTANT MODAL START----->
+   <div class="modal fade" id='editModal'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title text-center mx-auto">
+                   Edit Contestant <br>[<span id='titleName'></span>]
+                </div>
+                
+            </div>
+          
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-address">
+                          Event Name
+                        </label>
+                        <input
+                          id="newName"
+                          eventstat
+                          eventstat
+                          class="form-control"
+                          placeholder="enter event name here"
+                          type="text"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="row">
+                      <div className="col-md-12">
+                        <div className="form-group">
+                          <label htmlFor="file">Select Image</label>
+                          <div className="col-sm-offset-2 col-sm-10">
+                            <label className="file-upload btn btn-secondary">
+                              <input type="file" id='newPhoto' />
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                 
+            </div>
+            <div class="modal-footer">
+              <button type="button" id='closeBtn'  class="btn btn-light">Close</button>
+                <input
+                id="submitBtn"
+                type="button"
+                value="Submit"
+                class="btn btn-round btn-primary"
+            
+              />
+            </div>
+        </div>
+    </div>
+</div>
+<!----------EDIT CONTESTANT MODAL END----------->
   <!-- Argon Scripts -->
   <!-- Core -->
   <script src="./assets/vendor/jquery/dist/jquery.min.js"></script>
@@ -94,6 +151,18 @@
   <script src="./jsjsx/SideNav.js"></script>
   <script src="./jsjsx/TopNav.js"></script>
   <script src="./jsjsx/GetContestants.js"></script>
+  <script>
+    $(document).ready(function(){
+      $("#spinner").fadeOut()
+            $('#submitBtn').click(function(){
+                submitNewData()
+            })
+            $('#closeBtn').click(function(){
+              $("#editModal").modal('hide')
+            })
+            
+    })
+  </script>
 </body>
 
 </html>

@@ -54,7 +54,7 @@ async function getEventStats() {
     // console.log(sessionStorage.getItem('token'))
     var response = await axios({
       method: "get",
-      url: ur + "/adminresources/eventStats.php",
+      url: "/adminresources/eventStats.php",
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("token"),
       },

@@ -12,10 +12,12 @@ $trans_ref = "MEDIA BILLO VOTING";
 $date = date('Y-m-d H:i:s');
 try{
 require('../connection.php');
+require('./otp_process.php');
+$otp = sendOtp();
 $sql = "INSERT INTO `transaction_logs` (trans_id,trans_ref,voucher_code,status,event_name,
-selected_contestant,votes,trans_date,phone_number,networkType) VALUES (?,?,?,?,?,?,?,?,?,?)";
+selected_contestant,votes,trans_date,phone_number,networkType,otp) VALUES (?,?,?,?,?,?,?,?,?,?)";
 $stmt = $connection->prepare($sql);
-$res = $stmt->execute([$trans_id,$trans_ref,$voucher_code,'pending',$event_name,$contestant,$votes,$date,$phone_number,$network]);
+$res = $stmt->execute([$trans_id,$trans_ref,$voucher_code,'pending',$event_name,$contestant,$votes,$date,$phone_number,$network,$otp]);
 $response = array(
     'message'=>"record succesful"
 );

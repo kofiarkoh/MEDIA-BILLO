@@ -137,7 +137,7 @@ async function fetchList() {
   //console.log(sessionStorage.getItem('token'))
   var ur = "http://192.168.8.100:3000";
 
-  var url = ur + "/adminresources/getEventList.php";
+  var url =  "/adminresources/getEventList.php";
   try {
     var response = await axios.get(url, {
       headers: {
@@ -177,7 +177,7 @@ async function sendContestantDetails(contestant) {
 
     var res = await axios({
       method: "post",
-      url: ur + "/adminresources/addContestant.php",
+      url:  "/adminresources/addContestant.php",
       data: formdata,
       headers: {
         "Content-Type": "multipart/form-data",

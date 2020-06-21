@@ -17,7 +17,7 @@ class ContestantList extends React.Component {
 
     return _asyncToGenerator(function* () {
       var data = yield getContestants();
-      console.log('the', data);
+      console.log("the", data);
 
       _this.setState({
         list: data
@@ -43,7 +43,7 @@ class ContestantList extends React.Component {
           class: "mb-0"
         }, item.eventname)), React.createElement("div", {
           class: "table-responsive"
-        }), React.createElement("table", {
+        }, React.createElement("table", {
           class: "table align-items-center table-flush"
         }, React.createElement("thead", {
           class: "thead-light"
@@ -61,14 +61,12 @@ class ContestantList extends React.Component {
           "data-sort": "status"
         }, "Accumulated Votes"), React.createElement("th", {
           scope: "col"
-        }, "Action"), React.createElement("th", {
-          scope: "col"
-        }))), React.createElement("tbody", {
+        }, "Action"))), React.createElement("tbody", {
           class: "list"
         }, item.contestants.length == 0 ? React.createElement("h5", null) : React.createElement(TableRows, {
           items: item.contestants,
           eventName: item.eventname
-        }))));
+        })))));
       });
     }
   }
@@ -91,7 +89,7 @@ function _getContestants() {
       var ur = "http://192.168.8.100:3000";
       var response = yield axios({
         method: "get",
-        url: ur + "/adminresources/fetchAllContestants.php",
+        url: "/adminresources/fetchAllContestants.php",
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token")
         }
@@ -157,7 +155,7 @@ function _deleteContestant() {
       var ur = "http://192.168.8.100:3000";
       var response = yield axios({
         method: "post",
-        url: ur + "/adminresources/deleteContestant.php",
+        url: "/adminresources/deleteContestant.php",
         data: formdata,
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token")
@@ -187,14 +185,120 @@ class TableRows extends React.Component {
         key: item.id,
         id: item.id
       }, React.createElement("td", null, index + 1), React.createElement("td", null, item.contestant_name), React.createElement("td", null, item.votes), React.createElement("td", {
-        className: "text-primary",
+        className: "text-primary"
+      }, React.createElement("span", null, React.createElement("button", {
+        type: "button",
+        className: "btn btn-danger mr-2",
         onClick: () => confirmDeleteion(item.id, this.props.eventName)
-      }, "Delete"));
+      }, React.createElement("i", {
+        class: "fas fa-user-times"
+      }))), React.createElement("span", null, React.createElement("button", {
+        type: "button",
+        className: "btn btn-info ",
+        onClick: () => showModal(item.contestant_name, this.props.eventName, item.id)
+      }, React.createElement("i", {
+        class: "fas fa-user-edit"
+      })))));
     });
   }
 
 } //export default Btn
 
+
+function showModal(name, eventname, id) {
+  sessionStorage.setItem("eventname", eventname);
+  sessionStorage.setItem("id", id);
+  $("#titleName").text(name);
+  $("#editModal").modal({
+    keyboard: true,
+    backdrop: "static",
+    show: true
+  });
+}
+
+function submitNewData() {
+  return _submitNewData.apply(this, arguments);
+} //export default Btn
+
+
+function _submitNewData() {
+  _submitNewData = _asyncToGenerator(function* () {
+    var eventname = sessionStorage.getItem("eventname");
+    var id = sessionStorage.getItem("id");
+    var new_name = $("#newName").val();
+    var photo = $("#newPhoto")[0].files[0];
+    var prev_name = $("#titleName").text();
+    var reg = /\s\s+/g;
+    var res = reg.test(new_name);
+    console.log(photo);
+
+    if (res) {
+      swal({
+        title: "Warning!",
+        text: "Name field cannot be white spaces only",
+        icon: "warning"
+      });
+      return;
+    }
+
+    if ((new_name == "" || new_name == null) && photo == undefined) {
+      swal({
+        title: "Warning!",
+        text: "You have not made any changes",
+        icon: "warning"
+      });
+      return;
+    }
+
+    $("#spinner").fadeIn();
+    $("#submitBtn").prop("disabled", true);
+    var data = new FormData();
+    data.append("event_name", eventname);
+    data.append("file", photo);
+    data.append("id", id);
+    data.append("new_name", new_name);
+    var requestOptions = {
+      method: "POST",
+      body: data,
+      redirect: "follow",
+      headers: {
+        //`"Content-Type": "application/json",
+        Authorization: "Bearer " + sessionStorage.getItem("token")
+      }
+    };
+    var responseCode = 0;
+    fetch("/adminresources/editContestant.php", requestOptions).then(response => {
+      responseCode = response.status;
+      return response.text();
+    }).then(result => {
+      //console.log(result)
+      if (responseCode == 200) {
+        swal({
+          title: "Success",
+          text: "Changes recorded successfully",
+          icon: "success"
+        });
+        location.reload();
+      } else {
+        swal({
+          title: "Error!",
+          text: "An error has occured, please try again",
+          icon: "warning"
+        });
+      }
+    }).catch(error => {
+      console.log(error);
+      swal({
+        title: "Error!",
+        text: "An unknown error has occured, please try again",
+        icon: "warning"
+      });
+    });
+    $("#spinner").fadeOut();
+    $("#submitBtn").prop("disabled", false);
+  });
+  return _submitNewData.apply(this, arguments);
+}
 
 const tableitem = React.createElement;
 const eventslistContainer = document.getElementById("table-body");

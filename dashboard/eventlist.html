@@ -10,11 +10,13 @@
   <title>Events | Media Billo</title>
   <!-- Favicon -->
   <link rel="icon" href="./assets/img/billo.png" type="image/png">
-  
+  <link rel="stylesheet" href="./assets/css/bootstrap/bootstrap.min.css">
+
   <link rel="stylesheet" href="./assets/vendor/nucleo/css/nucleo.css" type="text/css">
   <link rel="stylesheet" href="./assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
   <!-- Argon CSS -->
   <link rel="stylesheet" href="./assets/css/argon.css?v=1.2.0" type="text/css">
+  
 </head>
 
 <body>
@@ -68,9 +70,9 @@
                     <th scope="col" class="sort" data-sort="status">Status</th>
                     <th scope="col">Actions</th>
                    
-                    <th scope="col">
+                  <!--   <th scope="col">
 
-                    </th>
+                    </th> -->
                   </tr>
                 </thead>
                 <tbody class="list" id="table-body">
@@ -104,8 +106,68 @@
       </footer>
     </div>
   </div>
+
+ 
+  <div class="modal fade" id='editModal'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title text-center mx-auto">
+                   Edit Event <br>[<span id='titleName'></span>]
+                </div>
+                
+            </div>
+          
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+
+                        <label class="form-control-label" for="input-address">
+                          Event Name
+                        </label>
+                        <input
+                          id="newName"
+                        
+                          class="form-control"
+                          placeholder="enter event name here"
+                          type="text"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="row">
+                      <div className="col-md-12">
+                        <div className="form-group">
+                          <label htmlFor="file">Select Image</label>
+                          <div className="col-sm-offset-2 col-sm-10">
+                            <label className="file-upload btn btn-secondary">
+                              <input type="file" id='newPhoto' />
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                 
+            </div>
+            <div class="modal-footer">
+             
+              <button type="button" id='closeBtn'  class="btn btn-light">Close</button>
+                <input
+                id="submitBtn"
+                type="button"
+                value="Submit"
+                class="btn btn-round btn-primary"
+            
+              />
+              <div class="spinner-border" id='spinner'></div>
+            </div>
+        </div>
+    </div>
+</div>
   <!-- Argon Scripts -->
   <!-- Core -->
+  
   <script src="./assets/vendor/jquery/dist/jquery.min.js"></script>
   <script src="./assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <script src="./assets/vendor/js-cookie/js.cookie.js"></script>
@@ -120,6 +182,19 @@
   <script src="./jsjsx/SideNav.js"></script>
   <script src="./jsjsx/TopNav.js"></script>
   <script src="./jsjsx/EventList.js"></script>
+  <script>
+    $(document).ready(function(){
+      $("#spinner").fadeOut()
+            $('#submitBtn').click(function(){
+                submitNewData()
+            })
+            $('#closeBtn').click(function(){
+              $("#editModal").modal('hide')
+            // $("#spinner").fadeOut()
+            })
+            
+    })
+</script>
 </body>
 
 </html>

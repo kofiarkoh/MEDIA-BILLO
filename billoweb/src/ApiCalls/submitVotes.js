@@ -24,12 +24,15 @@ const sumbitVotes = async data => {
     body: JSON.stringify(voteData),
   })).then(function(response) {
     // process response
-   
+    //console.log('hey ',response.json())
     result ='ok'// response.json()
+    return response.text()
+  }).then((ed)=>{
+    //console.log('hey ',ed)
   }).catch(function(error) {
     // might be a timeout error
     result = null
-   console.log('err',error)
+   //console.log('err',error)
   })
   
   return result;

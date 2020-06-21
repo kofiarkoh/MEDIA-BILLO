@@ -13,7 +13,7 @@ $("#submit-btn").click(async function () {
         var ur = "http://192.168.8.100:3000"
         var response = await axios({
             method: "post",
-            url: ur+"/adminresources/auth/login.php",//"/addEvent.php",
+            url: "adminresources/auth/login.php",//"/addEvent.php",
             data: formdata,
             header: {
                 "Content-Type": "multipart/form-data",

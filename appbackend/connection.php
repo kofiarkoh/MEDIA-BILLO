@@ -1,8 +1,9 @@
 <?php 
+
 try{
-    $connection= new PDO('mysql:host=localhost;dbname=media_billo','root','');
+    $connection= new PDO('mysql:host=localhost;dbname=mediabil_events','mediabil','m=B2P#19f%8vh');
     $connection->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-        
+       
     
 }
 catch(PDOException $e) {

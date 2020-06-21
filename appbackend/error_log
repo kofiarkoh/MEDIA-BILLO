@@ -1,0 +1,250 @@
+[08-May-2020 15:05:36 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1 in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php:13
+Stack trace:
+#0 /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php(13): PDOStatement->execute()
+#1 {main}
+  thrown in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php on line 13
+[08-May-2020 15:05:44 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1 in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php:13
+Stack trace:
+#0 /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php(13): PDOStatement->execute()
+#1 {main}
+  thrown in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php on line 13
+[08-May-2020 15:06:05 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1 in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php:13
+Stack trace:
+#0 /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php(13): PDOStatement->execute()
+#1 {main}
+  thrown in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php on line 13
+[08-May-2020 15:06:48 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'mediabil_events.malaika' doesn't exist in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php:13
+Stack trace:
+#0 /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php(13): PDOStatement->execute()
+#1 {main}
+  thrown in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php on line 13
+[23-May-2020 21:43:19 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1 in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php:13
+Stack trace:
+#0 /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php(13): PDOStatement->execute()
+#1 {main}
+  thrown in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php on line 13
+[23-May-2020 21:54:32 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1 in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php:13
+Stack trace:
+#0 /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php(13): PDOStatement->execute()
+#1 {main}
+  thrown in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php on line 13
+[23-May-2020 21:54:49 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1 in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php:13
+Stack trace:
+#0 /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php(13): PDOStatement->execute()
+#1 {main}
+  thrown in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php on line 13
+[23-May-2020 21:56:53 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1 in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php:13
+Stack trace:
+#0 /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php(13): PDOStatement->execute()
+#1 {main}
+  thrown in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php on line 13
+[23-May-2020 21:57:22 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1 in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php:13
+Stack trace:
+#0 /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php(13): PDOStatement->execute()
+#1 {main}
+  thrown in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php on line 13
+[23-May-2020 21:57:37 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1 in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php:13
+Stack trace:
+#0 /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php(13): PDOStatement->execute()
+#1 {main}
+  thrown in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php on line 13
+[23-May-2020 21:57:54 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1 in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php:13
+Stack trace:
+#0 /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php(13): PDOStatement->execute()
+#1 {main}
+  thrown in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php on line 13
+[23-May-2020 21:58:00 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1 in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php:13
+Stack trace:
+#0 /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php(13): PDOStatement->execute()
+#1 {main}
+  thrown in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php on line 13
+[23-May-2020 21:58:45 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1 in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php:13
+Stack trace:
+#0 /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php(13): PDOStatement->execute()
+#1 {main}
+  thrown in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php on line 13
+[23-May-2020 21:59:21 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1 in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php:13
+Stack trace:
+#0 /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php(13): PDOStatement->execute()
+#1 {main}
+  thrown in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php on line 13
+[23-May-2020 21:59:47 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1 in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php:13
+Stack trace:
+#0 /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php(13): PDOStatement->execute()
+#1 {main}
+  thrown in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php on line 13
+[23-May-2020 22:00:22 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1 in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php:13
+Stack trace:
+#0 /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php(13): PDOStatement->execute()
+#1 {main}
+  thrown in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php on line 13
+[23-May-2020 22:01:14 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1 in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php:13
+Stack trace:
+#0 /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php(13): PDOStatement->execute()
+#1 {main}
+  thrown in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php on line 13
+[23-May-2020 22:01:55 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1 in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php:13
+Stack trace:
+#0 /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php(13): PDOStatement->execute()
+#1 {main}
+  thrown in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php on line 13
+[23-May-2020 22:03:27 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1 in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php:13
+Stack trace:
+#0 /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php(13): PDOStatement->execute()
+#1 {main}
+  thrown in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php on line 13
+[23-May-2020 22:04:02 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1 in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php:13
+Stack trace:
+#0 /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php(13): PDOStatement->execute()
+#1 {main}
+  thrown in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php on line 13
+[23-May-2020 22:04:37 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1 in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php:13
+Stack trace:
+#0 /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php(13): PDOStatement->execute()
+#1 {main}
+  thrown in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php on line 13
+[23-May-2020 22:05:04 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1 in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php:13
+Stack trace:
+#0 /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php(13): PDOStatement->execute()
+#1 {main}
+  thrown in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php on line 13
+[23-May-2020 22:05:48 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1 in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php:13
+Stack trace:
+#0 /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php(13): PDOStatement->execute()
+#1 {main}
+  thrown in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php on line 13
+[24-May-2020 12:32:06 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'null' at line 1 in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php:13
+Stack trace:
+#0 /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php(13): PDOStatement->execute()
+#1 {main}
+  thrown in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php on line 13
+[24-May-2020 12:32:08 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'null' at line 1 in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php:13
+Stack trace:
+#0 /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php(13): PDOStatement->execute()
+#1 {main}
+  thrown in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php on line 13
+[24-May-2020 12:32:10 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'null' at line 1 in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php:13
+Stack trace:
+#0 /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php(13): PDOStatement->execute()
+#1 {main}
+  thrown in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php on line 13
+[24-May-2020 12:32:28 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'null' at line 1 in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php:13
+Stack trace:
+#0 /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php(13): PDOStatement->execute()
+#1 {main}
+  thrown in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php on line 13
+[24-May-2020 12:32:30 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'null' at line 1 in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php:13
+Stack trace:
+#0 /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php(13): PDOStatement->execute()
+#1 {main}
+  thrown in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php on line 13
+[24-May-2020 13:23:11 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'null' at line 1 in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php:13
+Stack trace:
+#0 /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php(13): PDOStatement->execute()
+#1 {main}
+  thrown in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php on line 13
+[24-May-2020 14:58:17 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'null' at line 1 in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php:13
+Stack trace:
+#0 /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php(13): PDOStatement->execute()
+#1 {main}
+  thrown in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php on line 13
+[24-May-2020 15:00:41 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'null' at line 1 in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php:13
+Stack trace:
+#0 /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php(13): PDOStatement->execute()
+#1 {main}
+  thrown in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php on line 13
+[24-May-2020 17:54:11 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'null' at line 1 in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php:13
+Stack trace:
+#0 /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php(13): PDOStatement->execute()
+#1 {main}
+  thrown in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php on line 13
+[24-May-2020 19:48:55 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'null' at line 1 in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php:13
+Stack trace:
+#0 /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php(13): PDOStatement->execute()
+#1 {main}
+  thrown in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php on line 13
+[25-May-2020 02:33:00 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'null' at line 1 in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php:13
+Stack trace:
+#0 /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php(13): PDOStatement->execute()
+#1 {main}
+  thrown in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php on line 13
+[25-May-2020 18:46:04 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1 in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php:13
+Stack trace:
+#0 /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php(13): PDOStatement->execute()
+#1 {main}
+  thrown in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php on line 13
+[25-May-2020 22:44:55 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'null' at line 1 in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php:13
+Stack trace:
+#0 /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php(13): PDOStatement->execute()
+#1 {main}
+  thrown in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php on line 13
+[26-May-2020 21:50:00 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'null' at line 1 in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php:13
+Stack trace:
+#0 /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php(13): PDOStatement->execute()
+#1 {main}
+  thrown in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php on line 13
+[01-Jun-2020 13:06:38 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'null' at line 1 in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php:13
+Stack trace:
+#0 /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php(13): PDOStatement->execute()
+#1 {main}
+  thrown in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php on line 13
+[01-Jun-2020 13:06:48 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'null' at line 1 in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php:13
+Stack trace:
+#0 /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php(13): PDOStatement->execute()
+#1 {main}
+  thrown in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php on line 13
+[03-Jun-2020 15:27:33 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'null' at line 1 in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php:13
+Stack trace:
+#0 /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php(13): PDOStatement->execute()
+#1 {main}
+  thrown in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php on line 13
+[05-Jun-2020 12:33:33 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'null' at line 1 in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php:13
+Stack trace:
+#0 /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php(13): PDOStatement->execute()
+#1 {main}
+  thrown in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php on line 13
+[06-Jun-2020 09:03:59 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'null' at line 1 in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php:13
+Stack trace:
+#0 /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php(13): PDOStatement->execute()
+#1 {main}
+  thrown in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php on line 13
+[06-Jun-2020 09:05:21 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'null' at line 1 in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php:13
+Stack trace:
+#0 /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php(13): PDOStatement->execute()
+#1 {main}
+  thrown in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php on line 13
+[06-Jun-2020 09:06:29 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'null' at line 1 in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php:13
+Stack trace:
+#0 /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php(13): PDOStatement->execute()
+#1 {main}
+  thrown in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php on line 13
+[07-Jun-2020 15:21:12 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'mediabil_events.miss_agriculture_ghana' doesn't exist in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php:13
+Stack trace:
+#0 /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php(13): PDOStatement->execute()
+#1 {main}
+  thrown in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php on line 13
+[07-Jun-2020 16:23:16 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'null' at line 1 in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php:13
+Stack trace:
+#0 /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php(13): PDOStatement->execute()
+#1 {main}
+  thrown in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php on line 13
+[10-Jun-2020 13:23:28 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'null' at line 1 in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php:13
+Stack trace:
+#0 /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php(13): PDOStatement->execute()
+#1 {main}
+  thrown in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php on line 13
+[18-Jun-2020 11:10:35 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'null' at line 1 in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php:13
+Stack trace:
+#0 /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php(13): PDOStatement->execute()
+#1 {main}
+  thrown in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php on line 13
+[18-Jun-2020 16:04:19 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'null' at line 1 in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php:13
+Stack trace:
+#0 /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php(13): PDOStatement->execute()
+#1 {main}
+  thrown in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php on line 13
+[19-Jun-2020 12:50:33 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'null' at line 1 in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php:13
+Stack trace:
+#0 /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php(13): PDOStatement->execute()
+#1 {main}
+  thrown in /home/mediabil/admin.mediabillo.net/appbackend/getEventContestants.php on line 13

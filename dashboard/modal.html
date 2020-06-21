@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="icon" href="./assets/img/billo.png" type="image/png">
+
+  <link rel="stylesheet" href="./assets/vendor/nucleo/css/nucleo.css" type="text/css">
+  <link rel="stylesheet" href="./assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css" type="text/css">
+  <!-- Page plugins -->
+  <!-- Argon CSS -->
+  <link rel="stylesheet" href="./assets/css/argon.css?v=1.2.0" type="text/css">
+  <link rel="stylesheet" href="./assets/css/bootstrap/bootstrap.min.css">
+
+</head>
+<body>
+    <div class="spinner-border"></div>
+    <div class="modal fade" id='editModal'>
+     
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="modal-title">
+                       Edit Event [My Event]
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                          <div class="form-group">
+                            <label class="form-control-label" for="input-address">
+                              Event Name
+                            </label>
+                            <input
+                              id="eventName"
+                              eventstat
+                              eventstat
+                              class="form-control"
+                              placeholder="enter event name here"
+                              type="text"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div className="row">
+                          <div className="col-md-12">
+                            
+                            <div className="form-group">
+                              <label htmlFor="file">Select Image</label>
+                              <div className="col-sm-offset-2 col-sm-10">
+                                <label className="file-upload btn btn-secondary">
+                                  <input type="file" ref={this.fileInput} />
+                                </label>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                     
+                </div>
+                <div class="modal-footer">
+                  <div class="spinner-border"></div>
+                    <input
+                    type="button"
+                    value="Submit"
+                    class="btn btn-round btn-primary"
+                
+                  />
+                </div>
+            </div>
+        </div>
+    </div>
+    <button id='openModal'>Open</button>
+    <script src="./assets/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="./assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function(){
+                $('#openModal').click(function(){
+                    $('#editModal').modal('show')
+                })
+        })
+    </script>
+</body>
+</html>

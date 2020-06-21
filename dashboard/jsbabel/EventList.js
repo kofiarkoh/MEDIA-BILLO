@@ -5,15 +5,14 @@ class EventList extends React.Component {
     super(props);
 
     this.state = {
-      list: null
+      list: null,
     };
   }
   async showme() {
-   
     var data = await fetchList();
 
     this.setState({
-      list: data
+      list: data,
     });
   }
   componentDidMount() {
@@ -32,16 +31,16 @@ class EventList extends React.Component {
             {item.status === "inactive" ? (
               <React.Fragment>
                 <td id={`status${item.id}`}>
-                  <span class="badge badge-dot mr-4">
-                    <i class="bg-warning"></i>
-                    <span class="status">Inactve</span>
+                  <span className="badge badge-dot mr-4">
+                    <i className="bg-warning"></i>
+                    <span className="status">Inactve</span>
                   </span>
                 </td>
                 <td>
                   <span id={`active${item.id}`}>
                     <button
                       type="button"
-                      className="btn btn-primary "
+                      className="btn btn-primary mr-2"
                       onClick={() =>
                         eventStatus(item.event_name, item.id, "active")
                       }
@@ -49,14 +48,32 @@ class EventList extends React.Component {
                       Activate
                     </button>
                   </span>
+                  <span>
+                    <button
+                      type="button"
+                      className="btn btn-danger mr-2"
+                      onClick={() => confirmDeleteion(item.event_name, item.id)}
+                    >
+                     <i class="fas fa-trash"></i>
+                    </button>
+                  </span>
+                  <span>
+                    <button
+                      type="button"
+                      className="btn btn-info mr-2"
+                      onClick={() => showModal(item.event_name)}
+                    >
+                     <i class="fas fa-edit"></i>
+                    </button>
+                  </span>
                 </td>
               </React.Fragment>
             ) : (
               <React.Fragment>
                 <td id={`status${item.id}`}>
-                  <span class="badge badge-dot mr-4">
-                    <i class="bg-success"></i>
-                    <span class="status">Active</span>
+                  <span className="badge badge-dot mr-4">
+                    <i className="bg-success"></i>
+                    <span className="status">Active</span>
                   </span>
                 </td>
                 <td>
@@ -64,7 +81,7 @@ class EventList extends React.Component {
                     {" "}
                     <button
                       type="button"
-                      className="btn btn-warning "
+                      className="btn btn-warning mr-2"
                       onClick={() =>
                         eventStatus(item.event_name, item.id, "inactive")
                       }
@@ -72,10 +89,28 @@ class EventList extends React.Component {
                       Deactivate
                     </button>
                   </span>
+                  <span>
+                    <button
+                      type="button"
+                      className="btn btn-danger mr-2"
+                      onClick={() => confirmDeleteion(item.event_name, item.id)}
+                    >
+                      <i class="fas fa-trash"></i>
+                    </button>
+                  </span>
+                  <span>
+                    <button
+                      type="button"
+                      className="btn btn-info mr-2"
+                      onClick={() => showModal(item.event_name)}
+                    >
+                      <i class="fas fa-edit"></i>
+                    </button>
+                  </span>
                 </td>
               </React.Fragment>
             )}
-            <td>
+            {/*  <td>
               <button
                 type="button"
                 className="btn btn-danger "
@@ -83,105 +118,97 @@ class EventList extends React.Component {
               >
                 Delete
               </button>
-            </td>
+            </td> */}
           </tr>
         );
       });
     }
   }
 }
-var ur = "http://192.168.8.100:3000"
+var ur = "http://192.168.8.100:3000";
 
 async function fetchList() {
-  
   var result = "";
   try {
-    var response = await axios.get(ur+"/adminresources/getEventList.php",
-   { headers: {
-      //`"Content-Type": "application/json",
-      Authorization: "Bearer " + sessionStorage.getItem("token")
-    }
-  }
-    );
+    var response = await axios.get("adminresources/getEventList.php", {
+      headers: {
+        //`"Content-Type": "application/json",
+        Authorization: "Bearer " + sessionStorage.getItem("token"),
+      },
+    });
     result = response.data;
   } catch (error) {
-   // alert(error);
+    // alert(error);
     result = null;
   }
   return result;
 }
 
-async function confirmDeleteion(eventname,id) {
-  sessionStorage.setItem("eventname",eventname)
-  sessionStorage.setItem("id",id)
+async function confirmDeleteion(eventname, id) {
+  sessionStorage.setItem("eventname", eventname);
+  sessionStorage.setItem("id", id);
 
- await swal({
-    text: "Proceed to delete "+eventname+" ?",
-    
+  await swal({
+    text: "Proceed to delete " + eventname + " ?",
+
     icon: "warning",
     buttons: true,
     dangerMode: true,
-  })
-  .then((willDelete) => {
+  }).then((willDelete) => {
     if (willDelete) {
-     deleteEvent()
-    } 
+      deleteEvent();
+    }
   });
 }
 
 async function deleteEvent() {
- 
-   var formdata = new FormData();
-   var eventname=sessionStorage.getItem("eventname")
-   var id=sessionStorage.getItem("id")
+  var formdata = new FormData();
+  var eventname = sessionStorage.getItem("eventname");
+  var id = sessionStorage.getItem("id");
 
   formdata.append("event_name", eventname);
   try {
     var response = await axios({
       method: "post",
-      url: ur+"/adminresources/deleteEvent.php",
+      url: "adminresources/deleteEvent.php",
       data: formdata,
       headers: {
         //`"Content-Type": "application/json",
-        Authorization: "Bearer " + sessionStorage.getItem("token")
-      }
-     
+        Authorization: "Bearer " + sessionStorage.getItem("token"),
+      },
     });
     //console.warn("response", response);
     await swal({
       text: " Deletion Succesful",
-      
+
       icon: "success",
-      
-    })
-    $("#"+id).hide()
+    });
+    $("#" + id).hide();
   } catch (error) {
     await swal({
-      text: " "+error,
-      
+      text: " " + error,
+
       icon: "warning",
-     
-    })
-   // console.warn("error", error);
-  } 
+    });
+    // console.warn("error", error);
+  }
 }
 
 async function eventStatus(eventname, id, eventstatus) {
   //alert('called'+eventstatus)
-  
+
   var formdata = new FormData();
   formdata.append("event_name", eventname);
   formdata.append("event_status", eventstatus);
   try {
-    
     var response = await axios({
       method: "post",
-      url: ur+"/adminresources/eventStatus.php",
+      url: "/adminresources/eventStatus.php",
       data: formdata,
       headers: {
         //`"Content-Type": "application/json",
-        Authorization: "Bearer " + sessionStorage.getItem("token")
-      }
+        Authorization: "Bearer " + sessionStorage.getItem("token"),
+      },
       /* headers: {
           "Content-Type": "multipart/form-data",
         
@@ -190,7 +217,7 @@ async function eventStatus(eventname, id, eventstatus) {
     console.log("response", response);
     if (eventstatus === "active") {
       await $("#inactive" + id).html(
-        '<button type="button" class="btn btn-warning" id=\'inactive' +
+        '<button type="button" className="btn btn-warning mr-2" id=\'inactive' +
           id +
           "' onclick='eventStatus(" +
           '"' +
@@ -201,13 +228,13 @@ async function eventStatus(eventname, id, eventstatus) {
           ")'>Deactivate</button>"
       );
       $("#status" + id).html(
-        ' <span class="badge badge-dot mr-4">\
-       <i class="bg-success"></i>\
-       <span class="status">Active</span>  </span>'
+        ' <span className="badge badge-dot mr-4">\
+       <i className="bg-success"></i>\
+       <span className="status">Active</span>  </span>'
       );
     } else {
       await $("#inactive" + id).html(
-        '<button type="button" class="btn btn-primary" id=\'active' +
+        '<button type="button" className="btn btn-primary mr-2" id=\'active' +
           id +
           "' onclick='eventStatus(" +
           '"' +
@@ -218,24 +245,107 @@ async function eventStatus(eventname, id, eventstatus) {
           ")'>Activate</button>"
       );
       $("#status" + id).html(
-        '<span class="badge badge-dot mr-4">\
-       <i class="bg-warning"></i>\
-       <span class="status">Iactive</span>  </span>'
+        '<span className="badge badge-dot mr-4">\
+       <i className="bg-warning"></i>\
+       <span className="status">Iactive</span>  </span>'
       );
     }
     //    eventStatus=='active'? $("#status"+id).html("Inactve") :$("#status"+id).html("Actve")
   } catch (error) {
-    console.log(error.response)
-   // alert("set event status" + error);
-   swal({
-    title: "Error!",
-    text: error.response.data.message,
-    icon: "warning",
-   
-  });
+    console.log(error.response);
+    // alert("set event status" + error);
+    swal({
+      title: "Error!",
+      text: error.response.data.message,
+      icon: "warning",
+    });
   }
 }
 //export default Btn
+function showModal(name) {
+  
+  $("#titleName").text(name);
+  
+  $("#editModal").modal({
+    keyboard:true,
+    backdrop: 'static',
+    show:true
+  });
+}
+async function submitNewData() {
+ 
+  var new_name = $("#newName").val();
+  var photo = $("#newPhoto")[0].files[0];
+  var prev_name = $("#titleName").text();
+  var reg = /\s\s+/g
+  var res = reg.test(new_name)
+ 
+   if(res){
+    swal({
+      title: "Warning!",
+      text: 'Name field cannot be white spaces only',
+      icon: "warning",
+    });
+    return
+  }
+  if ((new_name == '' || new_name == null) && photo == undefined){
+    swal({
+      title: "Warning!",
+      text: 'You have not made any changes',
+      icon: "warning",
+    });
+    return
+  } 
+  $("#spinner").fadeIn()
+  $('#submitBtn').prop('disabled',true)
+  var data = new FormData();
+  data.append("file", photo);
+  data.append("prev_name", prev_name);
+  data.append('new_name',new_name)
+  var requestOptions = {
+    method: 'POST',
+    body: data,
+    redirect: 'follow',
+    headers: {
+      //`"Content-Type": "application/json",
+      Authorization: "Bearer " + sessionStorage.getItem("token"),
+    }
+  };
+  var responseCode = 0
+  await fetch("/adminresources/editEvent.php", requestOptions)
+    .then(response =>{
+      responseCode = response.status
+       
+      return response.text()
+    } )
+    .then(result => {
+      if(responseCode ==200){
+        location.reload()
+        swal({
+          title: "Success",
+          text: "Changes recorded successfully",
+          icon: "success",
+        });
+       
+      }else{
+        swal({
+          title: "Error!",
+          text: "An error has occured, please try again",
+          icon: "warning",
+        });
+      }
+    })
+    .catch(error => {
+      console.log(error)
+      swal({
+        title: "Error!",
+        text: "An unknown error has occured, please try again",
+        icon: "warning",
+      });
+    }); 
+    $("#spinner").fadeOut()
+    $('#submitBtn').prop('disabled',false)
+}
 const tableitem = React.createElement;
 
 const eventslistContainer = document.getElementById("table-body");

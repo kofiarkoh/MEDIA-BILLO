@@ -1,0 +1,47 @@
+h5{
+    color: whitesmoke;
+}
+h3{
+    color: wheat;
+    background: linear-gradient(293deg, rgba(95,0,128,1) 90%, rgba(55,0,79,0.5452380781414128) 16%);
+
+}
+h5,h3{
+    text-align: center;
+}
+.page{
+    height: 100vh;
+}
+.main {
+    height: 100vh;
+    
+  display: flex;
+ 
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(293deg, rgba(95,0,128,1) 90%, rgba(55,0,79,0.5452380781414128) 16%);
+}
+.main div {
+    height: 60%;
+    min-width: 300px;
+    
+    /* display: flex;
+    align-content: center;
+    justify-content: center; */
+    
+}
+.form{
+    margin: 30px;
+    border-radius: 20px;
+   
+}
+.formc{
+    margin: 20px;
+    text-align: center;
+}
+
+.btn{
+    background: yellow;
+    background-color: violet;
+    align-self: center;
+}

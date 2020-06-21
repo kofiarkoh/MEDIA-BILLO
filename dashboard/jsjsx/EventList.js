@@ -39,36 +39,56 @@ class EventList extends React.Component {
         }, React.createElement("td", null, index + 1), React.createElement("td", null, item.event_name), item.status === "inactive" ? React.createElement(React.Fragment, null, React.createElement("td", {
           id: `status${item.id}`
         }, React.createElement("span", {
-          class: "badge badge-dot mr-4"
+          className: "badge badge-dot mr-4"
         }, React.createElement("i", {
-          class: "bg-warning"
+          className: "bg-warning"
         }), React.createElement("span", {
-          class: "status"
+          className: "status"
         }, "Inactve"))), React.createElement("td", null, React.createElement("span", {
           id: `active${item.id}`
         }, React.createElement("button", {
           type: "button",
-          className: "btn btn-primary ",
+          className: "btn btn-primary mr-2",
           onClick: () => eventStatus(item.event_name, item.id, "active")
-        }, "Activate")))) : React.createElement(React.Fragment, null, React.createElement("td", {
+        }, "Activate")), React.createElement("span", null, React.createElement("button", {
+          type: "button",
+          className: "btn btn-danger mr-2",
+          onClick: () => confirmDeleteion(item.event_name, item.id)
+        }, React.createElement("i", {
+          class: "fas fa-trash"
+        }))), React.createElement("span", null, React.createElement("button", {
+          type: "button",
+          className: "btn btn-info mr-2",
+          onClick: () => showModal(item.event_name)
+        }, React.createElement("i", {
+          class: "fas fa-edit"
+        }))))) : React.createElement(React.Fragment, null, React.createElement("td", {
           id: `status${item.id}`
         }, React.createElement("span", {
-          class: "badge badge-dot mr-4"
+          className: "badge badge-dot mr-4"
         }, React.createElement("i", {
-          class: "bg-success"
+          className: "bg-success"
         }), React.createElement("span", {
-          class: "status"
+          className: "status"
         }, "Active"))), React.createElement("td", null, React.createElement("span", {
           id: `inactive${item.id}`
         }, " ", React.createElement("button", {
           type: "button",
-          className: "btn btn-warning ",
+          className: "btn btn-warning mr-2",
           onClick: () => eventStatus(item.event_name, item.id, "inactive")
-        }, "Deactivate")))), React.createElement("td", null, React.createElement("button", {
+        }, "Deactivate")), React.createElement("span", null, React.createElement("button", {
           type: "button",
-          className: "btn btn-danger ",
+          className: "btn btn-danger mr-2",
           onClick: () => confirmDeleteion(item.event_name, item.id)
-        }, "Delete")));
+        }, React.createElement("i", {
+          class: "fas fa-trash"
+        }))), React.createElement("span", null, React.createElement("button", {
+          type: "button",
+          className: "btn btn-info mr-2",
+          onClick: () => showModal(item.event_name)
+        }, React.createElement("i", {
+          class: "fas fa-edit"
+        }))))));
       });
     }
   }
@@ -86,7 +106,7 @@ function _fetchList() {
     var result = "";
 
     try {
-      var response = yield axios.get(ur + "/adminresources/getEventList.php", {
+      var response = yield axios.get("adminresources/getEventList.php", {
         headers: {
           //`"Content-Type": "application/json",
           Authorization: "Bearer " + sessionStorage.getItem("token")
@@ -139,7 +159,7 @@ function _deleteEvent() {
     try {
       var response = yield axios({
         method: "post",
-        url: ur + "/adminresources/deleteEvent.php",
+        url: "adminresources/deleteEvent.php",
         data: formdata,
         headers: {
           //`"Content-Type": "application/json",
@@ -177,7 +197,7 @@ function _eventStatus() {
     try {
       var response = yield axios({
         method: "post",
-        url: ur + "/adminresources/eventStatus.php",
+        url: "/adminresources/eventStatus.php",
         data: formdata,
         headers: {
           //`"Content-Type": "application/json",
@@ -192,15 +212,15 @@ function _eventStatus() {
       console.log("response", response);
 
       if (eventstatus === "active") {
-        yield $("#inactive" + id).html('<button type="button" class="btn btn-warning" id=\'inactive' + id + "' onclick='eventStatus(" + '"' + eventname + '",' + id + ',"inactive"' + ")'>Deactivate</button>");
-        $("#status" + id).html(' <span class="badge badge-dot mr-4">\
-       <i class="bg-success"></i>\
-       <span class="status">Active</span>  </span>');
+        yield $("#inactive" + id).html('<button type="button" className="btn btn-warning mr-2" id=\'inactive' + id + "' onclick='eventStatus(" + '"' + eventname + '",' + id + ',"inactive"' + ")'>Deactivate</button>");
+        $("#status" + id).html(' <span className="badge badge-dot mr-4">\
+       <i className="bg-success"></i>\
+       <span className="status">Active</span>  </span>');
       } else {
-        yield $("#inactive" + id).html('<button type="button" class="btn btn-primary" id=\'active' + id + "' onclick='eventStatus(" + '"' + eventname + '",' + id + ',"active"' + ")'>Activate</button>");
-        $("#status" + id).html('<span class="badge badge-dot mr-4">\
-       <i class="bg-warning"></i>\
-       <span class="status">Iactive</span>  </span>');
+        yield $("#inactive" + id).html('<button type="button" className="btn btn-primary mr-2" id=\'active' + id + "' onclick='eventStatus(" + '"' + eventname + '",' + id + ',"active"' + ")'>Activate</button>");
+        $("#status" + id).html('<span className="badge badge-dot mr-4">\
+       <i className="bg-warning"></i>\
+       <span className="status">Iactive</span>  </span>');
       } //    eventStatus=='active'? $("#status"+id).html("Inactve") :$("#status"+id).html("Actve")
 
     } catch (error) {
@@ -214,6 +234,93 @@ function _eventStatus() {
     }
   });
   return _eventStatus.apply(this, arguments);
+}
+
+function showModal(name) {
+  $("#titleName").text(name);
+  $("#editModal").modal({
+    keyboard: true,
+    backdrop: 'static',
+    show: true
+  });
+}
+
+function submitNewData() {
+  return _submitNewData.apply(this, arguments);
+}
+
+function _submitNewData() {
+  _submitNewData = _asyncToGenerator(function* () {
+    var new_name = $("#newName").val();
+    var photo = $("#newPhoto")[0].files[0];
+    var prev_name = $("#titleName").text();
+    var reg = /\s\s+/g;
+    var res = reg.test(new_name);
+
+    if (res) {
+      swal({
+        title: "Warning!",
+        text: 'Name field cannot be white spaces only',
+        icon: "warning"
+      });
+      return;
+    }
+
+    if ((new_name == '' || new_name == null) && photo == undefined) {
+      swal({
+        title: "Warning!",
+        text: 'You have not made any changes',
+        icon: "warning"
+      });
+      return;
+    }
+
+    $("#spinner").fadeIn();
+    $('#submitBtn').prop('disabled', true);
+    var data = new FormData();
+    data.append("file", photo);
+    data.append("prev_name", prev_name);
+    data.append('new_name', new_name);
+    var requestOptions = {
+      method: 'POST',
+      body: data,
+      redirect: 'follow',
+      headers: {
+        //`"Content-Type": "application/json",
+        Authorization: "Bearer " + sessionStorage.getItem("token")
+      }
+    };
+    var responseCode = 0;
+    yield fetch("/adminresources/editEvent.php", requestOptions).then(response => {
+      responseCode = response.status;
+      return response.text();
+    }).then(result => {
+      if (responseCode == 200) {
+        location.reload();
+        swal({
+          title: "Success",
+          text: "Changes recorded successfully",
+          icon: "success"
+        });
+      } else {
+        swal({
+          title: "Error!",
+          text: "An error has occured, please try again",
+          icon: "warning"
+        });
+      }
+    }).catch(error => {
+      console.log(error);
+      swal({
+        title: "Error!",
+        text: "An unknown error has occured, please try again",
+        icon: "warning"
+      });
+    });
+    $("#spinner").fadeOut();
+    $('#submitBtn').prop('disabled', false);
+  });
+  return _submitNewData.apply(this, arguments);
 }
 
 const tableitem = React.createElement;
