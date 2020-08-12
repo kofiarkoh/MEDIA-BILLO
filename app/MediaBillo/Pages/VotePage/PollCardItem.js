@@ -21,6 +21,17 @@ import {
   View,
 } from 'native-base';
 class PollCardItem extends Component {
+
+cardClicked = () =>{
+ 
+  if (this.props.ended === 'true') {
+    alert('You are unable to vote now because voting has ended for this event')
+  } else{
+    
+    this.props.navigate(this.props.eventname)
+
+  }
+}
   render() {
     return (
       <Content style={[styles.carditem]}>
@@ -28,7 +39,7 @@ class PollCardItem extends Component {
           <CardItem
             cardBody
             button
-            onPress={() => this.props.navigate(this.props.eventname)}>
+            onPress={() => this.cardClicked()}>
           
             <Image
               source={{
@@ -47,7 +58,7 @@ class PollCardItem extends Component {
           <CardItem
             style={[styles.itemBackground]}
             button
-            onPress={() => this.props.navigate(this.props.eventname)}>
+            onPress={() => this.cardClicked()}>
             <Left>
               <Body>
                 <Text style={[styles.title]}>{this.props.eventname}</Text>

@@ -5,12 +5,10 @@ import {
   StyleSheet,
   ImageBackground,
   ScrollView,
+  Alert,
+  Linking
 } from 'react-native';
-import {
-  responsiveHeight,
-  responsiveWidth,
-  responsiveFontSize,
-} from 'react-native-responsive-dimensions';
+
 import {
   Content,
   Container,
@@ -28,6 +26,10 @@ import {Snackbar} from 'react-native-paper';
 import noEventimg from '../Images/nodata.png';
 import errorImage from '../Images/billoerror.png';
 import PollCardItem from './PollCardItem';
+import Pollstylesheet from './Pollstylesheet';
+
+const play_store_link = 'https://play.google.com/store/apps/details?id=com.mediabillo'
+const appversion = 4;
 class Polls extends Component {
   constructor(props) {
     super(props);
@@ -38,6 +40,7 @@ class Polls extends Component {
       launched: false,
       polls: [],
       // noEvent:
+      //use the versionCode from the graddle file
       loading: false,
     };
   }
@@ -60,10 +63,24 @@ class Polls extends Component {
       });
       return;
     } else {
-      this.setState({
-        polls: response,
-        loading: false,
-      });
+      if(response.app_version === appversion) {
+        this.setState({
+          polls: response.polls,
+          loading: false,
+        });
+      } else{
+        this.setState({loading:false})
+        Alert.alert('Update','A new version has been found, please update to enjoy the voting experience',
+        [
+          {
+            text:'Update',
+            onPress: ()=>{
+                Linking.openURL(play_store_link)
+            }
+          }
+        ])
+      }
+    
     }
   };
   componentDidMount = async () => {
@@ -95,7 +112,11 @@ class Polls extends Component {
               {/*  <ScrollView style={{height: '100%'}}> */}
               {this.state.polls.map(item => {
                 return (
-                  <PollCardItem key={item.id} eventname={item.event_name} imgpath={item.image_url} navigate={this.handleNavigation}/>
+                  <PollCardItem key={item.id} 
+                  ended = {item.is_ended}
+                  eventname={item.event_name} 
+                  imgpath={item.image_url} 
+                  navigate={this.handleNavigation}/>
                 
                 );
               })}
@@ -143,7 +164,7 @@ class Polls extends Component {
               action={{
                 label: 'Ok',
                 onPress: () => {
-                  // Do something
+                  // null
                 },
               }}>
               {this.state.msg}
@@ -155,88 +176,5 @@ class Polls extends Component {
   }
 }
 
-const styles = StyleSheet.create({
-  btn: {
-    color: '#e48a32',
-  },
-  centerContent: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    // backgroundColor: 'blue'
-  },
-  loading: {
-    width: '100%',
-    height: 2000,
-    backgroundColor: 'orange',
-    position: 'absolute',
-  },
-  card: {
-    marginLeft: 20,
-    marginRight: 20,
-    marginTop: 10,
-    marginBottom: 30,
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 10,
-  },
-  carditem: {
-    backgroundColor: '#eae6ed',
-  },
-  pollCard: {
-    height: 170,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-
-    color: 'white',
-    width: responsiveWidth(100),
-  },
-  bgImg: {
-    height: 350,
-    backgroundColor: 'transparent',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    color: 'white',
-    width: responsiveWidth(60),
-  },
-  errorImg: {
-    height: 210,
-    backgroundColor: 'transparent',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    color: 'white',
-    width: responsiveWidth(50),
-  },
-
-  cardText: {
-    fontSize: 25,
-    color: '#7a6464',
-    height: '100%',
-    width: '100%',
-    textAlign: 'center',
-  },
-  btn: {
-    alignSelf: 'flex-start',
-    backgroundColor: '#c969a8',
-    width: 70,
-    margin: 10,
-    height: 40,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  refreshBtn: {
-    alignSelf: 'center',
-    backgroundColor: '#c969a8',
-    width: 70,
-    margin: 10,
-    height: 40,
-    textAlign: 'center',
-  },
-});
+const styles =  Pollstylesheet()
 export default Polls;

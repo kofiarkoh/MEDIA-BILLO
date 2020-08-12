@@ -15,6 +15,10 @@ export default class SuccessDialog extends React.Component {
   _showDialog = () => this.setState({visible: true});
 
   _hideDialog = () => {
+    if (this.state.otp.length != 6) {
+      alert('Please enter the valid 6 digit number sent to you')
+      return
+    }
     this.setState({visible: false}, () => {
       //this.props.navigator.navigate('Polls')
 
@@ -26,7 +30,7 @@ export default class SuccessDialog extends React.Component {
     return (
       <View ref={this.dialogRef}>
         <Portal>
-          <Dialog visible={this.state.visible} onDismiss={this._hideDialog}>
+          <Dialog visible={this.state.visible} dismissable={false} onDismiss={this._hideDialog}>
             <Dialog.Title>Request Sent</Dialog.Title>
             <Dialog.Content>
               <Paragraph>Please enter the pin sent by sms...</Paragraph>

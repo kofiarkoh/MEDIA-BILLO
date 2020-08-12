@@ -1,0 +1,63 @@
+  {this.state.voteData.labels ==
+                null ? null /* (
+              <Text style={[styles.heading]}>Select An Event to view a graph</Text>
+            )  */ : (
+                  <View
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'center',
+                      borderRadius: 30,
+                      alignItems: 'center',
+                    }}>
+                   
+                    {this.state.voteData.labels.length != 0 ? (
+                      
+                      <BarChart
+                        style={{
+                          // width:'100%',
+
+                          margin: 1,
+                        }}
+                        data={this.state.voteData}
+                        width={responsiveWidth(90)}
+                        height={320}
+                        yAxisLabel=""
+                        fromZero={true}
+                        chartConfig={{
+                          backgroundColor: '#D71182',
+                          backgroundGradientFrom: '#D71182',
+                          backgroundGradientTo: '#D71182',
+                          decimalPlaces: 2, // optional, defaults to 2dp
+                          color: (opacity = 0.9) =>
+                            `rgba(255, 255, 255, ${opacity})`,
+                          labelColor: (opacity = 1) =>
+                            `rgba(255, 255, 255, ${opacity})`,
+                          style: {
+                            borderRadius: 16,
+                          },
+                          propsForDots: {
+                            r: '6',
+                            strokeWidth: '2',
+                            stroke: '#ffa726',
+                          },
+                        }}
+                        bezier
+                        style={{
+                          marginVertical: 8,
+                          borderRadius: 16,
+                        }}
+                        verticalLabelRotation={30}
+                      />
+                    ) : (
+                      <Text style={{fontSize: 20}}>
+                        Selected Event Has no data to display
+                      </Text>
+                    )}
+                    <Button
+                      title="Reload Graph"
+                      onPress={() =>
+                        this.handleChange(this.state.selectedEvent)
+                      }
+                    />
+                  </View>
+                )}

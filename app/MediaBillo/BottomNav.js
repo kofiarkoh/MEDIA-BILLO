@@ -6,6 +6,7 @@ import VotePage from './Pages/VotePage/Index';
 import LeaderBoardIndex from './Pages/LeaderBoardPage/LeaderBoardIndex';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AboutIndex from './Pages/AboutPage/AboutIndex';
+import TicketsIndex from './Pages/Tickets/TicketsIndex'
 const Tab = createBottomTabNavigator();
 export class BottomNav extends Component {
   render() {
@@ -38,6 +39,9 @@ export class BottomNav extends Component {
         }}>
         <Tab.Screen name="Home" component={VotePage}      />
         <Tab.Screen name="Statistics" component={LeaderBoardIndex} screenOptions={{ headerStyle: {
+                  backgroundColor: 'red',
+                },}}/>
+                <Tab.Screen name="Tickets" component={TicketsIndex} screenOptions={{ headerStyle: {
                   backgroundColor: 'red',
                 },}}/>
         <Tab.Screen name="About" component={AboutIndex} />

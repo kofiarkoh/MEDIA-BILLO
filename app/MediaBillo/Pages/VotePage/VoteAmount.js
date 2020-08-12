@@ -30,18 +30,7 @@ class VoteAmount extends Component {
   }
   
  
-  submitData = async () => {
-    console.log('called' + this.state.phoneNumber.length);
-    if (
-      this.state.ntwkType === 'VOD' &&
-      (this.state.voucherCode === '' || this.state.voucherCode.length != 6)
-    ) {
-      this.setState({
-        msg: '6 digit voucher code required',
-        visible: true,
-      });
-      return;
-    }
+  submitData = async () => { 
     if (this.state.ntwkType === null) {
       this.setState({
         msg: 'Please Select Network',
@@ -103,15 +92,6 @@ class VoteAmount extends Component {
      
     });
     if (response.resp_code === 200) {
-      //otp success
-     // this.handleClose()
-      /* swal({
-         text: response.message,
-         icon: "success",
-       });
-       setTimeout(() => {
-        navigate('/')
-       }, 3000); */
        alert(response.message)
        setTimeout(() => {
         this.props.navigation.navigate('Polls')
@@ -121,11 +101,7 @@ class VoteAmount extends Component {
     else{
       //otp error
       alert(response.message)
-     /*  swal({
-         text: response.message,
-         icon: "error",
-       }); */
-       //this.handleClose()
+    
     }
   }
   componentDidMount = () => {
@@ -208,15 +184,6 @@ class VoteAmount extends Component {
               />
             </Item>
             <Item style={[styles.inputField]}>
-         <Input
-              
-              disabled={this.state.ntwkType == 'VOD' ? false : true}
-                label="Voucher Code (Vodafone Users Only)"
-                leftIcon={{ type: 'font-awesome', name: 'lock' }}
-                keyboardType="numeric"
-                value={this.state.voucherCode}
-                onChangeText={text => this.setState({voucherCode: text})}
-            /> 
              
             </Item>
             <Item style={[styles.listItem]}>
