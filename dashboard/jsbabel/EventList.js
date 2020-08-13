@@ -8,7 +8,7 @@ class EventList extends React.Component {
       list: null,
     };
   }
-  async showme() {
+  async getData() {
     var data = await fetchList();
 
     this.setState({
@@ -16,7 +16,7 @@ class EventList extends React.Component {
     });
   }
   componentDidMount() {
-    var data = this.showme();
+    var data = this.getData();
   }
   render() {
     if (this.state.list == null) {
@@ -110,15 +110,23 @@ class EventList extends React.Component {
                 </td>
               </React.Fragment>
             )}
-            {/*  <td>
+            <td>
               <button
                 type="button"
-                className="btn btn-danger "
-                onClick={() => confirmDeleteion(item.event_name,item.id)}
+                className='btn bg-info'
+                onClick={() =>{
+                  sessionStorage.setItem('eventname',item.event_name)
+                  if(item.is_ended == 'true') {
+                    sessionStorage.setItem('is_suspend','false')
+                  } else{
+                    sessionStorage.setItem('is_suspend','true')
+                  }
+                  deleteEvent('Suspend')
+                } }
               >
-                Delete
+                {item.is_ended == 'true' ? <span style={{color:'white'}}>Activate Votiong</span> : <span style={{color:'white'}}> Suspend Voting</span>}
               </button>
-            </td> */}
+            </td> 
           </tr>
         );
       });
@@ -161,16 +169,20 @@ async function confirmDeleteion(eventname, id) {
   });
 }
 
-async function deleteEvent() {
+async function deleteEvent(action='Delete') {
   var formdata = new FormData();
   var eventname = sessionStorage.getItem("eventname");
   var id = sessionStorage.getItem("id");
-
+  var link ="adminresources/deleteEvent.php"
+  if(action == 'Suspend') {
+    link = "adminresources/suspendvoting.php"
+    formdata.append('event_status',sessionStorage.getItem('is_suspend'))
+  }
   formdata.append("event_name", eventname);
   try {
     var response = await axios({
       method: "post",
-      url: "adminresources/deleteEvent.php",
+      url: link,
       data: formdata,
       headers: {
         //`"Content-Type": "application/json",
@@ -179,7 +191,7 @@ async function deleteEvent() {
     });
     //console.warn("response", response);
     await swal({
-      text: " Deletion Succesful",
+      text: action+" Succesful",
 
       icon: "success",
     });

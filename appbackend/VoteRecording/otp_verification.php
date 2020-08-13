@@ -74,21 +74,7 @@ function ago($time)
     $mins = intval($remain / 60);
     $secs = $remain % 60;
 
-    if ($secs >= 0) {
-        $timestring = "0m" . $secs . "s";
-    }
-
-    if ($mins > 0) {
-        $timestring = $mins . "m" . $secs . "s";
-    }
-
-    if ($hours > 0) {
-        $timestring = $hours . "u" . $mins . "m";
-    }
-
-    if ($days > 0) {
-        $timestring = $days . "d" . $hours . "u";
-    }
+   
 
     return $mins;
 }

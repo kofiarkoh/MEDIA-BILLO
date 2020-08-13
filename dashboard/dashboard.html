@@ -195,8 +195,8 @@
   <script src="./assets/js/argon.js?v=1.2.0"></script>
  
       <script src="./assets/js/sweetalert.min.js"></script>
-<script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
-<script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
+<script src="./jsjsx/react.development.js" crossorigin></script>
+<script src="./jsjsx/react-dom.development.js" crossorigin></script>
   
   <script src="./axios.min.js"></script>
   <script src="./jsjsx/SideNav.js"></script>
@@ -204,7 +204,7 @@
   <script src="./jsjsx/EventStatistics.js"></script>
   <script>
     console.log('fetching')
-    var resp = fetch('http://192.168.8.100:3000/adminresources/dashboardstat.php')
+    var resp = fetch('http://localhost:8000/adminresources/dashboardstat.php')
     .then((result)=> result.json()).then((data)=>{
       console.log(data)
       $('#numEvents').text(data.num_events)  

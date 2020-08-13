@@ -82,13 +82,13 @@ class payment extends Component {
       return
     }
 
-    if (ntwkType === "VOD" && voucherCode.length !== 6) {
+   /*  if (ntwkType === "VOD" && voucherCode.length !== 6) {
       swal({
         icon: "warning",
         text: "6 digit voucher pin required",
       })
       return
-    }
+    } */
     if (contestantId === null || event_name === null) {
       swal({
         icon: "warning",
@@ -233,7 +233,7 @@ class payment extends Component {
                 onChange={event => this.setValues("phoneNumber", event)}
               />
             </Grid>
-            <Grid item xs={12} sm={4} className="form fade-in">
+           {/*  <Grid item xs={12} sm={4} className="form fade-in">
               <TextField
                 className="inputField puff-in-center"
                 id="outlined-multiline-static"
@@ -246,7 +246,7 @@ class payment extends Component {
                 onChange={event => this.setValues("voucherCode", event)}
                 helperText="Vodafone users only"
               />
-            </Grid>
+            </Grid> */}
 
           </Grid>
           

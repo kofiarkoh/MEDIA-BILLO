@@ -7,7 +7,7 @@ import Typography from "@material-ui/core/Typography"
 import img from "../images/sampleimg.jpeg"
 import Grid from "@material-ui/core/Grid"
 import { navigate } from "gatsby"
-
+import swal from 'sweetalert'
 import '../pages/index.css'
 class PollCard extends Component {
   constructor(props) {
@@ -19,11 +19,24 @@ class PollCard extends Component {
   }
   
   goToContestants = (eventname) =>{
-    this.props.showloading()
-    sessionStorage.setItem('eventname',eventname)
-   navigate('/pickcontestant')
+    if (this.props.ended === 'true') {
+   
+      swal({
+        text:'You are unable to vote now because voting has ended for this event',
+        icon:'warning'
+      })
+    } else{
+      
+      this.props.showloading()
+      sessionStorage.setItem('eventname',eventname)
+     navigate('/pickcontestant')
+  
+    }
+    
     //{ state: {'eventname':eventname}}
   }
+
+
   render() {
     return (
       <>

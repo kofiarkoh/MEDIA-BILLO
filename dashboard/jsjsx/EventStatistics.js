@@ -67,7 +67,7 @@ function _getEventStats() {
 
       var response = yield axios({
         method: "get",
-        url: "/adminresources/eventStats.php",
+        url: "adminresources/eventStats.php",
         headers: {
           Authorization: "Bearer " + sessionStorage.getItem("token")
         }

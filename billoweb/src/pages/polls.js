@@ -49,7 +49,7 @@ class Polls extends React.Component {
       return
     } else {
       this.setState({
-        polls: response,
+        polls: response.polls,
          loading: false,
       })
     }
@@ -100,6 +100,7 @@ class Polls extends React.Component {
                     className="fade-in"
                     key={item.id}
                     name={item.event_name}
+                    ended={item.is_ended}
                     showloading={this.showProgressbar}
                   />
                 )

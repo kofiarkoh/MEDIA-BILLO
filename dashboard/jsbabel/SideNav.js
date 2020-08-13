@@ -52,6 +52,12 @@ class SideNav extends React.Component {
                         <span className="nav-link-text">Add Another User</span>
                       </a>
                     </li>
+                    <li className="nav-item">
+                      <a className="nav-link active" href="history.html">
+                        <i className="ni ni-single-02 text-blue"></i>
+                        <span className="nav-link-text">History</span>
+                      </a>
+                    </li>
                    
                   </ul>
                  {/*  <!-- Divider --> */}

@@ -17,11 +17,15 @@ export class index extends Component {
       console.log('no user ',user)
     }
   } */
+  componentDidMount(){
+   // DrawGraph()
+  }
   render() {
   
     return (
       <div className='page'>
         <Polls/>
+        
       </div>
     )
   }

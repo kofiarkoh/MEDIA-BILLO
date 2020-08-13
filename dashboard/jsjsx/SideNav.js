@@ -74,7 +74,16 @@ class SideNav extends React.Component {
       className: "ni ni-single-02 text-blue"
     }), React.createElement("span", {
       className: "nav-link-text"
-    }, "Add Another User")))), React.createElement("hr", {
+    }, "Add Another User"))), React.createElement("li", {
+      className: "nav-item"
+    }, React.createElement("a", {
+      className: "nav-link active",
+      href: "history.html"
+    }, React.createElement("i", {
+      className: "ni ni-single-02 text-blue"
+    }), React.createElement("span", {
+      className: "nav-link-text"
+    }, "History")))), React.createElement("hr", {
       className: "my-3"
     }))));
   }

@@ -1,10 +1,10 @@
 <?php
-require('./verify_login.php');
+//require('./verify_login.php');
 
 /* header('Content-type: application/json');
 header('Access-Control-Allow-Origin: *'); */
 //header('Access-Control-Allow-Headers: X-Requested-With');
-
+header('Content-type: application/json');
 require('./connection.php');
 $sql = "SELECT * FROM billo_event";
 $stmt = $connection->prepare($sql);

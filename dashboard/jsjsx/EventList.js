@@ -12,7 +12,7 @@ class EventList extends React.Component {
     };
   }
 
-  showme() {
+  getData() {
     var _this = this;
 
     return _asyncToGenerator(function* () {
@@ -25,7 +25,7 @@ class EventList extends React.Component {
   }
 
   componentDidMount() {
-    var data = this.showme();
+    var data = this.getData();
   }
 
   render() {
@@ -88,7 +88,29 @@ class EventList extends React.Component {
           onClick: () => showModal(item.event_name)
         }, React.createElement("i", {
           class: "fas fa-edit"
-        }))))));
+        }))))), React.createElement("td", null, React.createElement("button", {
+          type: "button",
+          className: "btn bg-info",
+          onClick: () => {
+            sessionStorage.setItem('eventname', item.event_name);
+
+            if (item.is_ended == 'true') {
+              sessionStorage.setItem('is_suspend', 'false');
+            } else {
+              sessionStorage.setItem('is_suspend', 'true');
+            }
+
+            deleteEvent('Suspend');
+          }
+        }, item.is_ended == 'true' ? React.createElement("span", {
+          style: {
+            color: 'white'
+          }
+        }, "Activate Votiong") : React.createElement("span", {
+          style: {
+            color: 'white'
+          }
+        }, " Suspend Voting"))));
       });
     }
   }
@@ -150,16 +172,23 @@ function deleteEvent() {
 }
 
 function _deleteEvent() {
-  _deleteEvent = _asyncToGenerator(function* () {
+  _deleteEvent = _asyncToGenerator(function* (action = 'Delete') {
     var formdata = new FormData();
     var eventname = sessionStorage.getItem("eventname");
     var id = sessionStorage.getItem("id");
+    var link = "adminresources/deleteEvent.php";
+
+    if (action == 'Suspend') {
+      link = "adminresources/suspendvoting.php";
+      formdata.append('event_status', sessionStorage.getItem('is_suspend'));
+    }
+
     formdata.append("event_name", eventname);
 
     try {
       var response = yield axios({
         method: "post",
-        url: "adminresources/deleteEvent.php",
+        url: link,
         data: formdata,
         headers: {
           //`"Content-Type": "application/json",
@@ -168,7 +197,7 @@ function _deleteEvent() {
       }); //console.warn("response", response);
 
       yield swal({
-        text: " Deletion Succesful",
+        text: action + " Succesful",
         icon: "success"
       });
       $("#" + id).hide();
