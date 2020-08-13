@@ -1,4 +1,4 @@
-import React, {Component, useEffect, useState} from 'react';
+import React, {Component, useEffect, useState, useRef} from 'react';
 import {View, Picker} from 'native-base';
 import {TextInput, StyleSheet} from 'react-native';
 import {Container, Header, Content, Form, Item} from 'native-base';
@@ -6,7 +6,8 @@ import {Input} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {Button, RadioButton, Text, Snackbar} from 'react-native-paper';
 import RadioButtons from './RadioButtons';
-import { fetchTicketEvents } from '../ApiCalls/getticketevents';
+import { fetchTicketEvents, sendOtp, sendOtpConfirmation } from '../ApiCalls/getticketevents';
+import SuccessDialog from '../VotePage/SuccessDialog';
 const networklist = [
   {
     category_name:'MTN',category_id:'MTN'
@@ -19,16 +20,58 @@ const networklist = [
   }
 ]
 export default function TicketsHome() {
+  const [isloading,setLoading] = useState(false)
   const [eventlist,setEventList] = useState([])
   const [selectedEvent,setEvent] = useState('')
   const [selectedEventIndex,setIndex] = useState(0)
   const [ntwkType,setNtwktype] = useState('')
-  const [tickeckCategory,setTicketCategory] = useState('')
+  const [tickeckCategory,setTicketCategory] = useState('none')
   const [pricePerTicket,setPrice] = useState(0)
+  const [phone,setPhone] = useState('0241585537')
+  const [numTickets,setNumTickets] = useState('1')
+  const otpDialogRef = useRef(null);
+
+  const confirmOtp = async (otp) =>{
+    var res = await sendOtpConfirmation(otp)
+
+    alert(res.message)
+  }
+  const validateDetails = async ()=>{
+    if(selectedEvent === ''){
+      alert('Please choose an event')
+      return
+    }
+    if(eventlist[selectedEventIndex].multi_ticket === 'true' && tickeckCategory === 'none'){
+      alert('please choose a ticket category')
+      return
+    }
+    if(phone.length !== 10){
+      alert('10 digi Phone number required')
+      return
+    }
+    if(ntwkType === ''){
+      alert('Please choose your serive provider')
+      return
+    }
+    if(numTickets < 1){
+      alert('Please enter valid number of tickets to buy. MIN:1')
+      return
+    }
+    var res = await sendOtp(phone,selectedEvent,ntwkType,tickeckCategory,numTickets,pricePerTicket)
+    if(res.resp_code === 200) {
+      //show dialog to enter otp
+      otpDialogRef.current._showDialog()
+    }else{
+      //show the error message
+      alert(res.message)
+    }
+   
+  }
   const fetchevents = async ()=>{
     var res = await fetchTicketEvents()
     if(res.resp_code === 200){
       setEventList(res.message)
+      
     }
     else{
       alert(res.message)
@@ -39,15 +82,24 @@ export default function TicketsHome() {
     var index = eventlist.findIndex(item => item.event_id === event_id)
     if(eventlist[index].multi_ticket === 'false'){
       setPrice(eventlist[index].price)
-    }
+      setTicketCategory('none')
+    }  else{
+      var prevCat = eventlist[index].categories.filter((item)=>item.category_id === tickeckCategory)
+      if (prevCat.length !== 0){
+        setPrice(prevCat[0].price)
+      }
+     
+    
+    } 
     setIndex(index)
   }
  const  handleCategoryChange = (category_id)=>{
     setTicketCategory(category_id)
-    var price = eventlist[selectedEventIndex].categories.map((item)=> item.category_id === category_id && item.price)
-    setPrice(price)
+    var event = eventlist[selectedEventIndex].categories.filter((item)=>item.category_id === category_id)
+    setPrice(event[0].price)
     
   }
+ 
   useEffect(()=>{
     fetchevents()
   },[])
@@ -59,6 +111,7 @@ export default function TicketsHome() {
           <Text style={[styles.heading]}>Select Event</Text>
             <Item style={[styles.picker]} >
               <Picker  selectedValue={selectedEvent} onValueChange={(e)=>handleEventChange(e)}>
+
                 {
                   eventlist.length === 0 ? null :
                   eventlist.map((item,i)=>{
@@ -85,9 +138,8 @@ export default function TicketsHome() {
                 label="Enter Mobile Money Number"
                 keyboardType="numeric"
                 leftIcon={{ type: 'font-awesome', name: 'mobile' }}
-               /*  value={this.state.phoneNumber}
-                disabled={this.state.disableInput}
-                onChangeText={text => this.setState({phoneNumber: text})} */
+                value={phone}
+                onChangeText={(num)=>setPhone(num)}
               />
             </Item>
             <Text style={[styles.heading]}>Select Service Provider</Text>
@@ -100,6 +152,8 @@ export default function TicketsHome() {
               label={`Enter Number of tickets {GHS ${pricePerTicket} per ticket}`}
               keyboardType="phone-pad"
               leftIcon={{ type: 'font-awesome', name: 'money' }}
+              value={numTickets}
+              onChangeText={num=>setNumTickets(num)}
               
               />
            
@@ -111,6 +165,9 @@ export default function TicketsHome() {
                   mode="contained"
                   mode="contained"
                   color="#D71182"
+                  onPress={()=>validateDetails()}
+                  loading={isloading}
+                  disabled={isloading}
                  /*  disabled={this.state.disableInput}
                   loading={this.state.loading}
                   onPress={this.submitData} */>
@@ -121,6 +178,7 @@ export default function TicketsHome() {
             </Item>
           </Form>
         </Content>
+        <SuccessDialog ref={otpDialogRef} otpcall={confirmOtp}/>
         <Snackbar
          /*  visible={this.state.visible}
           onDismiss={() => this.setState({visible: false})} */

@@ -65,7 +65,7 @@ class Ticket extends DB
             ));
             $transactionult = curl_exec($ch); */
             //echo $transactionult;
-            UserResponse::displayMessage(200,$sms_data);
+            UserResponse::displayMessage(200,$sms_data['msg_body']);
         } catch (Exception $e) {
             //echo $e->getMessage();
             UserResponse::displayMessage(500,$e->getMessage());
@@ -98,10 +98,13 @@ class Ticket extends DB
                 UserResponse::displayMessage(404,'The otp entered does not exist');
             } else{
                 $otp_sent_duration = self::getTimeAgo(strtotime($transaction['trans_date']));
+                if($transaction['otp_status'] != 'pending'){
+                    UserResponse::displayMessage(401, 'This token has expired');
+                }
                 if ($otp_sent_duration <= 5) {
                     //proceed to make transaction request
                     $data = array(
-                        'phone' => $transaction[0]['phonenumber'],
+                        'phone' => $transaction['phonenumber'],
                         'amount' => $transaction['total_price'],
                         'trans_id' => $transaction['trans_id'],
                         'network' => $transaction['ntwk_type'],
@@ -110,7 +113,7 @@ class Ticket extends DB
                     self::updateOtpStatus($otp,'verified');
                    // PaymentRequest::executeRequest(json_encode($data));
 
-                    UserResponse::displayMessage(404, 'Phone verification succesful');
+                    UserResponse::displayMessage(200, 'Phone verification succesful');
                 } else {
                     self::updateOtpStatus($otp,'expired');
                     UserResponse::displayMessage(404, 'Your token has expired');
