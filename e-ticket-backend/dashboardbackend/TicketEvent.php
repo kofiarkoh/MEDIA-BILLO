@@ -70,6 +70,23 @@ class TicketEvent extends DB
            UserResponse::displayMessage(500,$th->getMessage());
         }
     }
-  
+    public static function editEvent($id,$new_name,$price,$multi_ticket){
+        DB::$user = 'root';
+        db::$password = '';
+        db::$dbName = 'media_billo';
+      
+        try {
+            DB::update('ticket_events',
+        [
+            'price'=>$price,
+            'event_name'=>$new_name,
+            'multi_ticket'=>$multi_ticket
+        ], "event_id=%s",$id);
+        UserResponse::displayMessage(200,'Update applied succesfully');
+        } catch (\Throwable $th) {
+            //throw $th;
+            UserResponse::displayMessage(500,$th->getMessage());
+        }
+    }
 
 }

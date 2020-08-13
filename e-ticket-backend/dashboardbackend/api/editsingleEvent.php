@@ -3,6 +3,7 @@ header('Content-type: Application/json');
 header("Access-Control-Allow-Origin: *");
 
 require('../../db.class.php');
+require('../TicketEvent.php');
 require('../TicketCategories.php');
 require('../../UserResponse.php');
 $error_handler = 'showError';
@@ -13,9 +14,9 @@ db::$nonsql_error_handler = $error_handler;
 $id = $_POST['id'];
 $new_name = $_POST['new_name'];
 $new_price = $_POST['new_price'];
-$sold_out = $_POST['sold_out'];
+$multi_ticket = $_POST['multi_ticket'];
 
-TicketCategories::editCategory($id,$new_name,$new_price,$sold_out);
+TicketEvent::editEvent($id,$new_name,$new_price,$multi_ticket);
 function showError($msg){
     UserResponse::displayMessage(500, $msg['error']);
 }

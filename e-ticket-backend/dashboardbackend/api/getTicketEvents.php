@@ -8,4 +8,5 @@ require('../TicketEvent.php');
 require('../../UserResponse.php');
 
 //get the media billo event which are yet to sell tickets
-TicketEvent::getTicketEvents();
+$events = TicketEvent::getTicketEvents();
+UserResponse::displayMessage(200,$events);
