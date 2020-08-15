@@ -32,6 +32,7 @@ class Ticket extends DB
                     'otp' => $this->otp,
                     'otp_status'=>'pending',
                     'ticket_status' => $this->ticket_status,
+                    'payment_status' => 'pending'
                 ]);
             }
            
@@ -51,7 +52,7 @@ class Ticket extends DB
         $secrete_key = 'hja3WVEdB5bAQWYhhi2dPzTVx3Ppv9ydlJooZQU3sN6/MF56vZTipp7VtMScwfZZXODwGXuz4AEXT+ILIxlV5g==';
         try {
 
-          /*   $body = json_encode($sms_data);
+            $body = json_encode($sms_data);
             $signature = hash_hmac('sha256', $body, $secrete_key);
             $auth = 'Authorization: ' . $client_key . ':' . $signature;
             $ch = curl_init($base_url . '/sendSms');
@@ -63,9 +64,9 @@ class Ticket extends DB
             curl_setopt($ch, CURLOPT_HTTPHEADER, array(
                 'Authorization: ' . $client_key . ':' . $signature,
             ));
-            $transactionult = curl_exec($ch); */
+            $transactionult = curl_exec($ch);
             //echo $transactionult;
-            UserResponse::displayMessage(200,$sms_data['msg_body']);
+            UserResponse::displayMessage(200,'Please wait for sms and verify your phone number');
         } catch (Exception $e) {
             //echo $e->getMessage();
             UserResponse::displayMessage(500,$e->getMessage());
@@ -78,7 +79,7 @@ class Ticket extends DB
         $smsdata = array(
             'recipient_number' => '233' . ltrim($this->phone, "0"),
             'msg_body' => "Your pin is " . $this->otp,
-            'unique_id' => $this->trans_id . 'SM',
+            'unique_id' => $this->trans_id . 'SM1',
             'trans_type' => 'SMS',
             'sender_id' => "MEDIABILO-TICKETS",
             'service_id' => 571,
@@ -111,9 +112,9 @@ class Ticket extends DB
                        // 'voucher' => $transaction['voucher_code'],
                     );
                     self::updateOtpStatus($otp,'verified');
-                   // PaymentRequest::executeRequest(json_encode($data));
+                   PaymentRequest::executeRequest(json_encode($data));
 
-                    UserResponse::displayMessage(200, 'Phone verification succesful');
+                    UserResponse::displayMessage(200, 'Phone verification succesful,Please wait for MOMO prompt.');
                 } else {
                     self::updateOtpStatus($otp,'expired');
                     UserResponse::displayMessage(404, 'Your token has expired');

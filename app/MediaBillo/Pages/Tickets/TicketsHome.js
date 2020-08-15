@@ -78,8 +78,13 @@ export default function TicketsHome() {
     }
   }
   const handleEventChange = (event_id)=>{
-    setEvent(event_id)
     var index = eventlist.findIndex(item => item.event_id === event_id)
+
+    setEvent(event_id)
+    if(eventlist[index].status === 'inactive'){
+     alert('Ticket Has been Sold Out for this event')
+     return
+    } 
     if(eventlist[index].multi_ticket === 'false'){
       setPrice(eventlist[index].price)
       setTicketCategory('none')
@@ -94,9 +99,14 @@ export default function TicketsHome() {
     setIndex(index)
   }
  const  handleCategoryChange = (category_id)=>{
+ 
     setTicketCategory(category_id)
-    var event = eventlist[selectedEventIndex].categories.filter((item)=>item.category_id === category_id)
-    setPrice(event[0].price)
+    var category = eventlist[selectedEventIndex].categories.filter((item)=>item.category_id === category_id)
+    if(category[0].is_sold_out === 'true'){
+      alert('Ticket Sold Out for this category')
+      return
+    }
+    setPrice(category[0].price)
     
   }
  
@@ -115,7 +125,10 @@ export default function TicketsHome() {
                 {
                   eventlist.length === 0 ? null :
                   eventlist.map((item,i)=>{
-                    return <Picker.Item label={item.event_name} key={item.event_id} value={item.event_id}/>
+                   /*  if(item.status === 'inactive') {
+                      return 
+                    } */
+                    return <Picker.Item disabled={true} label={item.event_name} key={item.event_id} value={item.event_id}/>
                   })
                 }
                 

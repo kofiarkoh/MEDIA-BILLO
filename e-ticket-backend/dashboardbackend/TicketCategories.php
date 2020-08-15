@@ -7,9 +7,9 @@ class TicketCategories{
     public $is_sold_out = "false";
 
     public function createCategories(){
-        DB::$user = 'root';
+       /*  DB::$user = 'root';
         db::$password = '';
-        db::$dbName = 'media_billo'; 
+        db::$dbName = 'media_billo';  */
         try {
             DB::insert('ticket_categories',[
                 'event_id'=>$this->event_id,
@@ -27,9 +27,9 @@ class TicketCategories{
     }
 
     public static function editCategory($id,$new_name,$price,$sold_out){
-        DB::$user = 'root';
+      /*   DB::$user = 'root';
         db::$password = '';
-        db::$dbName = 'media_billo';
+        db::$dbName = 'media_billo'; */
       
         try {
             DB::update('ticket_categories',

@@ -5,6 +5,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 require('../db.class.php');
 require('../UserResponse.php');
+require('../PaymentRequest.php');
 require('../Ticket.php');
 require('../dberrorhandler.php');
 

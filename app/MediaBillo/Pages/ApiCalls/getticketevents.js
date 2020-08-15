@@ -4,7 +4,7 @@ const fetchTicketEvents = async()=>{
         redirect: 'follow'
       };
       
-      return fetch("http://192.168.8.100:4000/api/ticketevents.php", requestOptions)
+      return fetch("http://admin.mediabillo.net/tdb/api/ticketevents.php", requestOptions)
         .then(response => response.json())
         .then(result =>{ console.log(result)
         return result
@@ -28,7 +28,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-return fetch("http://192.168.8.100:4000/api/sendotp.php", requestOptions)
+return fetch("http://admin.mediabillo.net/tdb/api/sendotp.php", requestOptions)
   .then(response => response.json())
   .then(result => {
     console.log(result)
@@ -45,7 +45,7 @@ const sendOtpConfirmation = async(otp)=>{
     redirect: 'follow'
   };
   
- return fetch("http://192.168.8.100:4000/api/verifyotp.php?otp="+otp, requestOptions)
+ return fetch("http://admin.mediabillo.net/tdb/api/verifyotp.php?otp="+otp, requestOptions)
     .then(response => response.json())
     .then(result => {
       console.log(result)
@@ -53,7 +53,7 @@ const sendOtpConfirmation = async(otp)=>{
     })
     .catch(error => {
       console.log('error', error)
-            return {resp_code:500,message:error}
+            return {resp_code:500,message:error} 
 })
 }
 export {fetchTicketEvents,sendOtp,sendOtpConfirmation}

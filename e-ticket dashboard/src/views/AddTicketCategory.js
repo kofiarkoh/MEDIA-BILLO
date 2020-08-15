@@ -6,6 +6,8 @@ import {
 import PageHeader from '../components/Headers/PageHeader';
 import { getTicketEvents } from '../api calls/getevents';
 import { createTicketCategory } from '../api calls/addticketcategory';
+import Loading from '../components/Loaders/Loading';
+import swal from 'sweetalert';
   
 
 export default function AddTicketCategory() {
@@ -14,9 +16,12 @@ export default function AddTicketCategory() {
     const [eventList,setEventList] = useState([])
     const [selectedEvent,setSelectedEvent] = useState('none')
     const [categories,setCategories] = useState([])
+    const [isloading,setLoading] = useState(false)
     const fetchEvents = async ()=>{
+      setLoading(true)
       var res = await getTicketEvents()
       setEventList(res.message)
+      setLoading(false)
     }
     useEffect(()=>{
       fetchEvents()
@@ -34,7 +39,8 @@ export default function AddTicketCategory() {
         console.log('price is ',name_t.slice(colonIndex))
         console.log('category name is ',name_t.slice(0,colonIndex)) */
         if (cat_name.length === 0 || price <= 0 || colonCount === 0){
-          alert('enter valid name and amount')
+
+          swal('enter valid name and amount','','error')
           return 
         }
         setCategories(categories.concat([
@@ -49,13 +55,22 @@ export default function AddTicketCategory() {
     const submitData = async ()=>{
       if (selectedEvent === 'none') {
         console.log('please choose and event')
+        swal('please choose and event','','warning')
         return
       }
       if (categories.length === 0) {
         console.log('please provide at least one category')
+        swal('please provide at least one category','','warning')
         return
       }
+      setLoading(true)
       var res = await createTicketCategory(selectedEvent,categories)
+      if (res.resp_code === 200){
+        swal('Success',res.message,'success')
+      }else{
+        swal('Error',res.message,'error')
+      }
+      setLoading(false)
     }
     return (
        <>
@@ -67,6 +82,8 @@ export default function AddTicketCategory() {
                 <Card className='shadow'>
                   <CardHeader>
                   <h3 className="mb-0">Add Ticket Category</h3>
+                  
+                  <Loading loading={isloading}/>
                   </CardHeader>
 
                   <CardBody className="px-lg-5 py-lg-5">
@@ -127,7 +144,7 @@ export default function AddTicketCategory() {
 
                 </FormGroup>
                     <div className="text-center">
-                  <Button className="my-4" color="primary" type="button" onClick={()=>submitData()}>
+                  <Button disabled={isloading} className="my-4" color="primary" type="button" onClick={()=>submitData()}>
                     Submit
                   </Button>
                 </div>

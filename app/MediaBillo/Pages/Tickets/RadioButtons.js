@@ -6,12 +6,16 @@ import {Container, Header, Content, Form, Item} from 'native-base';
 export default function RadioButtons(props) {
     return (
         <RadioButton.Group
+        style={{display:'flex',flexDirection:'row'}}
         color="red"
         value={props.selected}
         onValueChange={(e)=>props.handlechange(e)}
        >
            {
                props.items.map((item)=>{
+                 if(item.is_sold_out === 'true'){
+                   return null
+                 }
                return <Item  key={item.category_id} onPress={() => props.handlechange(item.category_id)}>
                 <RadioButton
                   /* disabled={this.state.disableInput} */

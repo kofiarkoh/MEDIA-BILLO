@@ -22,7 +22,7 @@ try {
             $cat_arr = [];
             foreach ($categories as $category) {
                 # code...
-                $ticket_sold =  DB::query("SELECT COUNT(event_id) as tickets_sold from ticket_transactions WHERE ticket_category_id=%s",$category['category_id']);
+                $ticket_sold =  DB::query("SELECT COUNT(event_id) as tickets_sold from ticket_transactions WHERE ticket_category_id=%s AND payment_status='completed'",$category['category_id']);
                 $cat = array(
                     'category_id' => $category['category_id'],
                     'category_name' => $category['category_name'],

@@ -4,7 +4,7 @@ const getevents = async()=>{
         redirect: 'follow'
       };
       
-  return    fetch("http://localhost:4000/dashboardbackend/api/getEventlist.php", requestOptions)
+  return    fetch("http://admin.mediabillo.net/tdb/dashboardbackend/api/getEventlist.php", requestOptions)
         .then(response => response.json())
         .then(result => {
             console.log(result)
@@ -18,7 +18,7 @@ const getTicketEvents = async()=>{
         redirect: 'follow'
       };
       
-  return    fetch("http://localhost:4000/dashboardbackend/api/getTicketEvents.php", requestOptions)
+  return    fetch("http://admin.mediabillo.net/tdb/dashboardbackend/api/getTicketEvents.php", requestOptions)
         .then(response => response.json())
         .then(result => {
             console.log(result)

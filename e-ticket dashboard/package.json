@@ -22,7 +22,7 @@
   "bugs": {
     "url": "https://github.com/creativetimofficial/argon-dashboard-react/issues"
   },
-  "homepage": "https://demos.creative-tim.com/argon-dashboard-react/",
+  "homepage": "http://localhost:9000/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -57,7 +57,8 @@
     "react-google-maps": "9.4.5",
     "react-router-dom": "5.1.2",
     "react-scripts": "^3.4.1",
-    "reactstrap": "8.4.1"
+    "reactstrap": "8.4.1",
+    "sweetalert": "^2.1.2"
   },
   "devDependencies": {
     "@types/googlemaps": "3.39.2",

@@ -11,9 +11,9 @@ class TicketEvent extends DB
     {
         try {
       
-            DB::$user = 'root';
+         /*    DB::$user = 'root';
             db::$password = '';
-            db::$dbName = 'media_billo';
+            db::$dbName = 'media_billo'; */
           
             $event_exists = DB::query("SELECT * FROM ticket_events WHERE event_name=%s_name",
         [
@@ -71,10 +71,10 @@ class TicketEvent extends DB
         }
     }
     public static function editEvent($id,$new_name,$price,$multi_ticket){
-        DB::$user = 'root';
+       /*  DB::$user = 'root';
         db::$password = '';
         db::$dbName = 'media_billo';
-      
+       */
         try {
             DB::update('ticket_events',
         [

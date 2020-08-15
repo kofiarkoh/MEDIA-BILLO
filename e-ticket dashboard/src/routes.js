@@ -25,6 +25,8 @@ import Icons from "views/examples/Icons.js";
 import AddTicketEvent from "./views/AddTicketEvent";
 import AddTicketCategory from "./views/AddTicketCategory";
 import TicketSummary from "./views/TicketSummary";
+import VerifyTicket from "./views/VerifyTicket";
+import TicketTransactions from "./views/TicketTransactions";
 
 var routes = [
   {
@@ -58,6 +60,21 @@ var routes = [
     layout: "/admin"
   },
 
+  {
+    path: "/ticketverification",
+    name: "Verify Ticket",
+    icon: "ni ni-tv-2 text-primary",
+    component:VerifyTicket,
+    layout: "/admin"
+  },
+
+  {
+    path: "/tickettransactions",
+    name: "Ticket Transactions",
+    icon: "ni ni-tv-2 text-primary",
+    component:TicketTransactions,
+    layout: "/admin"
+  },
 
 
 
@@ -71,10 +88,7 @@ var routes = [
 
 
 
-
-
-
-
+ /* 
   {
     path: "/icons",
     name: "Icons",
@@ -116,6 +130,6 @@ var routes = [
     icon: "ni ni-circle-08 text-pink",
     component: Register,
     layout: "/auth"
-  }
+  }  */
 ];
 export default routes;

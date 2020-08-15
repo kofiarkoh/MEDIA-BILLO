@@ -14,7 +14,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-return fetch("http://localhost:4000/dashboardbackend/api/createTicketCategory.php", requestOptions)
+return fetch("http://admin.mediabillo.net/tdb/dashboardbackend/api/createTicketCategory.php", requestOptions)
   .then(response => response.json())
   .then(result => {
       console.log(result)
@@ -35,7 +35,7 @@ const updateTicketCategory = async (catId,name,price,soldout) => {
     redirect: "follow",
   };
 
- return fetch("http://localhost:4000/dashboardbackend/api/editTicketCategory.php", requestOptions)
+ return fetch("http://admin.mediabillo.net/tdb/dashboardbackend/api/editTicketCategory.php", requestOptions)
     .then((response) => response.json())
     .then((result) => {
       console.log(result);

@@ -13,16 +13,33 @@ try {
     $active_events = 0;
     $total_sales = 0;
   foreach($events as $event){
-        $ticket_sold =  DB::query("SELECT COUNT(event_id) as tickets_sold from ticket_transactions WHERE event_id=%s",$event['event_id']);
+        $ticket_sold =  DB::query("SELECT COUNT(event_id) as tickets_sold from ticket_transactions WHERE event_id=%s_id AND payment_status=%s_status",
+        [
+            'id'=> $event['event_id'],
+             'status'=>'completed'
+        ]
+       );
         if($event['status'] == 'active'){
             $active_events += 1;
         }
         $event['tickets_sold'] = $ticket_sold[0]['tickets_sold'];
         if($event['multi_ticket'] == 'false'){
-            $event['amount_earned'] = $event['tickets_sold']*$event['price'];
+                $amount_earnd =  DB::query("SELECT SUM(price) as price from ticket_transactions WHERE event_id=%s_id AND payment_status=%s_status",
+                [
+                    'id'=> $event['event_id'],
+                    'status'=>'completed'
+                ]
+            );
+            $event['amount_earned'] = $amount_earnd[0]['price']; // $event['tickets_sold']*$event['price'];
             $total_sales +=  $event['amount_earned'] ;
         } else{
-            $amount_earnd =  DB::query("SELECT SUM(price) as price from ticket_transactions WHERE event_id=%s",$event['event_id']);
+            //multi tickets 
+            $amount_earnd =  DB::query("SELECT SUM(price) as price from ticket_transactions WHERE event_id=%s_id AND payment_status=%s_status",
+            [
+                'id'=> $event['event_id'],
+                 'status'=>'completed'
+            ]
+           );
             $event['amount_earned'] =  $amount_earnd[0]['price'];
             $total_sales +=   $event['amount_earned'] ;
         }

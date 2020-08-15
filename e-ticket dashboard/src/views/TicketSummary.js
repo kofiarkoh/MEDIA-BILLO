@@ -96,7 +96,7 @@ export default function TicketSummary() {
                      {(category.price * category.tickets_sold).toFixed(2)}
                    </td>
                    <td>
-                       <Button>Delete</Button>
+                       {/* <Button>Delete</Button> */}
                        <Button onClick={()=>{
                          setSelectedCategory(category)
                          setModal(true)
@@ -119,7 +119,7 @@ export default function TicketSummary() {
    
            }
         
-       <EditTicketCategoryModal  item={selectedCategory} open={modalopen} close={setModal} />
+       <EditTicketCategoryModal refreshdata={fetchData}  item={selectedCategory} open={modalopen} close={setModal} />
        </Container>
        </>
     )

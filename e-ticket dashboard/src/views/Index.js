@@ -15,7 +15,10 @@ import {
 // core components
 import { chartOptions, parseOptions } from "variables/charts.js";
 import EditSingleTicketEventModal from "../components/Modals/EditSingleTicketEventModal";
-import {getHomeStatistics} from '../api calls/homestats'
+import {getHomeStatistics, updateTicketSellingStatus} from '../api calls/homestats'
+import Loading from "../components/Loaders/Loading";
+import swal from 'sweetalert';
+
 class Index extends React.Component {
   constructor(props) {
     super(props);
@@ -27,7 +30,8 @@ class Index extends React.Component {
       active_events : null,
       sales:null,
       num_events:null,
-      itemToEdit: {}
+      itemToEdit: {},
+      isloading:false
     };
     if (window.Chart) {
       parseOptions(Chart, chartOptions());
@@ -37,6 +41,7 @@ class Index extends React.Component {
     this.setState({ modalopen: v });
   };
   fetchStatistics = async()=>{
+    this.setState({isloading:true})
     var res = await getHomeStatistics()
     if(res.resp_code === 200){
         this.setState({eventstats:res.message.stats,
@@ -45,8 +50,10 @@ class Index extends React.Component {
         sales:res.message.sales
         })
     }else{
-      alert(res.message)
+     
+      swal(res.message,'','error')
     }
+    this.setState({isloading:false})
   }
   toggleNavs = (e, index) => {
     e.preventDefault();
@@ -56,6 +63,18 @@ class Index extends React.Component {
         this.state.chartExample1Data === "data1" ? "data2" : "data1",
     });
   };
+  changeTicketStatus = async (id,status)=>{
+    this.setState({isloading:true})
+    var res = await updateTicketSellingStatus(id,status)
+    if (res.resp_code === 200){
+      swal(res.message,'','success')
+      this.fetchStatistics()
+    }
+    else{
+      swal(res.message,'','error')
+    }
+    this.setState({isloading:false})
+  }
   componentDidMount(){
     this.fetchStatistics()
   }
@@ -68,11 +87,13 @@ class Index extends React.Component {
         <Container className="mt--7" fluid>
           <Row className="mt-5">
             <Col className="mb-5 mb-xl-0 col-xl-12">
+             
               <Card className="shadow">
                 <CardHeader className="border-0">
+                <Loading loading={this.state.isloading}/>
                   <Row className="align-items-center">
                     <div className="col">
-                      <h3 className="mb-0">Page visits</h3>
+                      <h3 className="mb-0">Stats</h3>
                     </div>
                   </Row>
                 </CardHeader>
@@ -97,13 +118,25 @@ class Index extends React.Component {
                     <td className='text-center'>{item.multi_tickers === 'true' ? '-' : item.price}</td>
                     <td className='text-center'>{item.tickets_sold}</td>
                     <td className='text-center'>{item.amount_earned}</td>
-                     {/*  <td>
-                        <i className="fas fa-arrow-down text-warning mr-3" />{" "}
-                        46,53%
-                      </td> */}
-                      <td>Stop
+                   
+                      <td>
+                        {item.status === 'active' ?
+                        <Button 
+                        disabled={this.state.isloading}
+                        onClick={()=>this.changeTicketStatus(item.event_id,'inactive')}
+                        >
+                          Terminate
+                        </Button>  
+                        :
+                        <Button
+                        disabled={this.state.isloading}
+                        onClick={()=>this.changeTicketStatus(item.event_id,'active')}
+                        >
+                          Continue
+                        </Button>
+                      }
 
-                        <Button onClick={()=>{
+                        <Button  disabled={this.state.isloading} onClick={()=>{
                           this.setState({itemToEdit:item, modalopen:true})
                         }}>Edit</Button>
                       </td>
@@ -118,6 +151,7 @@ class Index extends React.Component {
             </Col>
           </Row>
           <EditSingleTicketEventModal
+            refreshdata={this.fetchStatistics}
             item={this.state.itemToEdit}
             open={this.state.modalopen}
             close={this.setModal}

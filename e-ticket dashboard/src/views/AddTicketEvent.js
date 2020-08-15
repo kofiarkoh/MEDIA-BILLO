@@ -7,16 +7,20 @@ import {
 import PageHeader from '../components/Headers/PageHeader';
 import { getevents } from '../api calls/getevents';
 import { createTicketEvent } from '../api calls/addticketevent';
-  
+import Loading from '../components/Loaders/Loading';
+import swal from 'sweetalert'  
 
 export default function AddTicketEvent() {
     const [eventlist,setEventList] = useState([])
     const [selectedEvent,setSelectedEvent] = useState('')
     const [mutliTicket,setMultiTiket] = useState('none')
     const [price,setPrice] = useState(0)
+    const [isloading,setLoading] = useState(false)
     const fetchEvents = async ()=>{
+        setLoading(true)
         var res = await getevents()
         setEventList(res.message)
+        setLoading(false)
     }
     useEffect(()=>{
         fetchEvents()
@@ -24,17 +28,31 @@ export default function AddTicketEvent() {
     const submitData = async ()=>{
         if(selectedEvent === ''){
             console.log('Please select an event')
+            swal('Please select an event','','error')
             return
         }
         if(mutliTicket === 'none'){
             console.log('Please choose ticket type')
+            swal('Please choose ticket type','','error')
             return
         }
         if(mutliTicket === 'false' && price <= 0) {
             console.log('please enter a valid ticket price')
+            swal('please enter a valid ticket price','','error')
             return
         }
+        if(mutliTicket === 'true') {
+           setPrice(0)
+        }
+        setLoading(true)
         var res = await createTicketEvent(selectedEvent,mutliTicket,price)
+        if(res.resp_code === 200){
+            swal('success',res.message,'success')
+        }
+        else{
+            swal('error',res.message,'error')
+        }
+        setLoading(false)
         console.log('submit data')
     }
     return (
@@ -47,6 +65,7 @@ export default function AddTicketEvent() {
                 <Card className='shadow'>
                   <CardHeader>
                   <h3 className="mb-0">Add ticketing event</h3>
+                  <Loading loading={isloading}/>
                   </CardHeader>
 
                   <CardBody className="px-lg-5 py-lg-5">
@@ -88,7 +107,7 @@ export default function AddTicketEvent() {
             
               
                 <div className="text-center">
-                  <Button className="my-4" color="primary" type="button" onClick={()=>submitData()}>
+                  <Button disabled={isloading} className="my-4" color="primary" type="button" onClick={()=>submitData()}>
                   Submit
                   </Button>
                 </div>
