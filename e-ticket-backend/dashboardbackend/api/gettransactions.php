@@ -13,7 +13,7 @@ try {
     $arr = [];
     foreach($transactions as $trans){
         $cat_name =  DB::query("SELECT category_name FROM ticket_categories WHERE category_id=%s",$trans['ticket_category_id']);
-        $trans['cat_name'] = $cat_name[0]['category_nam'];
+        $trans['cat_name'] = $cat_name[0]['category_name'];
         array_push($arr,$trans);
     }
     UserResponse::displayMessage(200, $arr);

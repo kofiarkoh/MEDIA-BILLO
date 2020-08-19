@@ -22,7 +22,7 @@
   "bugs": {
     "url": "https://github.com/creativetimofficial/argon-dashboard-react/issues"
   },
-  "homepage": "http://localhost:9000/",
+  "homepage": "http://admin.mediabillo.net/tdb/dash/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
