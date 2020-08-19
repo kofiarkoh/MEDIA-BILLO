@@ -6,13 +6,14 @@ import VotePage from './Pages/VotePage/Index';
 import LeaderBoardIndex from './Pages/LeaderBoardPage/LeaderBoardIndex';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AboutIndex from './Pages/AboutPage/AboutIndex';
-import TicketsIndex from './Pages/Tickets/TicketsIndex'
+import TicketRoutes from './Pages/Tickets/TicketRoutes'
 const Tab = createBottomTabNavigator();
 export class BottomNav extends Component {
   render() {
     return (
       <Tab.Navigator
-      
+
+        style={{backgroundColor:'red'}}
         screenOptions={({route}) => ({
           
           tabBarIcon: ({focused, color, size}) => {
@@ -33,15 +34,26 @@ export class BottomNav extends Component {
         })}
         tabBarOptions={{
           activeTintColor: 'hotpink',
-          inactiveTintColor: 'gray',
-          backgroudColor:'red'
+          inactiveTintColor: 'grey',
+          backgroudColor:'#D71182',
+          tabStyle:{
+              marginBottom:0,
+              position:'relative',
+              width:'100%',
+              bottom:0
+          },
+          style:{
+           // backgroundColor:'red',
+            padding: 0,
+         //   height:90
+          }
           
         }}>
-        <Tab.Screen name="Home" component={VotePage}      />
+        <Tab.Screen  name="Home" component={VotePage}      />
         <Tab.Screen name="Statistics" component={LeaderBoardIndex} screenOptions={{ headerStyle: {
                   backgroundColor: 'red',
                 },}}/>
-                <Tab.Screen name="Tickets" component={TicketsIndex} screenOptions={{ headerStyle: {
+                <Tab.Screen name="Tickets" component={TicketRoutes} screenOptions={{ headerStyle: {
                   backgroundColor: 'red',
                 },}}/>
         <Tab.Screen name="About" component={AboutIndex} />
