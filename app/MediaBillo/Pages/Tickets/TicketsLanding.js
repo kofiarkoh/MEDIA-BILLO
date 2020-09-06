@@ -1,65 +1,81 @@
-import { Text, View } from 'native-base';
-import React, { useRef,useEffect, useState } from 'react';
-import { ProgressBarAndroid, Animated } from 'react-native';
-import { Button } from 'react-native-paper';
+import {Text, View} from 'native-base';
+import React, {useRef, useEffect, useState} from 'react';
+import {ProgressBarAndroid, Animated} from 'react-native';
+import {Button} from 'react-native-paper';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import PickTicketType from './PickTicketType';
 import ticketstyles from './ticketstyles';
-import {useIsFocused} from '@react-navigation/native'
+import {useIsFocused} from '@react-navigation/native';
 export default function TicketsLanding(props) {
   const rbsheetref = useRef();
-  const isFocused = useIsFocused()
-  const [dialogVisible,setDialog] = useState(false)
-  const slideUpAnim = useRef(new Animated.Value(0)).current
-  
+  const isFocused = useIsFocused();
+  const [dialogVisible, setDialog] = useState(false);
+  const slideUpAnim = useRef(new Animated.Value(0)).current;
+
   const applyAnim = () => {
     //rbsheetref.current.open();
-//setDialog(!dialogVisible)
-Animated.timing(slideUpAnim,{
-  toValue:1,duration:1000
-}).start()
+    //setDialog(!dialogVisible)
+    Animated.timing(slideUpAnim, {
+      toValue: 1,
+      duration: 1000,
+    }).start();
   };
- const checkFocus = ()=>{
-   if(isFocused){
-     console.log('alive')
-   }else{
-     slideUpAnim.setValue(0)
-     console.log('dead')
-   }
- }
-const goToTicketsPage = ()=>{
-    props.navigation.navigate('Tickets')
- }
- useEffect(()=>{
-        applyAnim(),
-        checkFocus()
-    },[isFocused]) 
+  const checkFocus = () => {
+    if (isFocused) {
+      console.log('alive');
+    } else {
+      slideUpAnim.setValue(0);
+      console.log('dead');
+    }
+  };
+  const goToTicketsPage = () => {
+    var ticket_ids = ['BILO450751T','BILO450751T','BILO450751T','BILO450751T','BILO450751T','BILO450751T','BILO450751T','BILO450751T','BILO450751T']
+    var m = "Your ticket(s) is/are "+ticket_ids+". Thanks for your patronage"
+   
+    props.navigation.navigate('Tickets');
+  };
+  useEffect(() => {
+    applyAnim(), checkFocus();
+  }, [isFocused]);
 
-    
-      {/* <TicketEventList/> */}
+  {
+    /* <TicketEventList/> */
+  }
   return (
-    
-/*  <AnimatedList/>  */
- /*  <PaymentForm/>
+    /*  <AnimatedList/>  */
+    /*  <PaymentForm/>
 <PickTicketType/> */
 
-       <View style={[ticketstyles.mainView]}>
+    <View style={[ticketstyles.mainView]}>
       <View style={[ticketstyles.view1]}>
-        <Text style={[ticketstyles.h1,{fontSize:50}]}>Media Billo </Text>
-        <Animated.View style={[ticketstyles.h2,{
-          opacity:slideUpAnim,
-         // height:'1%',
-         /*  translateY: slideUpAnim.interpolate({
+        <Text style={[ticketstyles.h1, {fontSize: 50}]}>Media Billo </Text>
+        <Animated.View
+          style={[
+            ticketstyles.h2,
+            {
+              opacity: slideUpAnim,
+              // height:'1%',
+              /*  translateY: slideUpAnim.interpolate({
             inputRange:[0,1],outputRange:[30,0]
           }) */
-        }]}><Animated.Text style={{
-          fontSize:40,
-          color:slideUpAnim.interpolate({
-            inputRange:[0,1],outputRange:['black','black']
-          }),
-          lineHeight:slideUpAnim.interpolate({
-          inputRange:[0,1],outputRange:[0,60]
-        })}}> E-Tickets Portal</Animated.Text></Animated.View>
+            },
+          ]}>
+          <Animated.Text
+            style={{
+              fontSize: 40,
+              color: slideUpAnim.interpolate({
+                inputRange: [0, 1],
+                outputRange: ['red', 'white'],
+              }),
+              lineHeight: slideUpAnim.interpolate({
+                inputRange: [0, 1],
+                outputRange: [0, 60],
+              }),
+            }}>
+            {' '}
+            E-Tickets Portal
+          </Animated.Text>
+        </Animated.View>
       </View>
       <View style={[ticketstyles.view2]}>
         <View style={[ticketstyles.btnView]}>
@@ -68,15 +84,9 @@ const goToTicketsPage = ()=>{
           </Button>
         </View>
       </View>
-      <PickTicketType visible={dialogVisible}/>
-      <RBSheet
-        
-        closeOnDragDown={true}
-        closeOnPressMask={false}
-        ref={rbsheetref}>
-         <ProgressBarAndroid /> 
-       
+      <RBSheet closeOnDragDown={true} closeOnPressMask={false} ref={rbsheetref}>
+        <ProgressBarAndroid />
       </RBSheet>
-    </View>   
+    </View>
   );
 }

@@ -27,6 +27,7 @@ import AddTicketCategory from "./views/AddTicketCategory";
 import TicketSummary from "./views/TicketSummary";
 import VerifyTicket from "./views/VerifyTicket";
 import TicketTransactions from "./views/TicketTransactions";
+import AddTicketLogo from "./views/AddTicketLogo";
 
 var routes = [
   {
@@ -41,6 +42,13 @@ var routes = [
     name: "Add Ticket Event",
     icon: "ni ni-tv-2 text-primary",
     component: AddTicketEvent,
+    layout: "/admin"
+  },
+  {
+    path: "/addlogo",
+    name: "Add Ticket Logo",
+    icon: "ni ni-tv-2 text-primary",
+    component: AddTicketLogo,
     layout: "/admin"
   },
 

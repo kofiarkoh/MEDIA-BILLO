@@ -30,16 +30,16 @@ import {
 } from 'react-native-material-cards'; */
 function TicketEventList(props) {
   return (
-
+//http://admin.mediabillo.net/adminresources/Images/EventImages/WhatsApp Image 2020-05-13 at 00.21.18.jpeg
           <Content style={[styles.carditem]}>
     <Card style={[styles.itemShadow]} >
       <CardItem
         cardBody
         button
         onPress={()=>props.nav(props.index)} >
-      
+       
         <Image
-          source={{uri:'http://admin.mediabillo.net/adminresources/Images/EventImages/WhatsApp Image 2020-05-13 at 00.21.18.jpeg'}}
+          source={{uri:'http://192.168.8.100:4000/ticketlogos/'+props.eventid+'.jpg'}}
           indicator={ProgressBar}
           indicatorProps={{
             size: 80,
@@ -57,7 +57,7 @@ function TicketEventList(props) {
         /* onPress={() => this.cardClicked()} */>
         <Left>
           <Body>
-        <Text style={[styles.title]}>{props.title}</Text>
+        <Text style={[styles.title]}>{props.title.replace(/_+/g,' ')}</Text>
           </Body>
         </Left>
       </CardItem>

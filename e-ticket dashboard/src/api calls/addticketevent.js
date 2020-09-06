@@ -1,3 +1,5 @@
+import { BASE_URL } from "./baseurl";
+
 const createTicketEvent = (name, multiticket, price) => {
   var formdata = new FormData();
   formdata.append("name", name);
@@ -11,7 +13,7 @@ const createTicketEvent = (name, multiticket, price) => {
   };
 
   return fetch(
-    "http://admin.mediabillo.net/tdb/dashboardbackend/api/createEvent.php",
+    BASE_URL+"/api/createEvent.php",
     requestOptions
   )
     .then((response) => response.json())
@@ -37,7 +39,7 @@ const updateTicketEvent = async (id,name,price,multiticket) => {
     redirect: "follow",
   };
 
- return fetch("http://admin.mediabillo.net/tdb/dashboardbackend/api/editsingleEvent.php", requestOptions)
+ return fetch(BASE_URL+"/api/editsingleEvent.php", requestOptions)
     .then((response) => response.json())
     .then((result) => {
       console.log(result);

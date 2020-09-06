@@ -1,10 +1,12 @@
+import { BASE_URL } from "./baseurl";
+
 const getevents = async()=>{
     var requestOptions = {
         method: 'GET',
         redirect: 'follow'
       };
       
-  return    fetch("http://admin.mediabillo.net/tdb/dashboardbackend/api/getEventlist.php", requestOptions)
+  return    fetch(BASE_URL+"/api/getEventlist.php", requestOptions)
         .then(response => response.json())
         .then(result => {
             console.log(result)
@@ -18,7 +20,7 @@ const getTicketEvents = async()=>{
         redirect: 'follow'
       };
       
-  return    fetch("http://admin.mediabillo.net/tdb/dashboardbackend/api/getTicketEvents.php", requestOptions)
+  return    fetch(BASE_URL+"/api/getTicketEvents.php", requestOptions)
         .then(response => response.json())
         .then(result => {
             console.log(result)

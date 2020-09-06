@@ -5,62 +5,35 @@ import eventlistStyles from './eventliststyles';
 import {View, Text, Content, Container} from 'native-base';
 import TicketEventList from './TicketEventList';
 import PickTicketType from './PickTicketType';
-const m = [
-  {
-    id: '1',
-    event_name: 'THE_JOY_MODEL_CHALLENGE',
-    event_id: 'MBE-982508',
-    multi_ticket: 'false',
-    price: '10',
-    status: 'active',
-    categories: [
-      {
-        id: '3',
-        event_id: 'MBE-982508',
-        category_id: 'MBCA-210645',
-        category_name: 'CATEGORY TWO',
-        price: '60',
-        is_sold_out: 'false',
-      },
-    ],
-  },
-  {
-    id: '2',
-    event_name: 'MISS_AGRICULTURE_GHANA',
-    event_id: 'MBE-545028',
-    multi_ticket: 'true',
-    price: '20',
-    status: 'active',
-    categories: [
-      {
-        id: '1',
-        event_id: 'MBE-545028',
-        category_id: 'MBCA-888025',
-        category_name: 'CATEGORY ONE',
-        price: '25',
-        is_sold_out: 'false',
-      },
-      {
-        id: '2',
-        event_id: 'MBE-545028',
-        category_id: 'MBCA-499199',
-        category_name: 'CATEGORY TWO',
-        price: '50',
-        is_sold_out: 'true',
-      },
-    ],
-  },
-];
+import {fetchTicketEvents} from '../ApiCalls/getticketevents';
+import LoadingIcon from '../Components/LoadingIcon';
 
 export default function AnimatedList(props) {
+  const [eventlist, setEventList] = useState([]);
+  const [isloading, setLoading] = useState(false);
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [selectedEvent, setSelectdEvent] = useState('');
+  const [selectedEventCategories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState('');
+  const [price, setPrice] = useState('');
   const fadeAnim = useRef(new Animated.Value(0)).current;
+
+  const getEvents = async () => {
+    setLoading(true);
+    var res = await fetchTicketEvents();
+    if (res.resp_code === 200) {
+      setEventList(res.message);
+    } else {
+      alert(res.message);
+    }
+    setLoading(false);
+  };
   useEffect(() => {
+    getEvents();
     Animated.loop(
       Animated.timing(fadeAnim, {
-      
         toValue: 1,
-        easing: Easing.bezier(0,0.2,0.7,0.9),
+        easing: Easing.bezier(0, 0.2, 0.7, 0.9),
         duration: 2000,
       }),
       {
@@ -69,20 +42,32 @@ export default function AnimatedList(props) {
     ).start();
   }, [fadeAnim]);
 
-  const handleClose = t => {
-    if (t === 'ok') {
-      setDialogOpen(false);
-      props.navigation.navigate('ticketspay');
-    } else {
-      setDialogOpen(false);
+  const handleCategorySelection = () => {
+    setDialogOpen(false);
+    if (selectedCategory === '') {
+      return;
     }
+    props.navigation.navigate('ticketspay', {
+      eventid: selectedEvent,
+      catid: selectedCategory,
+      price: price,
+    });
   };
-  const goToPayment = i => {
-    if (m[i].multi_ticket === 'true') {
+  const handleClose = () => {
+    setDialogOpen(false);
+  };
+  const goToPayment = item => {
+    if (eventlist[item].multi_ticket === 'true') {
       //display dialog
+      setSelectdEvent(eventlist[item].event_id);
+      setCategories(eventlist[item].categories);
       setDialogOpen(true);
     } else {
-      props.navigation.navigate('ticketspay');
+      props.navigation.navigate('ticketspay', {
+        eventid: eventlist[item].event_id,
+        catid: 'none',
+        price: eventlist[item].price,
+      });
     }
   };
   return (
@@ -92,8 +77,8 @@ export default function AnimatedList(props) {
           ([eventlistStyles.view1],
           {
             backgroundColor: fadeAnim.interpolate({
-              inputRange: [0, 0.5,1],
-              outputRange: ['#D71182', '#d71181c4' ,'#f339a3'],
+              inputRange: [0, 0.5, 1],
+              outputRange: ['#D71182', '#d71181c4', '#f339a3'],
             }),
             flex: 1,
             height: 200,
@@ -106,22 +91,48 @@ export default function AnimatedList(props) {
       </Animated.View>
       <View style={[eventlistStyles.view2]}>
         <Container>
+          {isloading && (
+            <View
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: '100%',
+              }}>
+              <LoadingIcon />
+            </View>
+          )}
           <Content>
-            {m.map((item, i) => {
-              return (
-                <TicketEventList
-                  index={i}
-                  title={item.event_name}
-                  nav={goToPayment}
-                />
-              );
-            })}
+            {eventlist.length === 0
+              ? null
+              : eventlist.map((item, i) => {
+                  return (
+                    <TicketEventList
+                      key={item.event_id}
+                      index={i}
+                      eventid={item.event_id}
+                      title={item.event_name}
+                      nav={goToPayment}
+                    />
+                  );
+                })}
           </Content>
         </Container>
         <View style={[eventlistStyles.btnView]} />
       </View>
-      <PickTicketType visible={dialogOpen} close={handleClose} />
-      {/*  </View> */}
+    {/*   <View style={[eventlistStyles.view1]}>
+
+      </View> */}
+      <PickTicketType
+        setprice={setPrice}
+        setcategory={setSelectedCategory}
+        selected={selectedCategory}
+        categories={selectedEventCategories}
+        visible={dialogOpen}
+        close={handleClose}
+        saveselection={handleCategorySelection}
+      />
+    
     </View>
   );
 }

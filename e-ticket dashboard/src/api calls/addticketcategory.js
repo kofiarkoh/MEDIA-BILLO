@@ -1,3 +1,5 @@
+import { BASE_URL } from "./baseurl";
+
 const createTicketCategory = async(event_id,categories)=>{
     var myHeaders = new Headers();
 myHeaders.append("Content-Type", "application/json");
@@ -14,7 +16,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-return fetch("http://admin.mediabillo.net/tdb/dashboardbackend/api/createTicketCategory.php", requestOptions)
+return fetch( BASE_URL+"/api/createTicketCategory.php", requestOptions)
   .then(response => response.json())
   .then(result => {
       console.log(result)
@@ -35,7 +37,7 @@ const updateTicketCategory = async (catId,name,price,soldout) => {
     redirect: "follow",
   };
 
- return fetch("http://admin.mediabillo.net/tdb/dashboardbackend/api/editTicketCategory.php", requestOptions)
+ return fetch(BASE_URL+"/api/editTicketCategory.php", requestOptions)
     .then((response) => response.json())
     .then((result) => {
       console.log(result);

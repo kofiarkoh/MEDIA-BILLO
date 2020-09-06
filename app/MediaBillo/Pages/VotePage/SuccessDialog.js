@@ -23,6 +23,7 @@ export default class SuccessDialog extends React.Component {
       //this.props.navigator.navigate('Polls')
 
       this.props.otpcall(this.state.otp)
+      this.setState({otp:''})
     });
   };
 

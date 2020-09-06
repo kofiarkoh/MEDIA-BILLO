@@ -1,3 +1,5 @@
+import { BASE_URL } from "./baseurl";
+
 const getHomeStatistics = async () => {
   var requestOptions = {
     method: "GET",
@@ -5,7 +7,7 @@ const getHomeStatistics = async () => {
   };
 
   return fetch(
-    "http://admin.mediabillo.net/tdb/dashboardbackend/api/homestatistics.php",
+    BASE_URL+"/api/homestatistics.php",
     requestOptions
   )
     .then((response) => response.json())
@@ -24,7 +26,7 @@ const fetchCategoryStats = ()=>{
         redirect: 'follow'
       };
       
-  return    fetch("http://admin.mediabillo.net/tdb/dashboardbackend/api/getTicketCategoriesSummary.php", requestOptions)
+  return    fetch(BASE_URL+"/api/getTicketCategoriesSummary.php", requestOptions)
         .then(response => response.json())
         .then(result => {
             console.log(result) 
@@ -42,7 +44,7 @@ const updateTicketSellingStatus = (eventid,status )=>{
     redirect: 'follow'
   };
   
-return  fetch(`http://admin.mediabillo.net/tdb/dashboardbackend/api/ticketsellingstatus.php?id=${eventid}&status=${status}`, requestOptions)
+return  fetch(BASE_URL+`/api/ticketsellingstatus.php?id=${eventid}&status=${status}`, requestOptions)
     .then(response => response.json())
     .then(result => result)
     .catch((error) => {

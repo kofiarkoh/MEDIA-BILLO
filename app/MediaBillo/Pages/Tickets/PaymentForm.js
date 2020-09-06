@@ -1,14 +1,62 @@
 import { Container, Content, Form, Item, Text, View } from 'native-base';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Animated, Easing, StyleSheet } from 'react-native';
 import { Input } from 'react-native-elements';
 import { Button, RadioButton } from 'react-native-paper';
 import eventlistStyles from './eventliststyles';
+import {sendTicketOtp, sendOtpConfirmation } from '../ApiCalls/getticketevents'
+import SuccessDialog from '../VotePage/SuccessDialog';
 
 
-export default function PaymentForm() {
+export default function PaymentForm(props) {
   const fadeAnim = useRef(new Animated.Value(0)).current;
+  const [phone,setPhone] = useState('0241585537')
+  const [ntwk,setNtwk]  = useState('MTN')
+  const [numtickets,setTickets] = useState('9')
+  const [isloading,setLoading] = useState(false)
+  const dialogRef = useRef()
+
+  const getData =async ()=>{
+     //fetches the users selections from the route
+     console.clear()
+     const params = props.route.params
+     let data = {
+       phone:phone,eventid:params.eventid,
+       catId:params.catId,
+       ntwk:ntwk,
+       numTickets:numtickets,
+       price:params.price
+     }
+     setLoading(true)
+    var res = await sendTicketOtp(data)
+
+     if(res.resp_code === 200) {
+       //show the otp dialog
+       dialogRef.current._showDialog()
+
+     }
+     else{
+      // alert('An error occured,please try again...')
+        alert(res.message)
+     }
+     setLoading(false)
+  }
+
+
+  const submitOtp = async (otp)=>{
+    setLoading(true)
+    var res = await sendOtpConfirmation(otp)
+     if(res.resp_code === 200) {
+     alert('Please wait for prompt to complete payment')
+
+     }
+     else{
+       alert(res.message)
+     }
+     setLoading(false)
+  }
   useEffect(() => {
+   
     Animated.timing(fadeAnim, {
       toValue: 1,
       easing: Easing.elastic(),
@@ -38,14 +86,15 @@ export default function PaymentForm() {
         </View>
         <View style={[eventlistStyles.view2]}>
         <Content>
-          <Container>
+          <Container style={{backgroundColor:'rgb(255, 253, 253)'}}>
             <Form>
               <Item style={[styles.textInput]}>
-                <Input label="Enter phone number" />
+                <Input onChangeText={(t)=>setPhone(t)} value={phone} label="Enter phone number" keyboardType='phone-pad' />
               </Item>
               <Text style={[styles.ntwkHeading]}>Select Service Provider</Text>
-              <RadioButton.Group>
+              <RadioButton.Group value={ntwk}>
                 <Item
+                  onPress={()=>setNtwk('MTN')}
                   style={{
                     borderColor: 'white',
                     marginBottom: 10,
@@ -53,34 +102,36 @@ export default function PaymentForm() {
                   }}
                   underline={false}
                   success={true}>
-                  <RadioButton />
+                  <RadioButton value='MTN' color='#D71182'/>
                   <Text>MTN</Text>
                 </Item>
                 <Item
+                onPress={()=>setNtwk('VOD')}
                   style={{
                     borderColor: 'white',
                     marginBottom: 10,
                     marginLeft: 20,
                   }}
                   underline={false}>
-                  <RadioButton />
+                  <RadioButton color='#D71182' value='VOD' />
                   <Text>VODAFONE</Text>
                 </Item>
                 <Item
+                onPress={()=>setNtwk('TIG')}
                   style={{
                     borderColor: 'white',
                     marginBottom: 10,
                     marginLeft: 20,
                   }}
                   underline={false}>
-                  <RadioButton />
+                  <RadioButton value='TIG' color='#D71182' />
                   <Text>AIRTEL-TIGO</Text>
                 </Item>
               </RadioButton.Group>
               <Item style={[styles.textInput2]}>
-                <Input label="Enter number of tickets to purchase" />
+                <Input keyboardType='numeric' value={numtickets} onChangeText={(e)=>setTickets(Math.ceil(e))} label="Enter number of tickets to purchase" />
               </Item>
-              <Button style={[styles.btn]}>
+              <Button loading={isloading} disabled={isloading} onPress={()=>getData()} style={[styles.btn]}>
                   <Text style={{color:'white'}}>PAY</Text>
               </Button>
             </Form>
@@ -89,6 +140,7 @@ export default function PaymentForm() {
           </Container>
           </Content>
           <View style={[eventlistStyles.btnView]} />
+          <SuccessDialog ref={dialogRef}otpcall={submitOtp}/>
         </View>
      
     </Animated.View>

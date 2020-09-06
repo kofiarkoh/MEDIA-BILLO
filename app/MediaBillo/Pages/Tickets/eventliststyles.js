@@ -8,8 +8,8 @@ const eventlistStyles = StyleSheet.create({
     fontFamily: 'roboto',
    // backgroundColor: 'red',
     top:'60%',
-    left:'10%'
-    //color:'green',
+    left:'10%',
+    color:'white',
   },
   h2: {
   //  backgroundColor: 'blue',

@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "../../e-ticket dashboard/src"
+		},
+		{
+			"path": "../dashboardbackend"
+		},
+		{
+			"path": ".."
+		}
+	],
+	"settings": {}
+}

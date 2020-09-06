@@ -1,10 +1,12 @@
+import { BASE_URL } from "./baseurl";
+
 export const verifyTicket = async (id)=>{
     var requestOptions = {
         method: 'GET',
         redirect: 'follow'
       };
       
-  return    fetch("http://admin.mediabillo.net/tdb/dashboardbackend/api/checkticketstatus.php?id="+id, requestOptions)
+  return    fetch(BASE_URL+"/api/checkticketstatus.php?id="+id, requestOptions)
         .then(response => response.json())
         .then(result => result)
         .catch((error) => {
@@ -18,7 +20,7 @@ export const getTransactions = (id)=>{
     redirect: 'follow'
   };
   
- return fetch("http://admin.mediabillo.net/tdb/dashboardbackend/api/gettransactions.php?id="+id, requestOptions)
+ return fetch(BASE_URL+"/api/gettransactions.php?id="+id, requestOptions)
     .then(response => response.json())
     .then(result => result)
     .catch((error) => {

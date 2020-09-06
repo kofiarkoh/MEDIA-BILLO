@@ -17,7 +17,7 @@ const ticketstyles  = StyleSheet.create({
         flex:1
     },
     view1:{
-        flex:4,
+        flex:1,
         backgroundColor:'#D71182',
         justifyContent:'center',
         alignItems:'center',
@@ -37,7 +37,7 @@ const ticketstyles  = StyleSheet.create({
         alignItems:'center' */
     },
     btn:{
-        backgroundColor: '#D71182',
+        backgroundColor: '#00adf1', // '#D71182',
         width:'50%',
         alignSelf:'center',
         color:'white',

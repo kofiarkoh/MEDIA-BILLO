@@ -13,31 +13,25 @@ export default function PickTicketType(props) {
 
           <Form>
             <ScrollView>
-              <RadioButton.Group>
-                <Item
-                  style={{borderColor: '#D71182', marginBottom: 20,marginLeft:0}}
-                  success={false}>
-                  <RadioButton />
-                  <Text style={{color:'whitesmoke'}}>Ticket Category 1 @ GHC49</Text>
-                </Item>
-                <Item
-                  style={{borderColor: '#D71182', marginBottom: 20,marginLeft:0}}
-                  underline={false}>
-                  <RadioButton />
-                  <Text style={{color:'whitesmoke'}}>Ticket Category 1 @ GHC49</Text>
-                </Item>
-                <Item
-                  style={{borderColor: '#D71182', marginBottom: 20,marginLeft:0}}
-                  underline={false}>
-                  <RadioButton />
-                  <Text style={{color:'whitesmoke'}}>Ticket Category 1 @ GHC49</Text>
-                </Item>
-                <Item
-                  style={{borderColor: '#D71182', marginBottom: 20,marginLeft:0}}
-                  underline={false}>
-                  <RadioButton />
-                  <Text style={{color:'whitesmoke'}}>Ticket Category 1 @ GHC49</Text>
-                </Item>
+              <RadioButton.Group value={props.selected} /* onValueChange={(v)=>props.setcategory(v) }*/>
+                {
+                  props.categories.length === 0 ? null :
+                    props.categories.map((category)=>{
+                      return <Item
+                      key={category.category_id}
+                      onPress={()=>{
+                        props.setcategory(category.category_id)
+                        props.setprice(category.price)
+                      }}
+                      style={{borderColor: '#D71182', marginBottom: 20,marginLeft:0}}
+                      success={false}>
+                      <RadioButton color='whitesmoke'  value={category.category_id}/>
+                    <Text style={{color:'whitesmoke'}}>{category.category_name} @ GHC {category.price}</Text>
+                    </Item>
+                    })
+                }
+               
+               
               </RadioButton.Group>
             </ScrollView>
           </Form>
@@ -47,7 +41,7 @@ export default function PickTicketType(props) {
             <Button onPress={()=>props.close('cancel')}>
                 <Text  style={{color:'black'}}>  CANCEL</Text>
                </Button>
-            <Button onPress={()=>props.close('ok')}>
+            <Button onPress={()=>props.saveselection()}>
                 <Text style={{color:'white'}}>PROCEED</Text>
                  </Button>
         </Dialog.Actions>
