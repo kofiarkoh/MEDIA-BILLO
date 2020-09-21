@@ -1,1 +1,0 @@
-sudo npx babel --watch jsbabel --out-dir jsjsx --plugins @babel/plugin-transform-async-to-generator --presets @babel/preset-react

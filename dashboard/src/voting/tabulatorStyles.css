@@ -1,0 +1,43 @@
+ .tabulator-headers{
+    color: rgb(136, 136, 136);
+   
+}
+.tabulator{
+    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y:hidden;
+}
+.tabulator-header, .tabulator-col-content{
+    background-color: #ffffff;
+}
+.tabulator-row-odd{
+    background: #ffffff ;
+    color: rgb(12, 11, 11);
+    padding: 5px;
+}
+.tabulator-row-even{
+    background-color:#f7fafc;
+    color: rgb(8, 8, 8);
+    padding: 5px;
+}
+.tabulator .tabulator-footer{
+    background-color: #f6f9fc;
+}
+.success-row{
+    background-color: rgb(0, 174, 255) ;
+    border-radius: 20px;
+    padding: 5px;
+    color: white;
+}
+.failed-row{
+    background-color: rgb(252, 25, 82) ;
+    border-radius: 20px;
+    padding: 5px;
+    color: white;
+}
+.pending-row{
+    background-color: rgb(12, 107, 25) ;
+    border-radius: 20px;
+    padding: 5px;
+    color: white;
+}
