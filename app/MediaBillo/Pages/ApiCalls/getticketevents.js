@@ -1,10 +1,11 @@
+import { TICKET_BASE_URL } from "./app_const";
+
 const fetchTicketEvents = async()=>{
     var requestOptions = {
         method: 'GET',
         redirect: 'follow'
       };
-      var ur1 = 'http://admin.mediabillo.net/tdb/api/ticketevents.php'
-      var ur2 = "http://192.168.8.100:8000/ticketevents.php"
+      var ur1 =TICKET_BASE_URL+'/api/ticketevents.php'// 'http://admin.mediabillo.net/tdb/api/ticketevents.php'
       
       return fetch(ur1, requestOptions)
         .then(response => response.json())
@@ -29,7 +30,7 @@ var requestOptions = {
   body: formdata,
   redirect: 'follow'
 };
-var promise = Promise.race([fetch("http://admin.mediabillo.net/tdb/api/sendotp.php", requestOptions)
+var promise = Promise.race([fetch( TICKET_BASE_URL+"/api/sendotp.php", requestOptions)
 .then(response => response.json()),
 new Promise((resolve, reject) =>
 setTimeout(() => reject(new Error('Timeout')), 15000)
@@ -44,14 +45,7 @@ return promise.then(result => {
           return {resp_code:500,message:error}
 })
 /* return fetch("http://admin.mediabillo.net/tdb/api/sendotp.php", requestOptions)
-  .then(response => response.json())
-  .then(result => {
-    console.log(result)
-    return result
-  })
-  .catch(error => {console.log('error', error)
-            return {resp_code:500,message:error}
-}) */
+   */
 
 }
 
@@ -61,7 +55,7 @@ const sendOtpConfirmation = async(otp)=>{
     redirect: 'follow'
   };
   
- return fetch("http://admin.mediabillo.net/tdb/api/verifyotp.php?otp="+otp, requestOptions)
+ return fetch(TICKET_BASE_URL+"/api/verifyotp.php?otp="+otp, requestOptions)
     .then(response => response.json())
     .then(result => {
       console.log(result)

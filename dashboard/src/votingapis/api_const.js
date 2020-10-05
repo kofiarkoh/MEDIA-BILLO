@@ -1,8 +1,8 @@
 import swal from "sweetalert"
 
-var ur = 'http://admin.mediabillo.net/adminresources'
+var ur = 'http://admin.mediabillo.net/backend/voting'
 export const AUTH_TOKEN = "Bearer "+sessionStorage.getItem('token')
-export const VOTE_BASE_URL =  'http://192.168.8.100:4000/voting'
+export const VOTE_BASE_URL = ur // 'http://192.168.8.100:4000/voting'
 export const statusHandler = (response)=>{
     if(response.status !== 200) {
         ///throw new Error('Network response was not ok');

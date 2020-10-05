@@ -1,6 +1,7 @@
+import { VOTE_BASE_URL } from "./app_const";
 
 const otpVerification = async otp => {
-    var url_main = 'http://www.admin.mediabillo.net/appbackend/VoteRecording/otp_verification.php';
+    var url_main = VOTE_BASE_URL+'/VoteRecording/otp_verification.php'// 'http://www.admin.mediabillo.net/appbackend/VoteRecording/otp_verification.php';
     const formData = new FormData();
     formData.append('otp', otp)
     var data = {"otp":otp}

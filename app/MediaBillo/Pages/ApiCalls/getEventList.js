@@ -1,22 +1,16 @@
+import { VOTE_BASE_URL } from "./app_const";
+
 const getEventList = async () => {
-  var url_main = 'https://www.admin.mediabillo.net/appbackend/getEventList.php';
+  var url_main = VOTE_BASE_URL+ '/getEventList.php'//'https://www.admin.mediabillo.net/appbackend/getEventList.php';
    var res = null;
 await   timeout(15000,fetch(url_main)).then(function(response) {
     // process response
-   
     res = response.json()
   }).catch(function(error) {
-    // might be a timeout error
-    //alert(error)
     res = null
   })
- /*  try {
-    var response = await fetch(url_main);
-    res = response.json();
-  } catch (error) {
-    res = null;
-  } */
-  return res;
+ 
+  return res; 
 };
 async function timeout(ms, promise) {
   
