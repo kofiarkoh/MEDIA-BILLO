@@ -18,6 +18,7 @@ export default function TicketsLanding(props) {
     Animated.timing(slideUpAnim, {
       toValue: 1,
       duration: 1000,
+      useNativeDriver:false
     }).start();
   };
   const checkFocus = () => {

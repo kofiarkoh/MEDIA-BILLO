@@ -21,13 +21,7 @@ import {
     Right,
     View,
   } from 'native-base';
-/* import {
-  Card,
-  CardTitle,
-  CardContent,
-  CardAction,
-  CardImage,
-} from 'react-native-material-cards'; */
+
 function TicketEventCard(props) {
   return (
           <Content style={[styles.carditem]}>

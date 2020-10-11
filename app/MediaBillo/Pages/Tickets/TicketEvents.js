@@ -35,8 +35,10 @@ export default function TicketEvents(props) {
         toValue: 1,
         easing: Easing.bezier(0, 0.2, 0.7, 0.9),
         duration: 2000,
+        useNativeDriver : false
       }),
       {
+        
         iterations: -1,
       },
     ).start();

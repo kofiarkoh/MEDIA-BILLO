@@ -111,14 +111,14 @@ class Polls extends Component {
               {this.state.loading ? <LoadingIcon /> : null}
               {/*  <ScrollView style={{height: '100%'}}> */}
               {this.state.polls.map(item => {
-                return (
-                  <PollCardItem key={item.id} 
+                console.log('e item')
+                return    <PollCardItem key={item.id} 
                   ended = {item.is_ended}
                   eventname={item.event_name} 
                   imgpath={item.image_url} 
                   navigate={this.handleNavigation}/>
                 
-                );
+                
               })}
               {/*  </ScrollView> */}
             </Content>
@@ -131,7 +131,8 @@ class Polls extends Component {
             position="bottomRight"
             dis
             onPress={() => {
-              this.refresList();
+             
+             this.refresList();
             }}>
             <Icon name="refresh" />
           </Fab>
@@ -154,7 +155,8 @@ class Polls extends Component {
               position="bottomRight"
               dis
               onPress={() => {
-                this.refresList();
+              
+                this.refresList(); 
               }}>
               <Icon name="refresh" />
             </Fab>

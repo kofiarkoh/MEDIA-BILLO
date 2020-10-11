@@ -15,7 +15,7 @@
     "@react-navigation/material-bottom-tabs": "^5.0.7",
     "@react-navigation/native": "^5.0.7",
     "@react-navigation/stack": "^5.0.9",
-    "native-base": "^2.13.8",
+    "native-base": "^2.13.14",
     "radio-button-react-native": "^1.1.6",
     "react": "16.13.1",
     "react-native": "0.63.3",
