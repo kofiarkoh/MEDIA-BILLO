@@ -28,16 +28,6 @@ $response = array(
     'message'=>"record succesful"
 );
 
-$data = array(
-    'phone'=>$phone_number,
-    'amount'=> number_format((float)$votes*0.6, 2, '.', ''),
-    'trans_id'=>$trans_id,
-    'network'=>$network,
-    'voucher'=>$voucher_code
-    );
-        require('./paymentRequest.php');
-
-  // executeRequest(json_encode($data));
 //echo json_encode($data);
 }
 catch(PDOException $e) {
@@ -47,7 +37,3 @@ catch(PDOException $e) {
     );
     echo json_encode($response);
 }
-
-
-
-?>

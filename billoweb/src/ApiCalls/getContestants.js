@@ -1,10 +1,10 @@
+import {VOTE_BASE_URL} from './values'
 var result = ""
 const getContestants = async eventName => {
   var formdata = new FormData()
 
   formdata.append("event_name", eventName)
-  var url_main =
-    "https://www.admin.mediabillo.net/appbackend/getEventContestants.php"
+  var url_main = VOTE_BASE_URL+  "/getEventContestants.php"
 
   console.log("fetching them "+eventName)
   await timeout(

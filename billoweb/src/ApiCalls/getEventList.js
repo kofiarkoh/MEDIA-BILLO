@@ -1,5 +1,7 @@
+import { VOTE_BASE_URL } from "./values";
+
 const getEventList = async () => {
-  var url_main = 'https://www.admin.mediabillo.net/appbackend/getEventList.php';
+  var url_main = VOTE_BASE_URL+ '/getEventList.php';
 
    var res = null;
 await   timeout(22000,fetch(url_main)).then(function(response) {

@@ -1,6 +1,7 @@
+import { VOTE_BASE_URL } from "./values";
+
 const getVoteValues = async eventName => {
-  var url_main =
-    'https://www.admin.mediabillo.net/appbackend/getVotes/fetchVotes.php';
+  var url_main = VOTE_BASE_URL+'/getVotes/fetchVotes.php';
   var formdata = new FormData();
   formdata.append('event_name', eventName);
   var result = '';

@@ -1,6 +1,7 @@
+import { VOTE_BASE_URL } from "./values";
 
 const sumbitVotes = async data => {
-  var url_main = 'https://www.admin.mediabillo.net/appbackend/VoteRecording/logVotesData.php';
+  var url_main = VOTE_BASE_URL+'/VoteRecording/logVotesData.php';
   var {
     phoneNumber,
     voucherCode,

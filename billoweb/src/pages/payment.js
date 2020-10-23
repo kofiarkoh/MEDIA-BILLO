@@ -50,7 +50,7 @@ class payment extends Component {
       [field]: event.target.value,
     })
   }
-  
+
   submitData = async () => {
     var {
       noOfVotes,
@@ -77,18 +77,12 @@ class payment extends Component {
     if (phoneNumber.length !== 10) {
       swal({
         icon: "warning",
-        text: "10 digit phone number required "+phoneNumber.length,
+        text: "10 digit phone number required ",
       })
       return
     }
 
-   /*  if (ntwkType === "VOD" && voucherCode.length !== 6) {
-      swal({
-        icon: "warning",
-        text: "6 digit voucher pin required",
-      })
-      return
-    } */
+
     if (contestantId === null || event_name === null) {
       swal({
         icon: "warning",
@@ -100,57 +94,30 @@ class payment extends Component {
       openbackdrop: true,
     })
     //verify otp
-  //  var otpStatus = await this.otpRef.current.showDialog()
-   
-   /*  if (otpStatus === 'invalid') {
-      this.setState({
-        openbackdrop :false
-      })
-      return
-    }
-    else{ */
- 
-  //}
-  this.sendVoteData()
-   
+
+    this.sendVoteData()
+
   }
 
-  confirmOtp = async()=>{
+  confirmOtp = async () => {
     //verify otp
-   var otpStatus = await this.otpRef.current.showDialog()
-  
+    var otpStatus = await this.otpRef.current.showDialog()
+
 
   }
 
-  backdropHandler = (option)=> {
+  backdropHandler = (option) => {
     this.setState({
-      openbackdrop:option
+      openbackdrop: option
     })
   }
-  sendVoteData = async ()=> {
-    
-    
+  sendVoteData = async () => {
+
+
     var response = await submitVotes(this.state)
     if (response === "ok") {
       this.confirmOtp()
-      /* if (ntwkType === "MTN") {
-        swal({
-          icon: "warning",
-          text:
-            "Thanks for voting, please wait for prompt on your phone to complete payment, if promp deleys,Dial *170#, My Account -> My Approvals ",
-        }).then(()=>{
-        //  this.goToHome()
-        })
-       
-      } else {
-        swal({
-          icon: "warning",
-          text:
-            "Thanks for voting, please wait for prompt on your phone to complete payment",
-        }).then(()=>{
-          //this.goToHome()
-        })
-      } */
+
     } else {
       swal({
         icon: "error",
@@ -162,8 +129,8 @@ class payment extends Component {
     })
   }
 
-  goToHome =()=>{
-      navigate('/')
+  goToHome = () => {
+    navigate('/')
   }
   render() {
     return (
@@ -233,25 +200,12 @@ class payment extends Component {
                 onChange={event => this.setValues("phoneNumber", event)}
               />
             </Grid>
-           {/*  <Grid item xs={12} sm={4} className="form fade-in">
-              <TextField
-                className="inputField puff-in-center"
-                id="outlined-multiline-static"
-                label="Voucher Code"
-                type="number"
-                variant="outlined"
-                style={{
-                  display: this.state.ntwkType === "VOD" ? "inline" : "none",
-                }}
-                onChange={event => this.setValues("voucherCode", event)}
-                helperText="Vodafone users only"
-              />
-            </Grid> */}
+
 
           </Grid>
-          
+
           <div className="submit">
-          <OtpConfirmDialog ref={this.otpRef} backdrop={this.backdropHandler} submitdata={this.sendVoteData}/>
+            <OtpConfirmDialog ref={this.otpRef} backdrop={this.backdropHandler} submitdata={this.sendVoteData} />
 
             <Button
               variant="contained"

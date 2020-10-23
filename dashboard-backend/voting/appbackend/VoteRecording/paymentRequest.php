@@ -1,13 +1,5 @@
 <?php
 
-
-/*
-$data = array(
-    "service_id"=> $service_id,
-    "trans_type"=>"BLC",
-    'ts'=>date('Y-m-d H:i:s')
-);
-*/
 function executeRequest($data) {
      $service_id =571;
     $payload = json_decode($data);
@@ -71,8 +63,3 @@ $secrete_key = 'hja3WVEdB5bAQWYhhi2dPzTVx3Ppv9ydlJooZQU3sN6/MF56vZTipp7VtMScwfZZ
     curl_close($ch); 
   
 }
-
-// Submit the POST request
-
-// Close cURL session handle
-?>

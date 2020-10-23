@@ -36,7 +36,7 @@ class pickcontestant extends Component {
       eventname: sessionStorage.getItem("eventname"),
     })
     var data = await getContestants(sessionStorage.getItem("eventname"))
-    
+    console.log(data)
     this.setState({
       contestants: data,
       event_name: eventName,

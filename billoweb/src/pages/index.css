@@ -18,6 +18,7 @@
 .pollCard {
   margin: 10px;
   
+  
 }
 .grid-item{
   align-self: center;
@@ -40,6 +41,8 @@
   background: linear-gradient(293deg, #00adf1 90%, #025170 66%);
   background-repeat: repeat; 
   color: whitesmoke;
+  height: 90px;
+  text-align: center;
 }
 .fab {
   position: fixed;
