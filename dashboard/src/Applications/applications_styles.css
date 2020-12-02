@@ -1,0 +1,62 @@
+.dsa{
+    background: linear-gradient(87deg, #11cdef 0, #1171ef 100%) !important;
+
+}
+.applicant-photo{
+    width: 100%;
+    
+    text-align: center;
+}
+.applicant-photo i{
+    background-color: #1171ef;
+    text-align: center;
+    border-radius: 50%;
+    width: 130px;
+    height: 130px;
+    color: whitesmoke;
+}
+li{
+    list-style-type: none;
+    margin-bottom: 10px;
+    font-size:20px;
+}
+.application-icon{
+   color: #748497; 
+}
+
+i {
+   
+}
+span{
+    margin-left: 5px;
+
+    color: #27303b; 
+}
+.pending-s{
+    background-color: rgb(87, 133, 87);
+    padding: 5px;
+    color: white;
+    border-radius: 10px;
+}
+.approved-s{
+    background-color: rgb(6, 73, 218);
+    padding: 5px;
+    color: white;
+    border-radius: 10px;
+}
+.failed-s{
+    background-color: rgb(255, 28, 28);
+    padding: 5px;
+    color: white;
+    border-radius: 10px;
+}
+.applicant-data div{
+    margin-bottom: 10px;
+
+}
+.sd{
+    background: indianred;
+}
+.fs{
+    background-color: #1171ef;
+}

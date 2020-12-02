@@ -1,11 +1,10 @@
 import { verifyTransaction } from "api calls/trans_status";
-import React, { useState } from "react";
+import React from "react";
 import { ReactTabulator } from "react-tabulator";
 import "react-tabulator/lib/css/tabulator.min.css";
 import "react-tabulator/lib/styles.css"; // required styles
 import { sweetAlertMsg } from "votingapis/api_const";
 import "./tabulatorStyles.css";
-import Loading from "components/Loaders/Loading";
 
 export default function VoteTransactionsTable(props) {
 //  const [isloading, props.setload] = useState(false);

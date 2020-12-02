@@ -115,7 +115,7 @@ class Index extends React.Component {
                     
                     eventstats.map((item)=>{
                    return   <tr key={item.event_id}>
-                      <th scope="row">{item.event_name}</th>
+                      <th scope="row">{item.event_name.replace(/_/g,' ')}</th>
                     <td className='text-center'>{item.multi_tickers === 'true' ? '-' : item.price}</td>
                     <td className='text-center'>{item.tickets_sold}</td>
                     <td className='text-center'>{item.amount_earned}</td>

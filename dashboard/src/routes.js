@@ -1,12 +1,7 @@
+import { faExchangeAlt } from "@fortawesome/free-solid-svg-icons";
+import ApplicationsIndex from "Applications/ApplicationsIndex";
 import React from "react";
 import Index from "views/Index.js";
-import Profile from "views/examples/Profile.js";
-import Maps from "views/examples/Maps.js";
-import Register from "views/examples/Register.js";
-import Login from "views/examples/Login.js";
-import Tables from "views/examples/Tables.js";
-import Icons from "views/examples/Icons.js";
-import { faExchangeAlt } from "@fortawesome/free-solid-svg-icons";
 
 /* import AddTicketEvent from "./views/AddTicketEvent";
 import AddTicketCategory from "./views/AddTicketCategory";
@@ -180,7 +175,7 @@ var routes = [
   },
   {
     groupname: "Users",
-    id: "menu4",
+    id: "menu5",
     access: ["super-admin", "admin"],
     icon: "ni ni-money-coins text-primary",
     links: [
@@ -193,7 +188,22 @@ var routes = [
         access: ["super-admin", "admin"],
       },
     ]
+  },
+  {
+    groupname: "Applications",
+    id: "menu4",
+    access: ["super-admin", "admin"],
+    icon: "ni ni-money-coins text-primary",
+    links: [
+      {
+        path: "/applications",
+        name: "Applications",
+        icon: faExchangeAlt,
+        component: ApplicationsIndex,
+        layout: "/admin",
+        access: ["super-admin", "admin"],
+      },
+    ]
   }
-  
 ];
 export default routes;

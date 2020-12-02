@@ -10,13 +10,12 @@ import {
   FormGroup,
   Input,
   Label,
-  Row,
+  Row
 } from "reactstrap";
+import { sweetAlertMsg } from "votingapis/api_const";
 import PageHeader from "../components/Headers/PageHeader";
 import Loading from "../components/Loaders/Loading";
 import { addVoteEvent } from "../votingapis/addvoteevent";
-import swal from "sweetalert";
-import { sweetAlertMsg } from "votingapis/api_const";
 
 export default function AddVoteEvent() {
   const [eventName, setEventName] = useState("");

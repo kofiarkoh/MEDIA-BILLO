@@ -1,4 +1,5 @@
 import swal from "sweetalert"
+var localhost = 'http://localhost:3001/voting'
 
 var ur = 'http://admin.mediabillo.net/backend/voting'
 export const AUTH_TOKEN = "Bearer "+sessionStorage.getItem('token')
@@ -10,7 +11,7 @@ export const statusHandler = (response)=>{
        return response.json() // Promise.reject('an error has occured')
 
     }else{
-        console.log('all is well',response.status)
+       
         return response.json()
     }
 }

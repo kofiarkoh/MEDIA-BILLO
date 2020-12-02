@@ -57,7 +57,7 @@ class TicketEvent extends DB
             $events = DB::query("SELECT * from ticket_events LEFT JOIN ticket_categories  ON ticket_events.event_id = ticket_categories.event_id");
             UserResponse::displayMessage(200,$events);
         } catch (\Throwable $th) {
-           UserResponse::displayMessage(500,$th->getMessage());
+           UserResponse::displayMessage(400,$th->getMessage());
         }
     }
     static function getEvents(){

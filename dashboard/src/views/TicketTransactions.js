@@ -1,13 +1,16 @@
-import React,{useState,useEffect} from 'react'
-import PageHeader from '../components/Headers/PageHeader'
-import { getevents } from '../api calls/getevents';
-import Loading from '../components/Loaders/Loading';
-import swal from 'sweetalert'  
-import { Container, Row, Col, Card, CardHeader, CardBody,Form, FormGroup,
-Badge,
-    Input, Label, Table, } from 'reactstrap'
-import { getTransactions, fetchTicketEvents } from '../api calls/verifyticket';
+import React, { useEffect, useState } from 'react';
+import {
+  Badge, Card, CardBody, CardHeader, Col, Container, Form, FormGroup,
+
+  Input, Label, Row,
+
+  Table
+} from 'reactstrap';
+import swal from 'sweetalert';
 import { sweetAlertMsg } from 'votingapis/api_const';
+import { fetchTicketEvents, getTransactions } from '../api calls/verifyticket';
+import PageHeader from '../components/Headers/PageHeader';
+import Loading from '../components/Loaders/Loading';
 
 export default function TicketTransactions() {
     const [eventlist,setEventList] = useState([])

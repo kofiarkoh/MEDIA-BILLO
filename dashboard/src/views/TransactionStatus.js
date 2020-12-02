@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Button,
   Card,
@@ -10,14 +10,11 @@ import {
   FormGroup,
   Input,
   Label,
-  Row,
+  Row
 } from "reactstrap";
-import PageHeader from "../components/Headers/PageHeader";
-import { getevents } from "../api calls/getevents";
-import { createTicketEvent } from "../api calls/addticketevent";
-import Loading from "../components/Loaders/Loading";
-import swal from "sweetalert";
 import { verifyTransaction } from "../api calls/trans_status";
+import PageHeader from "../components/Headers/PageHeader";
+import Loading from "../components/Loaders/Loading";
 
 export default function TransactionStatus() {
   const [isloading, setLoading] = useState(false);

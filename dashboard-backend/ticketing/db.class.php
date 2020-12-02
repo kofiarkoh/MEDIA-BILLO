@@ -22,7 +22,7 @@ class DB {
   public static $dbName = 'media_billo';
   public static $user = 'root';
   public static $password = '';
-  public static $host = 'localhost';
+  public static $host = "127.0.0.1";
   public static $port = 3306; //hhvm complains if this is null
   public static $socket = null;
   public static $encoding = 'latin1';

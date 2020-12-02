@@ -1,33 +1,12 @@
-/*!
 
-=========================================================
-* Argon Dashboard React - v1.1.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-react
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/argon-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-import React from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
-// reactstrap components
-import { Container, Row, Col, Card, CardBody, Form, FormGroup, Label, Input, Button, CardHeader } from "reactstrap";
-
-// core components
-import AuthNavbar from "components/Navbars/AuthNavbar.js";
-import AuthFooter from "components/Footers/AuthFooter.js";
-
-import routes from "routes.js";
 import { UserLogin } from "api calls/auth";
-import { sweetAlertMsg } from "votingapis/api_const";
 import Loading from "components/Loaders/Loading";
+import React from "react";
+import { Redirect, Route, Switch } from "react-router-dom";
+// reactstrap components
+import { Button, Card, CardBody, CardHeader, Col, Container, Form, FormGroup, Input, Label, Row } from "reactstrap";
+import routes from "routes.js";
+import { sweetAlertMsg } from "votingapis/api_const";
 
 class Auth extends React.Component {
   state = {

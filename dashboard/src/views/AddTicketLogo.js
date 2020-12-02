@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import PageHeader from "../components/Headers/PageHeader";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Card,
@@ -11,14 +10,14 @@ import {
   FormGroup,
   Input,
   Label,
-  Row,
+  Row
 } from "reactstrap";
-import { getevents, getTicketEvents } from "../api calls/getevents";
-import { createTicketEvent } from "../api calls/addticketevent";
-import Loading from "../components/Loaders/Loading";
 import swal from "sweetalert";
-import { uploadPhoto } from "../api calls/uploadphoto";
 import { sweetAlertMsg } from "votingapis/api_const";
+import { getTicketEvents } from "../api calls/getevents";
+import { uploadPhoto } from "../api calls/uploadphoto";
+import PageHeader from "../components/Headers/PageHeader";
+import Loading from "../components/Loaders/Loading";
 
 export default function AddTicketLogo() {
   const [eventlist, setEventList] = useState([]);
