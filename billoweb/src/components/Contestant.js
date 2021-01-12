@@ -46,7 +46,9 @@ class Contestant extends Component {
                 src={this.props.imgurl}
               />
               <CardContent className='card-content'> 
-               {this.props.name}
+               {this.props.name} 
+               <br/>
+               <span className='votes'> ({this.props.votes} votes) </span>
                </CardContent> 
             </CardActionArea>
           </Card>

@@ -10,7 +10,7 @@ if (!empty($_POST['event_name'])) {
     $event_name = $_POST['event_name'];
     $id = $_POST['id']; //id of contestant
     $error_characters = [' ', '\n'];
-    $character_replace = ['_', ' '];
+    $character_replace = ['_', ''];
     $event_table = trim(strtoupper(str_replace($error_characters, $character_replace, $event_name)));
     //check if file exist
     if(isset($_FILES['file']) !== false) {    
@@ -19,10 +19,10 @@ if (!empty($_POST['event_name'])) {
         $file = $_FILES['file']['tmp_name'];
 
         $file_name = $_FILES['file']['name'];
-
+        $file_name = str_replace(' ','_',$file_name);
         try {
             $img_path = "./Images/" . $file_name;
-            $path_db = '/Images/' . $file_name;
+            $path_db = 'http://admin.mediabillo.net/backend/voting/Images/' . $file_name;
             move_uploaded_file($file, $img_path);
 
             $event_staus = 'inactive';

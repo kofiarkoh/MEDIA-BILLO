@@ -36,7 +36,7 @@ class pickcontestant extends Component {
       eventname: sessionStorage.getItem("eventname"),
     })
     var data = await getContestants(sessionStorage.getItem("eventname"))
-    console.log(data)
+  //  console.log(data)
     this.setState({
       contestants: data,
       event_name: eventName,
@@ -99,6 +99,7 @@ class pickcontestant extends Component {
                     key={item.id}
                     name={item.contestant_name}
                     id={item.id}
+                    votes={item.votes}
                     imgurl={`${item.image_path}`}
                     click={this.setContestant}
                     showloading={this.showProgressbar}

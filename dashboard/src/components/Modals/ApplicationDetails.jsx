@@ -37,7 +37,7 @@ export default function ApplicationDetails(props) {
 
         // console.log(cat_name,cat_price,sold_out)
     }
-    const { project_name, applicant_name, email, phone, location, height, age, status } = props.applicant
+    const { project_name, applicant_name, email, phone, location, height, age, status ,img_path} = props.applicant
     return (
         <Modal isOpen={props.open} className='dsa'>
             <ModalHeader> <br />
@@ -46,7 +46,8 @@ export default function ApplicationDetails(props) {
             </ModalHeader>
             <ModalBody>
                 <div className='applicant-photo'>
-                    <i className="application-icon fas fa-user" style={{ fontSize: '100px' }}></i>
+                    {/* <i className="application-icon fas fa-user" style={{ fontSize: '100px' }}></i> */}
+                    <img className="application-icon " src={img_path} alt="" srcset=""/>
 
                 </div>
                 <div className="container">
