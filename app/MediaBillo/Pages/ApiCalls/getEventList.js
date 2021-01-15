@@ -3,7 +3,7 @@ import { VOTE_BASE_URL } from "./app_const";
 const getEventList = async () => {
   var url_main = VOTE_BASE_URL+ '/getEventList.php'//'https://www.admin.mediabillo.net/appbackend/getEventList.php';
    var res = null;
-await   timeout(15000,fetch(url_main)).then(function(response) {
+await   timeout(30000,fetch(url_main)).then(function(response) {
     // process response
     res = response.json()
   }).catch(function(error) {

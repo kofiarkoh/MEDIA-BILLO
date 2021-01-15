@@ -1,9 +1,9 @@
 import { VOTE_BASE_URL } from "./app_const";
 
 const sumbitVotes = async data => {
-  var url1 = 'http://192.168.8.100:5000/VoteRecording/getVotes.php';
+  
 
-  var url_main = VOTE_BASE_URL + '/VoteRecording/logVotesData.php' // 'https://www.admin.mediabillo.net/appbackend/VoteRecording/logVotesData.php';
+  var url_main = VOTE_BASE_URL + '/VoteRecording/logVotesData.php' 
   var {
     phoneNumber,
     voucherCode,
@@ -34,16 +34,7 @@ const sumbitVotes = async data => {
     // might be a timeout error
     alert("An error has occured")
   })
-  /* try {
-    var response = await fetch(url_main, {
-      method: 'POST',
-      body: JSON.stringify(voteData),
-    });
-   // console.log(response.text());
-    result = 'ok'; //response.json()
-  } catch (error) {
-    alert("error"+error)
-  } */
+ 
   return result;
 };
 function timeout(ms, promise) {

@@ -45,6 +45,7 @@ clearSelection = ()=>[
     this.props.navigation.navigate('Payment', {
       eventName: this.state.event_name,
       id: this.state.seletectedContestant,
+      price :this.props.route.params.charge
     });
   };
 
@@ -57,10 +58,10 @@ clearSelection = ()=>[
   };
   componentDidMount = async () => {
     const eventName = this.props.route.params.eventName;
-    console.log('load contestant for ', eventName);
+   
     this.setState({loading: true});
     var data = await getContestants(eventName);
-    console.log(data);
+  //  console.log(data);
     this.setState({
       contestants: data,
       event_name: eventName,

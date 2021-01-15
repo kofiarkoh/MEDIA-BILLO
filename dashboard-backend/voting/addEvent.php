@@ -1,4 +1,9 @@
 <?php
+//error_reporting(0);
+/* header('Content-type: application/json');
+
+header('Access-Control-Allow-Origin: *'); */
+//require('./verify_login.php');
 
 require ('./cors_headers.php');
 if (!isset( $_POST['event_name'])){
@@ -12,6 +17,7 @@ $error_characters = [' ', '\n'];
 $character_replace = ['_', ' '];
 $file = $_FILES['file']['tmp_name'];
 $file_name = $_FILES['file']['name'];
+$file_name = str_replace([' ','  ','  '],'_',$file_name);
 $table = trim(strtoupper(str_replace($error_characters, $character_replace, $event_name)));
 $status = 0;
 $message = '';
@@ -32,7 +38,7 @@ if ($event_existence == true) {
     $res = $connection->exec($sql);
     if ($res !== false) {
         $img_path = "./Images/EventImages/" . $file_name;
-        $path_db = "http://admin.mediabillo.net/adminresources/Images/EventImages/" . $file_name; 
+        $path_db = "http://admin.mediabillo.net/backend/voting/Images/EventImages/" . $file_name; 
        move_uploaded_file($file, $img_path);
 
         $event_staus = 'inactive';

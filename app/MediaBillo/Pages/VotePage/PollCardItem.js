@@ -28,7 +28,7 @@ cardClicked = () =>{
     alert('You are unable to vote now because voting has ended for this event')
   } else{
     
-    this.props.navigate(this.props.eventname)
+    this.props.navigate(this.props.eventname,this.props.price)
 
   }
 }

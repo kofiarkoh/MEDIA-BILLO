@@ -44,13 +44,14 @@ class Polls extends Component {
       loading: false,
     };
   }
-  handleNavigation = event_name => {
+  handleNavigation = (event_name,charge) => {
     //console.log('event name is ',event_name)
-    this.props.navigation.navigate('CastVote', {eventName: event_name});
+    this.props.navigation.navigate('CastVote', {eventName: event_name,charge:charge});
   };
   refresList = async () => {
     this.setState({loading: true});
     var data = await getEventList();
+
     var response = data;
     console.log('datais ', data);
     // alert(response)
@@ -116,6 +117,7 @@ class Polls extends Component {
                   ended = {item.is_ended}
                   eventname={item.event_name} 
                   imgpath={item.image_url} 
+                  price={item.price}
                   navigate={this.handleNavigation}/>
                 
                 

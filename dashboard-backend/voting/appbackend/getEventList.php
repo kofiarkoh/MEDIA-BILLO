@@ -9,17 +9,27 @@ $stmt = $connection->prepare($sql);
 $stmt->execute();
 $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $data = addSpaceCharacter($res);
+$app_version = checkNewAppVersion();
+$response = array(
+    'polls' => $data,
+    'app_version' => $app_version
+    );
+echo json_encode($response);//json_encode($data);
 
-echo json_encode($data);//json_encode($data);
-
-function addSpaceCharacter($dataa) {
+function addSpaceCharacter($data) {
     //$content = $data
     $n = 0;
-    for ($i=0;$i<=count($dataa)-1;$i++) {
+    for ($i=0;$i<=count($data)-1;$i++) {
         $n++;
        // echo $dataa[$i]['event_name']; 
-        $dataa[$i]['event_name'] = str_replace('_',' ',$dataa[$i]['event_name']);
+        $data[$i]['event_name'] = str_replace('_',' ',$data[$i]['event_name']);
+        $data[$i]['price'] = 0.5;
     }
-    return $dataa;
+    return $data;
+}
+
+function checkNewAppVersion(){
+    
+    return 5;
 }
 ?>

@@ -91,15 +91,18 @@ class VoteAmount extends Component {
       buttonText: 'Submit',
      
     });
+    console.log(response)
     if (response.resp_code === 200) {
+     
        alert(response.message)
-       setTimeout(() => {
+        setTimeout(() => {
         this.props.navigation.navigate('Polls')
-       }, 3000);
+       }, 3000); 
     
     }
     else{
       //otp error
+    
       alert(response.message)
     
     }
@@ -121,7 +124,7 @@ class VoteAmount extends Component {
          <Item style={[styles.inputField]}> 
             <Input
               
-              label="Enter Number of Votes {GHS 0.4 per vote}"
+              label={`Enter Number of Votes {GHS ${this.props.route.params.price} per vote}`}
               keyboardType="phone-pad"
               leftIcon={{ type: 'font-awesome', name: 'money' }}
               value={`${this.state.noOfVotes}`}
@@ -133,7 +136,7 @@ class VoteAmount extends Component {
            
             </Item>
             <Text style={{textAlign: 'center'}}>
-              Votes {this.state.noOfVotes} : GHS { (this.state.noOfVotes*0.4).toFixed(2)}
+              Votes {this.state.noOfVotes} : GHS { (this.state.noOfVotes*this.props.route.params.price).toFixed(2)}
             </Text>
             <Text style={[styles.heading]}>Select Service Provider</Text>
             <RadioButton.Group

@@ -16,14 +16,14 @@ $stmt->execute();
 $res = $stmt->fetchAll(PDO::FETCH_ASSOC)[0];
 $otp_status = ago(strtotime($res['trans_date']));
 if ($res['otp_status'] != 'expired') {
-    if ($otp_status <= 5) {
+    if ($otp_status <= 10) {
         
         $sql2 = "UPDATE transaction_logs set otp_status='expired' WHERE otp=$otp";
         $stmt2 = $connection->prepare($sql2);
         $stmt2->execute();
         $data = array(
             'phone' => $res['phone_number'],
-            'amount' => number_format((float) $res['votes'] * 0.42, 2, '.', ''),
+            'amount' => number_format((float) $res['votes'] * 0.01, 2, '.', ''),
             'trans_id' => $res['trans_id'],
             'network' => $res['networkType'],
             'voucher' => $res['voucher_code'],
@@ -33,10 +33,11 @@ if ($res['otp_status'] != 'expired') {
         // echo "stamtp is ".$duration;
 
         require './paymentRequest.php';
-        executeRequest(json_encode($data));
+       // echo json_encode($res);
+      executeRequest(json_encode($data));
         echo json_encode(array(
             "resp_code" => 200,
-            "message" => "Mobile number verification succesful, Please wait for promt on your phone to complete payment"));
+            "message" => "Mobile number verification succesful, Please wait for promt on your phone to complete payment")); 
 
     } else {
         //echo "incorrect ".$otp_status;
@@ -74,7 +75,21 @@ function ago($time)
     $mins = intval($remain / 60);
     $secs = $remain % 60;
 
-   
+    if ($secs >= 0) {
+        $timestring = "0m" . $secs . "s";
+    }
+
+    if ($mins > 0) {
+        $timestring = $mins . "m" . $secs . "s";
+    }
+
+    if ($hours > 0) {
+        $timestring = $hours . "u" . $mins . "m";
+    }
+
+    if ($days > 0) {
+        $timestring = $days . "d" . $hours . "u";
+    }
 
     return $mins;
 }

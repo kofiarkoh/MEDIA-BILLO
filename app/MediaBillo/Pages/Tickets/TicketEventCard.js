@@ -32,7 +32,7 @@ function TicketEventCard(props) {
         onPress={()=>props.nav(props.index)} >
        
         <Image
-          source={{uri:'http://admin.mediabillo.net/tdb/e-ticket-backend/dashboardbackend/ticketlogos/'+props.eventid+'.jpg'}}
+          source={{uri:'http://admin.mediabillo.net/backend/ticketing/dashboardbackend/ticketlogos/'+props.eventid+'.jpg'}}
           indicator={ProgressBar}
           indicatorProps={{
             size: 80,
