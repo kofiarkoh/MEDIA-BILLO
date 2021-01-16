@@ -29,7 +29,7 @@ import PollCardItem from './PollCardItem';
 import Pollstylesheet from './Pollstylesheet';
 
 const play_store_link = 'https://play.google.com/store/apps/details?id=com.mediabillo'
-const appversion = 4;
+const appversion = 5;
 class Polls extends Component {
   constructor(props) {
     super(props);

@@ -36,6 +36,7 @@ class Polls extends React.Component {
   refresList = async () => {
     this.setState({ loading: true })
     var data = await getEventList()
+    console.log('ds',data)
     var response = data
     // alert(response)
     if (response == null) {
@@ -99,6 +100,8 @@ class Polls extends React.Component {
                   <PollCard
                     className="fade-in"
                     key={item.id}
+                    img={item.image_url}
+                    price={item.price}
                     name={item.event_name}
                     ended={item.is_ended}
                     showloading={this.showProgressbar}

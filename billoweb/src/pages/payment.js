@@ -36,12 +36,14 @@ class payment extends Component {
       openSnackbar: false,
       message: "",
       openbackdrop: false,
+      price : ''
     }
   }
   componentDidMount() {
     this.setState({
       event_name: sessionStorage.getItem("eventname"),
       contestantId: sessionStorage.getItem("contestant"),
+      price: sessionStorage.getItem('price')
     })
   }
   setValues = (field, event) => {
@@ -151,9 +153,19 @@ class payment extends Component {
                 type="number"
                 variant="outlined"
                 onChange={event => this.setValues("noOfVotes", event)}
-                helperText={`GHS ${(this.state.noOfVotes * 0.4).toFixed(
+                helperText={`GHS ${(this.state.noOfVotes * this.state.price).toFixed(
                   2
-                )} (GHS 0.4 per vote)`}
+                )} (GHS ${ this.state.price} per vote)`}
+              />
+            </Grid>
+            <Grid item xs={12} sm={4} className="form">
+              <TextField
+                className="inputField"
+                id="outlined-multiline-static"
+                label="Phone Number"
+                type="number"
+                variant="outlined"
+                onChange={event => this.setValues("phoneNumber", event)}
               />
             </Grid>
             <Grid item xs={12} sm={4} className="form">
@@ -190,16 +202,7 @@ class payment extends Component {
                 </RadioGroup>
               </FormControl>
             </Grid>
-            <Grid item xs={12} sm={4} className="form">
-              <TextField
-                className="inputField"
-                id="outlined-multiline-static"
-                label="Phone Number"
-                type="number"
-                variant="outlined"
-                onChange={event => this.setValues("phoneNumber", event)}
-              />
-            </Grid>
+           
 
 
           </Grid>

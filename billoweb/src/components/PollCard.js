@@ -26,6 +26,7 @@ class PollCard extends Component {
         icon:'warning'
       })
     } else{
+      sessionStorage.setItem('price',this.props.price)
       
       this.props.showloading()
       sessionStorage.setItem('eventname',eventname)
@@ -44,7 +45,7 @@ class PollCard extends Component {
       <Grid item xs={12} sm={4}  >
         <Card className="pollCard" onClick={()=>this.goToContestants(this.props.name)}>
           <CardActionArea>
-            <CardMedia component="img" image={img} />
+            <CardMedia component="img" image={this.props.img} />
             <CardContent className='card-content'>
               <Typography>{this.props.name}</Typography>
             </CardContent>
